@@ -137,7 +137,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         run: |
           gh release create ${{ env.REL_TAG }} \
-            --repo paritytech/polkadot-sdk \
+            --repo EgorPopelyaev/polkadot-sdk \
             --draft \
             --title "Polkadot ${{ env.REL_TAG }}" \
             --notes-file ${{ github.workspace}}/scripts/release/RELEASE_DRAFT.md
@@ -182,7 +182,7 @@ jobs:
           mv "${{ env.ASSET }}" "$VERSIONED_ASSET"
 
           gh release upload ${{ needs.validate-inputs.outputs.release_tag }} \
-            --repo paritytech/polkadot-sdk "$VERSIONED_ASSET"
+            --repo EgorPopelyaev/polkadot-sdk "$VERSIONED_ASSET"
 
   publish-release-artifacts:
     needs: [ validate-inputs, publish-release-draft ]
@@ -213,29 +213,29 @@ jobs:
           mv ${{ matrix.binary }}.asc ${{ matrix.binary }}-aarch64-apple-darwin.asc
           mv ${{ matrix.binary }}.sha256 ${{ matrix.binary }}-aarch64-apple-darwin.sha256
 
-      - name: Generate content write token for the release automation
-        id: generate_write_token
-        uses: actions/create-github-app-token@v1
-        with:
-            app-id: ${{ vars.POLKADOT_SDK_RELEASE_RW_APP_ID }}
-            private-key: ${{ secrets.POLKADOT_SDK_RELEASE_RW_APP_KEY }}
-            owner: paritytech
-            repositories: polkadot-sdk
+      # - name: Generate content write token for the release automation
+      #   id: generate_write_token
+      #   uses: actions/create-github-app-token@v1
+      #   with:
+      #       app-id: ${{ vars.POLKADOT_SDK_RELEASE_RW_APP_ID }}
+      #       private-key: ${{ secrets.POLKADOT_SDK_RELEASE_RW_APP_KEY }}
+      #       owner: paritytech
+      #       repositories: polkadot-sdk
 
       - name: Upload ${{ matrix.binary }} binary to release draft
         env:
-          GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         working-directory: ${{ github.workspace}}/release-artifacts/${{ matrix.target }}/${{ matrix.binary }}
         run: |
           if [[ ${{ matrix.target }} == "aarch64-apple-darwin" ]]; then
             gh release upload ${{ needs.validate-inputs.outputs.release_tag }} \
-              --repo paritytech/polkadot-sdk \
+              --repo EgorPopelyaev/polkadot-sdk \
               ${{ matrix.binary }}-aarch64-apple-darwin \
               ${{ matrix.binary }}-aarch64-apple-darwin.asc \
               ${{ matrix.binary }}-aarch64-apple-darwin.sha256
           else
             gh release upload ${{ needs.validate-inputs.outputs.release_tag }} \
-              --repo paritytech/polkadot-sdk \
+              --repo EgorPopelyaev/polkadot-sdk \
               ${{ matrix.binary }} \
               ${{ matrix.binary }}.asc \
               ${{ matrix.binary }}.sha256
