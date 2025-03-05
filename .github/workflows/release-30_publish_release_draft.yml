@@ -132,8 +132,9 @@ jobs:
 
       - name: Create draft release
         id: create-release
-        # env:
-        #   GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+        env:
+          # GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         run: |
           gh release create ${{ env.REL_TAG }} \
             --repo paritytech/polkadot-sdk \
@@ -173,8 +174,9 @@ jobs:
       #       repositories: polkadot-sdk
 
       - name: Upload compressed ${{ matrix.chain }} v${{ env.SPEC }} wasm
-      #   env:
-      #     GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+        env:
+          # GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSIONED_ASSET="${{ matrix.chain }}_runtime-v${{ env.SPEC }}.compact.compressed.wasm"
           mv "${{ env.ASSET }}" "$VERSIONED_ASSET"
