@@ -121,19 +121,19 @@ jobs:
             scripts/release/context.json
             **/*-srtool-digest.json
 
-      - name: Generate content write token for the release automation
-        id: generate_write_token
-        uses: actions/create-github-app-token@v1
-        with:
-            app-id: ${{ vars.RELEASE_AUTOMATION_APP_ID }}
-            private-key: ${{ secrets.RELEASE_AUTOMATION_APP_PRIVATE_KEY }}
-            owner: EgorPopelyaev
-            repositories: polkadot-sdk
+      # - name: Generate content write token for the release automation
+      #   id: generate_write_token
+      #   uses: actions/create-github-app-token@v1
+      #   with:
+      #       app-id: ${{ vars.RELEASE_AUTOMATION_APP_ID }}
+      #       private-key: ${{ secrets.RELEASE_AUTOMATION_APP_PRIVATE_KEY }}
+      #       owner: EgorPopelyaev
+      #       repositories: polkadot-sdk
 
       - name: Create draft release
         id: create-release
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+        # env:
+        #   GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
         run: |
           gh release create ${{ env.REL_TAG }} \
             --repo paritytech/polkadot-sdk \
@@ -163,18 +163,18 @@ jobs:
           >>$GITHUB_ENV echo ASSET=$(find ${{ matrix.chain }}-runtime -name '*.compact.compressed.wasm')
           >>$GITHUB_ENV echo SPEC=$(<${JSON} jq -r .runtimes.compact.subwasm.core_version.specVersion)
 
-      - name: Generate content write token for the release automation
-        id: generate_write_token
-        uses: actions/create-github-app-token@v1
-        with:
-            app-id: ${{ vars.RELEASE_AUTOMATION_APP_ID }}
-            private-key: ${{ secrets.RELEASE_AUTOMATION_APP_PRIVATE_KEY }}
-            owner: EgorPopelyaev
-            repositories: polkadot-sdk
+      # - name: Generate content write token for the release automation
+      #   id: generate_write_token
+      #   uses: actions/create-github-app-token@v1
+      #   with:
+      #       app-id: ${{ vars.RELEASE_AUTOMATION_APP_ID }}
+      #       private-key: ${{ secrets.RELEASE_AUTOMATION_APP_PRIVATE_KEY }}
+      #       owner: EgorPopelyaev
+      #       repositories: polkadot-sdk
 
       - name: Upload compressed ${{ matrix.chain }} v${{ env.SPEC }} wasm
-        env:
-          GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ steps.generate_write_token.outputs.token }}
         run: |
           VERSIONED_ASSET="${{ matrix.chain }}_runtime-v${{ env.SPEC }}.compact.compressed.wasm"
           mv "${{ env.ASSET }}" "$VERSIONED_ASSET"
