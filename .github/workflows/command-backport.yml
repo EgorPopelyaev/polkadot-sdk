@@ -30,6 +30,8 @@ jobs:
         github.event.pull_request.base.ref == 'master'
       )
     steps:
+      - uses: actions/checkout@v4
+
       - name: Check for backport labels
         id: check_labels
         run: |
