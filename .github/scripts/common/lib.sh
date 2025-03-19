@@ -524,14 +524,16 @@ prepare_docker_stable_tag() {
 # input: labels (array of lables like ("A3-backport" "RO-silent" "A4-backport-stable2407" "A4-backport-stable2503"))
 # output: BRANCHES (array of the branch names)
 parse_branch_names_from_backport_labels() {
-  labels=("$@")
-  BRANCHES=""
+  local labels="$1"
+  local BRANCHES=""
 
-  for label in "${labels[@]}"; do
+  for label in $labels; do
     if [[ "$label" =~ ^A4-backport-stable[0-9]{4}$ ]]; then
       branch_name=$(sed 's/A4-backport-//' <<< "$label")
       BRANCHES+=" ${branch_name}"
     fi
   done
-  echo "${BRANCHES[@]}"
+
+  BRANCHES=$(echo "$BRANCHES" | sed 's/^ *//')
+  echo "$BRANCHES"
 }
