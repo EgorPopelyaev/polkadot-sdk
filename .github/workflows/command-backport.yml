@@ -123,11 +123,11 @@ jobs:
             const reviewer = '${{ github.event.pull_request.user.login }}';
 
             for (const pullNumber of pullNumbers) {
-              await github.pulls.requestReviewers({
+              await github.rest.pulls.requestReviewers({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 pull_number: parseInt(pullNumber),
-                reviewers: [ reviewer ]
+                reviewers: [reviewer]
               });
               console.log(`Requested review from ${reviewer} for PR #${pullNumber}`);
             }
