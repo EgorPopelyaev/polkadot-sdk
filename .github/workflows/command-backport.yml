@@ -51,7 +51,7 @@ jobs:
     name: Backport pull request
     runs-on: ubuntu-latest
     needs: [ check-labels ]
-    if: ${{ needs.check-labels.outputs.found }} == 'true'
+    if: ${{ needs.check-labels.outputs.found }} == true
     steps:
       - uses: actions/checkout@v4
 
