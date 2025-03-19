@@ -471,3 +471,39 @@ validate_stable_tag() {
         exit 1
     fi
 }
+<<<<<<< HEAD
+=======
+
+# Prepare docker stable tag form the polkadot stable tag
+#
+# input: tag (polkaodot-stableYYMM(-X) or polkadot-stableYYMM(-X)-rcX)
+# output: stableYYMM(-X) or stableYYMM(-X)-rcX
+prepare_docker_stable_tag() {
+  tag="$1"
+  if [[ "$tag" =~ stable[0-9]{4}(-[0-9]+)?(-rc[0-9]+)? ]]; then
+      echo "${BASH_REMATCH[0]}"
+  else
+      echo "Tag is invalid: $tag"
+      exit 1
+  fi
+}
+
+# Parse names of the branches from the github labels based on the pattern
+#
+# input: labels (array of lables like ("A3-backport" "RO-silent" "A4-backport-stable2407" "A4-backport-stable2503"))
+# output: BRANCHES (array of the branch names)
+parse_branch_names_from_backport_labels() {
+  labels="$1"
+  BRANCHES=""
+
+  for label in $labels; do
+    if [[ "$label" =~ ^A4-backport-stable[0-9]{4}$ ]]; then
+      branch_name=$(sed 's/A4-backport-//' <<< "$label")
+      BRANCHES+=" ${branch_name}"
+    fi
+  done
+
+  BRANCHES=$(echo "$BRANCHES" | sed 's/^ *//')
+  echo "$BRANCHES"
+}
+>>>>>>> 9647acd (rebuild backport flow test12 (#40))
