@@ -508,6 +508,7 @@ validate_stable_tag() {
 }
 
 # Prepare docker stable tag form the polkadot stable tag
+#
 # input: tag (polkaodot-stableYYMM(-X) or polkadot-stableYYMM(-X)-rcX)
 # output: stableYYMM(-X) or stableYYMM(-X)-rcX
 prepare_docker_stable_tag() {
@@ -521,6 +522,7 @@ prepare_docker_stable_tag() {
 }
 
 # Parse names of the branches from the github labels based on the pattern
+#
 # input: labels (array of lables like ("A3-backport" "RO-silent" "A4-backport-stable2407" "A4-backport-stable2503"))
 # output: BRANCHES (array of the branch names)
 parse_branch_names_from_backport_labels() {
