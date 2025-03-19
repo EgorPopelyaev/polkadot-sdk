@@ -61,8 +61,8 @@ jobs:
         run: |
           . ./.github/scripts/common/lib.sh
 
-          readarray -t LABELS <<< "${{ needs.check-labels.outputs.LABELS }}"
-          BACKPORT_BRANCHES=$(parse_branch_names_from_backport_labels "${LABELS[@]}")
+          LABELS = "${{ needs.check-labels.outputs.LABELS }}"
+          BACKPORT_BRANCHES=$(parse_branch_names_from_backport_labels "$LABELS")
           echo "BACKPORT_BRANCHES=${BACKPORT_BRANCHES}" >> $GITHUB_OUTPUT
 
       - name: Generate token
