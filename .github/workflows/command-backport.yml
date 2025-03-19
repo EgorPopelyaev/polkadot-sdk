@@ -24,10 +24,23 @@ jobs:
         github.event_name == 'pull_request_target' &&
         github.event.pull_request.merged &&
         github.event.pull_request.base.ref == 'master' &&
-        contains(github.event.pull_request.labels.*.name, 'A4-needs-backport')
+        contains(github.event.pull_request.labels.*.name, 'A4-backport-stable')
       )
     steps:
       - uses: actions/checkout@v4
+
+      - name: Get branches to backport to
+        id: branches
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          . ./.github/scripts/common/lib.sh
+
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '.labels[].name')
+          readarray -t labels_array <<< "$LABELS"
+
+          BACKPORT_BRANCHES=$(parse_branch_names_from_backport_labels "${labels_array[@]}")
+          echo "BACKPORT_BRANCHES=${BACKPORT_BRANCHES}" >> $GITHUB_OUTPUT
 
       - name: Generate token
         id: generate_token
@@ -40,7 +53,7 @@ jobs:
         uses: korthout/backport-action@v3
         id: backport
         with:
-          target_branches: stable2407 stable2409 stable2412 stable2503
+          target_branches: ${{ steps.branches.outputs.BACKPORT_BRANCHES}}
           merge_commits: skip
           github_token: ${{ steps.generate_token.outputs.token }}
           pull_description: |
