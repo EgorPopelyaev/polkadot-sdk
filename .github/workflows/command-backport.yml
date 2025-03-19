@@ -51,7 +51,6 @@ jobs:
     name: Backport pull request
     runs-on: ubuntu-latest
     needs: [ check-labels ]
-    # The 'github.event.pull_request.merged' ensures that it got into master:
     if: ${{ needs.check-labels.outputs.found }} == 'true'
     steps:
       - uses: actions/checkout@v4
