@@ -37,9 +37,11 @@ jobs:
         id: check_labels
         run: |
           LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '.labels[].name')
-          echo "LABELS=$LABELS" >> $GITHUB_OUTPUT
+
           if echo "$LABELS" | grep -q '^A4-backport-stable'; then
             echo "found=true" >> $GITHUB_OUTPUT
+            readarray -t labels_array <<< "$LABELS"
+            echo "LABELS=${labels_array[@]}" >> $GITHUB_OUTPUT
           else
             echo "found=false" >> $GITHUB_OUTPUT
           fi
@@ -60,9 +62,7 @@ jobs:
           . ./.github/scripts/common/lib.sh
 
           LABELS="${{ needs.check-labels.outputs.LABELS }}"
-          readarray -t labels_array <<< "$LABELS"
-
-          BACKPORT_BRANCHES=$(parse_branch_names_from_backport_labels "${labels_array[@]}")
+          BACKPORT_BRANCHES=$(parse_branch_names_from_backport_labels "${LABELS[@]}")
           echo "BACKPORT_BRANCHES=${BACKPORT_BRANCHES}" >> $GITHUB_OUTPUT
 
       - name: Generate token
