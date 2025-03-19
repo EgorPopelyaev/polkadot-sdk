@@ -15,6 +15,8 @@ permissions:
 jobs:
   check-labels:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     outputs:
       LABELS: ${{ steps.check_labels.outputs.LABELS}}
       found: ${{ steps.check_labels.outputs.found}}
@@ -51,8 +53,6 @@ jobs:
 
       - name: Get branches to backport to
         id: branches
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           . ./.github/scripts/common/lib.sh
 
