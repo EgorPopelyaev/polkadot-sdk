@@ -19,7 +19,12 @@ docify = { workspace = true }
 futures = { features = ["thread-pool"], workspace = true }
 futures-timer = { workspace = true }
 jsonrpsee = { features = ["server"], workspace = true }
+<<<<<<< HEAD
 minimal-template-runtime.workspace = true
+=======
+
+minimal-template-runtime = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 polkadot-sdk = { workspace = true, features = ["experimental", "node"] }
 
 [build-dependencies]

@@ -37,6 +37,7 @@ pallet-utility.default-features = true
 pallet-utility.workspace = true
 quick_cache = { workspace = true }
 rand = { workspace = true, default-features = true }
+<<<<<<< HEAD
 relay-utils.workspace = true
 sc-chain-spec.default-features = true
 sc-chain-spec.workspace = true
@@ -47,6 +48,9 @@ sc-transaction-pool-api.workspace = true
 scale-info = { features = [
 	"derive",
 ], workspace = true, default-features = true }
+=======
+scale-info = { features = ["derive"], workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 serde_json = { workspace = true }
 sp-consensus-grandpa.default-features = true
 sp-consensus-grandpa.workspace = true
@@ -63,11 +67,42 @@ sp-trie.workspace = true
 sp-version.default-features = true
 sp-version.workspace = true
 thiserror = { workspace = true }
+<<<<<<< HEAD
 tokio = { features = [
 	"rt-multi-thread",
 ], workspace = true, default-features = true }
 xcm.default-features = true
 xcm.workspace = true
+=======
+tokio = { features = ["rt-multi-thread"], workspace = true, default-features = true }
+
+# Bridge dependencies
+bp-header-chain = { workspace = true, default-features = true }
+bp-messages = { workspace = true, default-features = true }
+bp-polkadot-core = { workspace = true, default-features = true }
+bp-runtime = { workspace = true, default-features = true }
+finality-relay = { workspace = true }
+relay-utils = { workspace = true }
+
+# Substrate Dependencies
+frame-support = { workspace = true, default-features = true }
+pallet-transaction-payment = { workspace = true, default-features = true }
+pallet-transaction-payment-rpc-runtime-api = { workspace = true, default-features = true }
+pallet-utility = { workspace = true, default-features = true }
+sc-chain-spec = { workspace = true, default-features = true }
+sc-rpc-api = { workspace = true, default-features = true }
+sc-transaction-pool-api = { workspace = true, default-features = true }
+sp-consensus-grandpa = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-rpc = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-std = { workspace = true, default-features = true }
+sp-trie = { workspace = true, default-features = true }
+sp-version = { workspace = true, default-features = true }
+
+# Polkadot Dependencies
+xcm = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = []

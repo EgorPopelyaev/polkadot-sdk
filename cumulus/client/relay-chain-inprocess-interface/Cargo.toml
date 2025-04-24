@@ -44,7 +44,6 @@ sp-state-machine.default-features = true
 sp-state-machine.workspace = true
 
 [dev-dependencies]
-
 # Substrate
 sp-keyring = { default-features = true, workspace = true }
 

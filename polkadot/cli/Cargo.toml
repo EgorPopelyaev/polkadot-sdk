@@ -46,6 +46,23 @@ sp-runtime.default-features = true
 sp-runtime.workspace = true
 thiserror = { workspace = true }
 
+<<<<<<< HEAD
+=======
+polkadot-service = { optional = true, workspace = true }
+
+frame-benchmarking-cli = { optional = true, workspace = true, default-features = true }
+polkadot-node-metrics = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+sc-cli = { optional = true, workspace = true, default-features = true }
+sc-service = { optional = true, workspace = true, default-features = true }
+sc-storage-monitor = { workspace = true, default-features = true }
+sc-sysinfo = { workspace = true, default-features = true }
+sc-tracing = { optional = true, workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [build-dependencies]
 substrate-build-script-utils.default-features = true
 substrate-build-script-utils.workspace = true

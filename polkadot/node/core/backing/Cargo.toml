@@ -42,8 +42,16 @@ futures = { features = ["thread-pool"], workspace = true }
 polkadot-node-subsystem-test-helpers = { workspace = true }
 polkadot-primitives = { features = ["test"], workspace = true, default-features = false }
 polkadot-primitives-test-helpers = { workspace = true }
+<<<<<<< HEAD
 sc-keystore = { default-features = true, workspace = true }
 sp-application-crypto = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
 sp-keyring = { default-features = true, workspace = true }
 sp-tracing = { default-features = true, workspace = true }
+=======
+sc-keystore = { workspace = true, default-features = true }
+sp-application-crypto = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

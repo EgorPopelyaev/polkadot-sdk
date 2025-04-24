@@ -23,6 +23,7 @@ polkadot-primitives.workspace = true
 sc-keystore.workspace = true
 schnorrkel = { workspace = true, default-features = true }
 serde = { features = ["derive"], workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-application-crypto.default-features = true
 sp-application-crypto.workspace = true
 sp-consensus-babe.default-features = true
@@ -32,6 +33,13 @@ sp-keystore.default-features = true
 sp-keystore.workspace = true
 sp-maybe-compressed-blob.default-features = true
 sp-maybe-compressed-blob.workspace = true
+=======
+sp-application-crypto = { workspace = true, default-features = true }
+sp-consensus-babe = { workspace = true, default-features = true }
+sp-consensus-slots = { workspace = true }
+sp-keystore = { workspace = true, default-features = true }
+sp-maybe-compressed-blob = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 
 [target.'cfg(not(target_os = "unknown"))'.dependencies]

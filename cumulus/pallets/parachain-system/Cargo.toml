@@ -49,6 +49,7 @@ rand = { workspace = true, default-features = true }
 trie-standardmap = { workspace = true }
 
 # Substrate
+<<<<<<< HEAD
 sc-client-api = { default-features = true, workspace = true }
 sp-consensus-slots = { default-features = true, workspace = true }
 sp-crypto-hashing = { default-features = true, workspace = true }
@@ -60,6 +61,16 @@ sp-version = { default-features = true, workspace = true }
 cumulus-test-client = { workspace = true }
 cumulus-test-relay-sproof-builder = { default-features = true, workspace = true }
 cumulus-test-runtime = { workspace = true }
+=======
+sp-consensus-slots = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+sp-version = { workspace = true, default-features = true }
+
+# Cumulus
+cumulus-test-client = { workspace = true }
+cumulus-test-relay-sproof-builder = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

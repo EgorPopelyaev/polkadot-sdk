@@ -47,7 +47,11 @@ xcm-simulator.workspace = true
 xcm.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-revive-fixtures = { workspace = true, default-features = false }
+=======
+pallet-revive-fixtures = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -18,5 +18,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 bitflags = { workspace = true }
 codec = { features = ["derive"], workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-runtime.default-features = true
 sp-runtime.workspace = true
+=======
+sp-runtime = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

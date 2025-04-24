@@ -33,8 +33,13 @@ pallet-balances = { default-features = true, workspace = true }
 pallet-staking-reward-curve = { default-features = true, workspace = true }
 pallet-timestamp = { default-features = true, workspace = true }
 scale-info = { workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-core = { default-features = true, workspace = true }
 sp-io = { default-features = true, workspace = true }
+=======
+sp-io = { workspace = true, default-features = true }
+sp-staking = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -47,8 +52,8 @@ std = [
 	"rand/std",
 	"sp-runtime/std",
 	"sp-session/std",
+	"sp-staking/std",
 ]
-
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-election-provider-support/runtime-benchmarks",
@@ -58,4 +63,5 @@ runtime-benchmarks = [
 	"pallet-staking/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
+	"sp-staking/runtime-benchmarks",
 ]

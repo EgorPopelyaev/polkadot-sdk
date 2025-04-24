@@ -16,6 +16,7 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+<<<<<<< HEAD
 [dependencies]
 arbitrary = { workspace = true }
 fraction = { workspace = true }
@@ -24,6 +25,8 @@ num-bigint = { workspace = true }
 sp-arithmetic.default-features = true
 sp-arithmetic.workspace = true
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [[bin]]
 name = "biguint"
 path = "src/biguint.rs"
@@ -47,3 +50,10 @@ path = "src/multiply_by_rational_with_rounding.rs"
 [[bin]]
 name = "fixed_point"
 path = "src/fixed_point.rs"
+
+[dependencies]
+arbitrary = { workspace = true }
+fraction = { workspace = true }
+honggfuzz = { workspace = true }
+num-bigint = { workspace = true }
+sp-arithmetic = { workspace = true, default-features = true }

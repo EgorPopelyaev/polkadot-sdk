@@ -12,8 +12,14 @@ repository.workspace = true
 workspace = true
 
 [dependencies]
+<<<<<<< HEAD
 sp-api.workspace = true
 sp-consensus-aura.workspace = true
+=======
+# Substrate
+sp-api = { workspace = true }
+sp-consensus-aura = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

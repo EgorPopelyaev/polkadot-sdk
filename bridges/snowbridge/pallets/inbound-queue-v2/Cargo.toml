@@ -21,10 +21,13 @@ exclude-from-umbrella = true
 alloy-core = { workspace = true, features = ["sol-types"] }
 bp-relayers.workspace = true
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 frame-benchmarking = { optional = true, workspace = true }
 frame-support.workspace = true
 frame-system.workspace = true
 hex-literal = { optional = true, workspace = true, default-features = true }
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 log = { workspace = true }
 pallet-balances.workspace = true
 scale-info = { features = ["derive"], workspace = true }
@@ -43,8 +46,12 @@ xcm-executor.workspace = true
 xcm.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-benchmarking = { default-features = true, workspace = true }
 hex = { workspace = true, default-features = true }
+=======
+frame-benchmarking = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 hex-literal = { workspace = true, default-features = true }
 snowbridge-test-utils = { workspace = true }
 sp-keyring = { default-features = true, workspace = true }
@@ -80,7 +87,6 @@ runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
-	"hex-literal",
 	"pallet-balances/runtime-benchmarks",
 	"snowbridge-core/runtime-benchmarks",
 	"snowbridge-inbound-queue-primitives/runtime-benchmarks",

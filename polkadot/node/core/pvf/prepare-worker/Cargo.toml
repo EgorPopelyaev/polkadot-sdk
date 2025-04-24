@@ -11,6 +11,10 @@ repository.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "prepare_rococo_runtime"
+harness = false
+
 [dependencies]
 blake3 = { workspace = true }
 cfg-if = { workspace = true }
@@ -24,16 +28,29 @@ tracking-allocator.default-features = true
 tracking-allocator.workspace = true
 
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 polkadot-node-core-pvf-common.default-features = true
 polkadot-node-core-pvf-common.workspace = true
 polkadot-primitives.default-features = true
 polkadot-primitives.workspace = true
 sp-maybe-compressed-blob.default-features = true
 sp-maybe-compressed-blob.workspace = true
+=======
+
+polkadot-node-core-pvf-common = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+
+sp-maybe-compressed-blob = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [target.'cfg(target_os = "linux")'.dependencies]
 tikv-jemallocator = { workspace = true }
 tikv-jemalloc-ctl = { workspace = true }
+
+[dev-dependencies]
+criterion = { features = ["cargo_bench_support"], workspace = true }
+rococo-runtime = { workspace = true }
+sp-maybe-compressed-blob = { workspace = true, default-features = true }
 
 [features]
 builder = []
@@ -42,6 +59,7 @@ jemalloc-allocator = [
 	"dep:tikv-jemallocator",
 	"polkadot-node-core-pvf-common/jemalloc-allocator",
 ]
+<<<<<<< HEAD
 
 [dev-dependencies]
 criterion = { features = ["cargo_bench_support"], workspace = true }
@@ -51,3 +69,5 @@ sp-maybe-compressed-blob = { default-features = true, workspace = true }
 [[bench]]
 name = "prepare_rococo_runtime"
 harness = false
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

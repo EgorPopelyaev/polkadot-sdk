@@ -44,8 +44,14 @@ sp-runtime.workspace = true
 thiserror = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sc-consensus = { default-features = true, workspace = true }
 sc-transaction-pool-api = { default-features = true, workspace = true }
 sp-keyring = { default-features = true, workspace = true }
+=======
+sc-consensus = { workspace = true, default-features = true }
+sc-transaction-pool-api = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 substrate-test-runtime-client = { workspace = true }
 tokio = { workspace = true, default-features = true }

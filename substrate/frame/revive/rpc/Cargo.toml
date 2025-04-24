@@ -26,6 +26,7 @@ pallet-revive.workspace = true
 prometheus-endpoint.default-features = true
 prometheus-endpoint.workspace = true
 rlp = { workspace = true }
+<<<<<<< HEAD
 sc-cli.default-features = true
 sc-cli.workspace = true
 sc-rpc-api.default-features = true
@@ -50,6 +51,20 @@ subxt = { workspace = true, default-features = true, features = [
 subxt-signer = { workspace = true, features = [
 	"unstable-eth",
 ] }
+=======
+sc-cli = { workspace = true, default-features = true }
+sc-rpc = { workspace = true, default-features = true }
+sc-rpc-api = { workspace = true, default-features = true }
+sc-service = { workspace = true, default-features = true }
+sp-arithmetic = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-weights = { workspace = true, default-features = true }
+sqlx = { workspace = true, features = ["macros", "runtime-tokio", "sqlite"] }
+subxt = { workspace = true, default-features = true, features = ["reconnecting-rpc-client"] }
+subxt-signer = { workspace = true, features = ["unstable-eth"] }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 tokio = { workspace = true, features = ["full"] }
 

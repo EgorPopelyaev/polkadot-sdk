@@ -22,6 +22,7 @@ sp-runtime.workspace = true
 sp-staking.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-election-provider-support = { workspace = true, default-features = false }
 pallet-balances = { default-features = true, workspace = true }
 pallet-nomination-pools = { default-features = true, workspace = true }
@@ -31,6 +32,16 @@ pallet-timestamp = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
 sp-io = { default-features = true, workspace = true }
 sp-tracing = { default-features = true, workspace = true }
+=======
+frame-election-provider-support = { workspace = true }
+pallet-balances = { workspace = true, default-features = true }
+pallet-nomination-pools = { workspace = true, default-features = true }
+pallet-staking = { workspace = true, default-features = true }
+pallet-staking-reward-curve = { workspace = true, default-features = true }
+pallet-timestamp = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

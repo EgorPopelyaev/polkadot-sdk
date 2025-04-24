@@ -44,7 +44,13 @@ fn default_config() -> MockGenesisConfig {
 #[cfg(not(feature = "runtime-benchmarks"))]
 mod enter {
 	use super::{inclusion::tests::TestCandidateBuilder, *};
+<<<<<<< HEAD
 	use polkadot_primitives::vstaging::{ClaimQueueOffset, CoreSelector, UMPSignal};
+=======
+	use polkadot_primitives::vstaging::{
+		ApprovedPeerId, ClaimQueueOffset, CoreSelector, UMPSignal,
+	};
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	use rstest::rstest;
 
 	use crate::{
@@ -77,6 +83,7 @@ mod enter {
 		elastic_paras: BTreeMap<u32, u8>,
 		unavailable_cores: Vec<u32>,
 		v2_descriptor: bool,
+		approved_peer_signal: Option<ApprovedPeerId>,
 		candidate_modifier: Option<CandidateModifier<<Test as frame_system::Config>::Hash>>,
 	}
 
@@ -91,6 +98,7 @@ mod enter {
 			unavailable_cores,
 			v2_descriptor,
 			candidate_modifier,
+			approved_peer_signal,
 		}: TestConfig,
 	) -> Bench<Test> {
 		let extra_cores = elastic_paras
@@ -100,7 +108,7 @@ mod enter {
 			.saturating_sub(elastic_paras.len() as usize);
 		let total_cores = dispute_sessions.len() + backed_and_concluding.len() + extra_cores;
 
-		let builder = BenchBuilder::<Test>::new()
+		let mut builder = BenchBuilder::<Test>::new()
 			.set_max_validators((total_cores) as u32 * num_validators_per_core)
 			.set_elastic_paras(elastic_paras.clone())
 			.set_max_validators_per_core(num_validators_per_core)
@@ -110,6 +118,10 @@ mod enter {
 			.set_unavailable_cores(unavailable_cores)
 			.set_candidate_descriptor_v2(v2_descriptor)
 			.set_candidate_modifier(candidate_modifier);
+
+		if let Some(approved_peer_signal) = approved_peer_signal {
+			builder = builder.set_approved_peer_signal(approved_peer_signal);
+		}
 
 		// Setup some assignments as needed:
 		(0..(builder.max_cores() as usize - extra_cores)).for_each(|para_id| {
@@ -137,7 +149,6 @@ mod enter {
 	// `create_inherent` and will not cause `enter` to early.
 	fn include_backed_candidates(#[case] v2_descriptor: bool) {
 		let config = MockGenesisConfig::default();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
 
 		new_test_ext(config).execute_with(|| {
 			// Enable the v2 receipts.
@@ -163,6 +174,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor,
+				approved_peer_signal: v2_descriptor.then_some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -233,7 +245,11 @@ mod enter {
 		// All of them are being made available in this block. Propose 5 more candidates (one for
 		// each core) and check that they're successfully backed and the old ones enacted.
 		let config = default_config();
+<<<<<<< HEAD
 		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+=======
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		new_test_ext(config).execute_with(|| {
 			// Enable the v2 receipts.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -259,6 +275,7 @@ mod enter {
 				elastic_paras: [(2, 3)].into_iter().collect(),
 				unavailable_cores: vec![],
 				v2_descriptor,
+				approved_peer_signal: v2_descriptor.then_some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -334,8 +351,19 @@ mod enter {
 		// for each core) and check that the right ones are successfully backed and the old ones
 		// enacted.
 		let config = default_config();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+
 		new_test_ext(config).execute_with(|| {
+<<<<<<< HEAD
+=======
+			// Enable the v2 receipts.
+			configuration::Pallet::<Test>::set_node_feature(
+				RuntimeOrigin::root(),
+				FeatureIndex::CandidateReceiptV2 as u8,
+				v2_descriptor,
+			)
+			.unwrap();
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 			let mut backed_and_concluding = BTreeMap::new();
 			backed_and_concluding.insert(0, 1);
 			backed_and_concluding.insert(1, 1);
@@ -353,7 +381,8 @@ mod enter {
 				code_upgrade: None,
 				elastic_paras: [(2, 4)].into_iter().collect(),
 				unavailable_cores: unavailable_cores.clone(),
-				v2_descriptor: false,
+				v2_descriptor,
+				approved_peer_signal: v2_descriptor.then_some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -506,7 +535,6 @@ mod enter {
 	// end of the block. Claim queue will also not be advanced.
 	fn session_change() {
 		let config = MockGenesisConfig::default();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
 
 		new_test_ext(config).execute_with(|| {
 			let dispute_statements = BTreeMap::new();
@@ -524,6 +552,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -705,6 +734,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -780,6 +810,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -853,6 +884,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -942,6 +974,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1030,6 +1063,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1090,6 +1124,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1167,7 +1202,6 @@ mod enter {
 	#[test]
 	fn limit_candidates_over_weight_1() {
 		let config = MockGenesisConfig::default();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
 
 		new_test_ext(config).execute_with(|| {
 			// Create the inherent data for this block
@@ -1192,6 +1226,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1299,6 +1334,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1368,6 +1404,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1435,6 +1472,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1546,6 +1584,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor,
+				approved_peer_signal: v2_descriptor.then_some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -1638,6 +1677,7 @@ mod enter {
 				elastic_paras: BTreeMap::new(),
 				unavailable_cores: vec![],
 				v2_descriptor: false,
+				approved_peer_signal: None,
 				candidate_modifier: None,
 			});
 
@@ -1671,7 +1711,11 @@ mod enter {
 	#[test]
 	fn v2_descriptors_are_filtered() {
 		let config = default_config();
+<<<<<<< HEAD
 		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+=======
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		new_test_ext(config).execute_with(|| {
 			let mut backed_and_concluding = BTreeMap::new();
 			backed_and_concluding.insert(0, 1);
@@ -1689,6 +1733,7 @@ mod enter {
 				elastic_paras: [(2, 8)].into_iter().collect(),
 				unavailable_cores: unavailable_cores.clone(),
 				v2_descriptor: true,
+				approved_peer_signal: Some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -1732,7 +1777,7 @@ mod enter {
 	#[test]
 	fn too_many_ump_signals() {
 		let config = default_config();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+
 		new_test_ext(config).execute_with(|| {
 			// Set the v2 receipts feature.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -1758,9 +1803,10 @@ mod enter {
 				elastic_paras: [(2, 8)].into_iter().collect(),
 				unavailable_cores: unavailable_cores.clone(),
 				v2_descriptor: true,
+				approved_peer_signal: None,
 				candidate_modifier: Some(|mut candidate: CommittedCandidateReceiptV2| {
 					if candidate.descriptor.para_id() == 2.into() {
-						// Add an extra message so `verify_backed_candidates` fails.
+						// Duplicate SelectCore message so `verify_backed_candidates` fails.
 						candidate.commitments.upward_messages.force_push(
 							UMPSignal::SelectCore(CoreSelector(123 as u8), ClaimQueueOffset(2))
 								.encode(),
@@ -1797,9 +1843,11 @@ mod enter {
 	}
 
 	#[test]
+	// Test that candidates with invalid UMP signals are filtered.
 	fn invalid_ump_signals() {
 		let config = default_config();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+
+		// Invalid core selector. Cannot decode it.
 		new_test_ext(config).execute_with(|| {
 			// Set the V2 receipts feature.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -1814,8 +1862,6 @@ mod enter {
 			backed_and_concluding.insert(1, 1);
 			backed_and_concluding.insert(2, 1);
 
-			let unavailable_cores = vec![];
-
 			let scenario = make_inherent_data(TestConfig {
 				dispute_statements: BTreeMap::new(),
 				dispute_sessions: vec![], // No disputes
@@ -1823,8 +1869,9 @@ mod enter {
 				num_validators_per_core: 1,
 				code_upgrade: None,
 				elastic_paras: [(2, 8)].into_iter().collect(),
-				unavailable_cores: unavailable_cores.clone(),
+				unavailable_cores: vec![],
 				v2_descriptor: true,
+				approved_peer_signal: Some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: Some(|mut candidate: CommittedCandidateReceiptV2| {
 					if candidate.descriptor.para_id() == 1.into() {
 						// Make the core selector invalid
@@ -1858,12 +1905,83 @@ mod enter {
 			// v2 descriptors.
 			assert_eq!(dispatch_error, Error::<Test>::InherentDataFilteredDuringExecution.into());
 		});
-	}
-	#[test]
-	fn v2_descriptors_are_accepted() {
+
+		// Invalid ApprovedPeer. Cannot decode it.
 		let config = default_config();
-		assert!(config.configuration.config.scheduler_params.lookahead > 0);
 		new_test_ext(config).execute_with(|| {
+<<<<<<< HEAD
+=======
+			// Set the V2 receipts feature.
+			configuration::Pallet::<Test>::set_node_feature(
+				RuntimeOrigin::root(),
+				FeatureIndex::CandidateReceiptV2 as u8,
+				true,
+			)
+			.unwrap();
+
+			let mut backed_and_concluding = BTreeMap::new();
+			backed_and_concluding.insert(0, 1);
+			backed_and_concluding.insert(1, 1);
+			backed_and_concluding.insert(2, 1);
+
+			let scenario = make_inherent_data(TestConfig {
+				dispute_statements: BTreeMap::new(),
+				dispute_sessions: vec![], // No disputes
+				backed_and_concluding,
+				num_validators_per_core: 1,
+				code_upgrade: None,
+				elastic_paras: [(2, 8)].into_iter().collect(),
+				unavailable_cores: vec![],
+				v2_descriptor: true,
+				approved_peer_signal: Some(vec![1, 2, 3].try_into().unwrap()),
+				candidate_modifier: Some(|mut candidate: CommittedCandidateReceiptV2| {
+					if candidate.descriptor.para_id() == 1.into() {
+						// Make the approved peer message invalid. It exceeds the 64 byte limit.
+						candidate.commitments.upward_messages[2] = vec![3u8; 70];
+					}
+					candidate
+				}),
+			});
+
+			let unfiltered_para_inherent_data = scenario.data.clone();
+
+			// Check the para inherent data is as expected:
+			// * 1 bitfield per validator (1 validator per core, 10 backed candidates)
+			assert_eq!(unfiltered_para_inherent_data.bitfields.len(), 10);
+			// * 10 v2 candidate descriptors.
+			assert_eq!(unfiltered_para_inherent_data.backed_candidates.len(), 10);
+
+			let mut inherent_data = InherentData::new();
+			inherent_data
+				.put_data(PARACHAINS_INHERENT_IDENTIFIER, &unfiltered_para_inherent_data)
+				.unwrap();
+
+			let dispatch_error = Pallet::<Test>::enter(
+				frame_system::RawOrigin::None.into(),
+				unfiltered_para_inherent_data,
+			)
+			.unwrap_err()
+			.error;
+
+			// We expect `enter` to fail because the inherent data contains backed candidates with
+			// v2 descriptors.
+			assert_eq!(dispatch_error, Error::<Test>::InherentDataFilteredDuringExecution.into());
+		});
+	}
+
+	#[rstest]
+	#[case(true, true)]
+	#[case(true, false)]
+	// Test that v2 descriptors with multiple types of UMP signals are accepted if the node feature
+	// is enabled.
+	fn v2_descriptors_are_accepted(
+		#[case] v2_descriptor: bool,
+		#[case] has_approved_peer_signal: bool,
+	) {
+		let config = default_config();
+
+		new_test_ext(config).execute_with(|| {
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 			// Enable the v2 receipts.
 			configuration::Pallet::<Test>::set_node_feature(
 				RuntimeOrigin::root(),
@@ -1887,7 +2005,9 @@ mod enter {
 				code_upgrade: None,
 				elastic_paras: [(2, 3)].into_iter().collect(),
 				unavailable_cores: unavailable_cores.clone(),
-				v2_descriptor: true,
+				v2_descriptor,
+				approved_peer_signal: has_approved_peer_signal
+					.then_some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -1908,7 +2028,11 @@ mod enter {
 	#[test]
 	fn elastic_scaling_mixed_v1_v2_descriptors() {
 		let config = default_config();
+<<<<<<< HEAD
 		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+=======
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		new_test_ext(config).execute_with(|| {
 			// Enable the v2 receipts.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -1923,8 +2047,6 @@ mod enter {
 			backed_and_concluding.insert(1, 1);
 			backed_and_concluding.insert(2, 1);
 
-			let unavailable_cores = vec![];
-
 			let scenario = make_inherent_data(TestConfig {
 				dispute_statements: BTreeMap::new(),
 				dispute_sessions: vec![], // No disputes
@@ -1932,8 +2054,9 @@ mod enter {
 				num_validators_per_core: 1,
 				code_upgrade: None,
 				elastic_paras: [(2, 3)].into_iter().collect(),
-				unavailable_cores: unavailable_cores.clone(),
+				unavailable_cores: vec![],
 				v2_descriptor: true,
+				approved_peer_signal: Some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -1963,11 +2086,15 @@ mod enter {
 		});
 	}
 
-	// Mixed test with v1, v2 with/without `UMPSignal::SelectCore`
+	// Mixed test with v1, v2 with/without UMP signals.
 	#[test]
-	fn mixed_v1_and_v2_optional_commitments() {
+	fn mixed_v1_and_v2_optional_ump_signals() {
 		let config = default_config();
+<<<<<<< HEAD
 		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+=======
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		new_test_ext(config).execute_with(|| {
 			// Enable the v2 receipts.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -1990,7 +2117,11 @@ mod enter {
 					candidate.commitments.upward_messages.clear();
 				}
 
+<<<<<<< HEAD
 				// Paras 3 and 4 have v1 descriptor.
+=======
+				// 3rd and 4th candidates send ump signals but are v1. They'll be dropped.
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 				if candidate.descriptor.para_id() > ParaId::from(2) {
 					candidate.commitments.upward_messages.clear();
 
@@ -2013,6 +2144,7 @@ mod enter {
 				elastic_paras: Default::default(),
 				unavailable_cores: vec![],
 				v2_descriptor: true,
+				approved_peer_signal: Some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: Some(candidate_modifier),
 			});
 
@@ -2024,7 +2156,18 @@ mod enter {
 			// * 5 v2 candidate descriptors.
 			assert_eq!(inherent_data.backed_candidates.len(), 5);
 
-			Pallet::<Test>::enter(frame_system::RawOrigin::None.into(), inherent_data).unwrap();
+			let mut expected_inherent_data = inherent_data.clone();
+			expected_inherent_data.backed_candidates.truncate(3);
+
+			let mut create_inherent_data = InherentData::new();
+			create_inherent_data
+				.put_data(PARACHAINS_INHERENT_IDENTIFIER, &inherent_data)
+				.unwrap();
+
+			assert_eq!(
+				Pallet::<Test>::create_inherent_inner(&create_inherent_data).unwrap(),
+				expected_inherent_data
+			);
 		});
 	}
 
@@ -2033,7 +2176,11 @@ mod enter {
 	#[test]
 	fn invalid_session_index() {
 		let config = default_config();
+<<<<<<< HEAD
 		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+=======
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		new_test_ext(config).execute_with(|| {
 			// Enable the v2 receipts.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -2059,6 +2206,7 @@ mod enter {
 				elastic_paras: [(2, 3)].into_iter().collect(),
 				unavailable_cores,
 				v2_descriptor: true,
+				approved_peer_signal: Some(vec![1, 2, 3].try_into().unwrap()),
 				candidate_modifier: None,
 			});
 
@@ -2124,7 +2272,11 @@ mod enter {
 	// filtered.
 	fn candidate_without_core_index(#[case] v2_descriptor: bool) {
 		let config = default_config();
+<<<<<<< HEAD
 		assert!(config.configuration.config.scheduler_params.lookahead > 0);
+=======
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		new_test_ext(config).execute_with(|| {
 			// Enable the v2 receipts.
 			configuration::Pallet::<Test>::set_node_feature(
@@ -2148,6 +2300,10 @@ mod enter {
 				elastic_paras: [(2, 3)].into_iter().collect(),
 				unavailable_cores: vec![],
 				v2_descriptor,
+<<<<<<< HEAD
+=======
+				approved_peer_signal: v2_descriptor.then_some(vec![1, 2, 3].try_into().unwrap()),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 				candidate_modifier: Some(|mut candidate| {
 					if candidate.descriptor.para_id() == ParaId::from(0) {
 						candidate.commitments.upward_messages.clear();

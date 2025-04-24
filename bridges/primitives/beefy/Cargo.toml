@@ -20,9 +20,24 @@ pallet-beefy-mmr.workspace = true
 pallet-mmr.workspace = true
 scale-info = { features = ["bit-vec", "derive"], workspace = true }
 serde = { features = ["alloc", "derive"], workspace = true }
+<<<<<<< HEAD
 sp-consensus-beefy.workspace = true
 sp-runtime.workspace = true
 sp-std.workspace = true
+=======
+
+# Bridge Dependencies
+bp-runtime = { workspace = true }
+
+# Substrate Dependencies
+binary-merkle-tree = { workspace = true }
+frame-support = { workspace = true }
+pallet-beefy-mmr = { workspace = true }
+pallet-mmr = { workspace = true }
+sp-consensus-beefy = { workspace = true }
+sp-runtime = { workspace = true }
+sp-std = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

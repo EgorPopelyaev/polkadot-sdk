@@ -12,6 +12,7 @@ workspace = true
 
 [dependencies]
 codec = { workspace = true }
+<<<<<<< HEAD
 cumulus-pallet-parachain-system.workspace = true
 cumulus-pallet-xcmp-queue.workspace = true
 emulated-integration-tests-common.workspace = true
@@ -31,3 +32,28 @@ westend-runtime-constants.workspace = true
 westend-system-emulated-network.workspace = true
 xcm-executor.workspace = true
 xcm.workspace = true
+=======
+
+# Substrate
+frame-support = { workspace = true }
+pallet-assets = { workspace = true }
+pallet-balances = { workspace = true }
+pallet-message-queue = { workspace = true }
+pallet-treasury = { workspace = true }
+pallet-utility = { workspace = true }
+pallet-whitelist = { workspace = true }
+sp-runtime = { workspace = true }
+
+# Polkadot
+pallet-xcm = { workspace = true }
+polkadot-runtime-common = { workspace = true, default-features = true }
+westend-runtime-constants = { workspace = true, default-features = true }
+xcm = { workspace = true }
+xcm-executor = { workspace = true }
+
+# Cumulus
+cumulus-pallet-parachain-system = { workspace = true }
+cumulus-pallet-xcmp-queue = { workspace = true }
+emulated-integration-tests-common = { workspace = true }
+westend-system-emulated-network = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

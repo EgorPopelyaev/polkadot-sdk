@@ -90,4 +90,8 @@ tracing = { workspace = true, default-features = true }
 cumulus-test-client = { workspace = true }
 cumulus-test-relay-sproof-builder = { workspace = true, default-features = false }
 rstest = { workspace = true }
+<<<<<<< HEAD
 sp-keyring = { workspace = true, default-features = false }
+=======
+sp-keyring = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

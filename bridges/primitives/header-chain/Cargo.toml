@@ -17,6 +17,15 @@ finality-grandpa = { workspace = true }
 frame-support.workspace = true
 scale-info = { features = ["derive"], workspace = true }
 serde = { features = ["alloc", "derive"], workspace = true }
+<<<<<<< HEAD
+=======
+
+# Bridge dependencies
+bp-runtime = { workspace = true }
+
+# Substrate Dependencies
+frame-support = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 sp-consensus-grandpa = { features = ["serde"], workspace = true }
 sp-core = { features = ["serde"], workspace = true }
 sp-runtime = { features = ["serde"], workspace = true }

@@ -17,6 +17,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 frame-benchmarking = { optional = true, workspace = true }
 frame-election-provider-support.workspace = true
 frame-support.workspace = true
@@ -25,6 +26,14 @@ log = { workspace = true }
 pallet-authorship.workspace = true
 pallet-session = { features = ["historical"], workspace = true }
 rand_chacha = { optional = true, workspace = true }
+=======
+frame-election-provider-support = { workspace = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+log = { workspace = true }
+pallet-authorship = { workspace = true }
+pallet-session = { features = ["historical"], workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 scale-info = { features = ["derive", "serde"], workspace = true }
 serde = { features = ["alloc", "derive"], workspace = true }
 sp-application-crypto = { features = ["serde"], workspace = true }

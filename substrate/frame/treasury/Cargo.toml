@@ -30,9 +30,14 @@ sp-core = { optional = true, workspace = true }
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-utility = { default-features = true, workspace = true }
 sp-core = { workspace = true, default-features = false }
 sp-io = { default-features = true, workspace = true }
+=======
+pallet-utility = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

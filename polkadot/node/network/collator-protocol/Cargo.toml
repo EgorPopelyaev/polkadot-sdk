@@ -15,6 +15,7 @@ workspace = true
 bitvec = { features = ["alloc"], workspace = true }
 futures = { workspace = true }
 futures-timer = { workspace = true }
+<<<<<<< HEAD
 gum.default-features = true
 gum.workspace = true
 schnellru.workspace = true
@@ -24,6 +25,14 @@ sp-keystore.default-features = true
 sp-keystore.workspace = true
 sp-runtime.default-features = true
 sp-runtime.workspace = true
+=======
+gum = { workspace = true, default-features = true }
+schnellru = { workspace = true }
+
+sp-core = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 fatality = { workspace = true }
 polkadot-node-network-protocol.default-features = true
@@ -55,3 +64,4 @@ polkadot-primitives-test-helpers = { workspace = true }
 
 [features]
 default = []
+experimental-collator-protocol = []

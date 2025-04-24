@@ -38,7 +38,13 @@ pallet-vesting.workspace = true
 rustc-hex = { workspace = true }
 scale-info = { features = ["derive"], workspace = true }
 serde = { features = ["alloc"], workspace = true }
+<<<<<<< HEAD
 sp-api.workspace = true
+=======
+static_assertions = { workspace = true, default-features = true }
+
+sp-api = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 sp-core = { features = ["serde"], workspace = true }
 sp-inherents.workspace = true
 sp-io.workspace = true

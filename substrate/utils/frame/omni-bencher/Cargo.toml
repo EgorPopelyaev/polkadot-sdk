@@ -13,6 +13,7 @@ workspace = true
 
 [dependencies]
 clap = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 cumulus-primitives-proof-size-hostfunction.default-features = true
 cumulus-primitives-proof-size-hostfunction.workspace = true
 frame-benchmarking-cli.workspace = true
@@ -22,11 +23,23 @@ sp-runtime.default-features = true
 sp-runtime.workspace = true
 sp-statement-store.default-features = true
 sp-statement-store.workspace = true
+=======
+cumulus-primitives-proof-size-hostfunction = { workspace = true, default-features = true }
+frame-benchmarking-cli = { workspace = true }
+sc-cli = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-statement-store = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tracing-subscriber = { workspace = true }
 
 [dev-dependencies]
 assert_cmd = { workspace = true }
 cumulus-test-runtime = { workspace = true }
+<<<<<<< HEAD
 sc-chain-spec = { workspace = true, default-features = false }
 sp-genesis-builder = { default-features = true, workspace = true }
+=======
+sc-chain-spec = { workspace = true }
+sp-genesis-builder = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tempfile = { workspace = true }

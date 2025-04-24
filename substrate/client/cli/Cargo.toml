@@ -30,6 +30,7 @@ names = { workspace = true }
 rand = { workspace = true, default-features = true }
 regex = { workspace = true }
 rpassword = { workspace = true }
+<<<<<<< HEAD
 sc-client-api.default-features = true
 sc-client-api.workspace = true
 sc-client-db.default-features = false
@@ -66,6 +67,27 @@ sp-runtime.default-features = true
 sp-runtime.workspace = true
 sp-version.default-features = true
 sp-version.workspace = true
+=======
+sc-client-api = { workspace = true, default-features = true }
+sc-client-db = { workspace = true, default-features = false }
+sc-keystore = { workspace = true, default-features = true }
+sc-mixnet = { workspace = true, default-features = true }
+sc-network = { workspace = true, default-features = true }
+sc-service = { workspace = true, default-features = false }
+sc-telemetry = { workspace = true, default-features = true }
+sc-tracing = { workspace = true, default-features = true }
+sc-transaction-pool = { workspace = true, default-features = true }
+sc-utils = { workspace = true, default-features = true }
+serde = { workspace = true, default-features = true }
+serde_json = { workspace = true, default-features = true }
+sp-blockchain = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+sp-panic-handler = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-version = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 tokio = { features = ["parking_lot", "rt-multi-thread", "signal"], workspace = true, default-features = true }
 

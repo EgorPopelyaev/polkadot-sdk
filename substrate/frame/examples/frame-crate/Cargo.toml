@@ -18,7 +18,10 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 codec = { workspace = true }
 frame = { features = ["runtime"], workspace = true }
+<<<<<<< HEAD
 scale-info = { features = ["derive"], workspace = true }
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

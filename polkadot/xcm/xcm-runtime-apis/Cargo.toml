@@ -20,8 +20,12 @@ xcm-executor.workspace = true
 xcm.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-executive = { workspace = true, default-features = false }
 frame-system = { workspace = true, default-features = false }
+=======
+frame-system = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 hex-literal = { workspace = true }
 log = { workspace = true }
 pallet-assets = { workspace = true, default-features = false }
@@ -36,7 +40,6 @@ xcm-executor = { workspace = true, default-features = false }
 default = ["std"]
 std = [
 	"codec/std",
-	"frame-executive/std",
 	"frame-support/std",
 	"frame-system/std",
 	"log/std",

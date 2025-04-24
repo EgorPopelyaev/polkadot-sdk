@@ -19,21 +19,35 @@ exclude-from-umbrella = true
 
 [dependencies]
 hex-literal = { workspace = true, default-features = true }
+<<<<<<< HEAD
 snowbridge-beacon-primitives.workspace = true
 snowbridge-core.workspace = true
 snowbridge-verification-primitives.workspace = true
 sp-core.workspace = true
 sp-std.workspace = true
+=======
+snowbridge-beacon-primitives = { workspace = true }
+snowbridge-verification-primitives = { workspace = true }
+sp-core = { workspace = true }
+sp-std = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
 std = [
 	"snowbridge-beacon-primitives/std",
+<<<<<<< HEAD
 	"snowbridge-core/std",
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"snowbridge-verification-primitives/std",
 	"sp-core/std",
 	"sp-std/std",
 ]
+<<<<<<< HEAD
 runtime-benchmarks = [
 	"snowbridge-core/runtime-benchmarks",
 ]
+=======
+runtime-benchmarks = []
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

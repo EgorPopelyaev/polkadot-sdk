@@ -15,6 +15,7 @@ workspace = true
 codec = { workspace = true, default-features = true }
 futures = { workspace = true }
 futures-timer = { workspace = true }
+<<<<<<< HEAD
 gum.default-features = true
 gum.workspace = true
 polkadot-node-primitives.default-features = true
@@ -25,6 +26,13 @@ polkadot-node-subsystem.default-features = true
 polkadot-node-subsystem.workspace = true
 polkadot-primitives.default-features = true
 polkadot-primitives.workspace = true
+=======
+gum = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 
 [dev-dependencies]

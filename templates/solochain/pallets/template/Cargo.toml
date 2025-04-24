@@ -14,6 +14,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
+=======
+scale-info = { features = ["derive"], workspace = true }
+
+# frame deps
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 frame-benchmarking = { optional = true, workspace = true }
 frame-support.workspace = true
 frame-system.workspace = true

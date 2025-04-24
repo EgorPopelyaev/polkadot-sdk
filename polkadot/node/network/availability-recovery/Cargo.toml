@@ -11,6 +11,12 @@ repository.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "availability-recovery-regression-bench"
+path = "benches/availability-recovery-regression-bench.rs"
+harness = false
+required-features = ["subsystem-benchmarks"]
+
 [dependencies]
 async-trait = { workspace = true }
 fatality = { workspace = true }
@@ -43,20 +49,21 @@ assert_matches = { workspace = true }
 futures-timer = { workspace = true }
 rstest = { workspace = true }
 
+<<<<<<< HEAD
 sc-network = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
 sp-keyring = { default-features = true, workspace = true }
 sp-tracing = { default-features = true, workspace = true }
+=======
+sc-network = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 polkadot-node-subsystem-test-helpers = { workspace = true }
 polkadot-primitives-test-helpers = { workspace = true }
 polkadot-subsystem-bench = { workspace = true }
-
-[[bench]]
-name = "availability-recovery-regression-bench"
-path = "benches/availability-recovery-regression-bench.rs"
-harness = false
-required-features = ["subsystem-benchmarks"]
 
 [features]
 subsystem-benchmarks = []

@@ -61,6 +61,7 @@ sp-version.workspace = true
 sp-weights.workspace = true
 
 # num-traits feature needed for dex integer sq root:
+<<<<<<< HEAD
 assets-common.workspace = true
 bp-asset-hub-rococo.workspace = true
 bp-asset-hub-westend.workspace = true
@@ -95,6 +96,43 @@ xcm-builder.workspace = true
 xcm-executor.workspace = true
 xcm-runtime-apis.workspace = true
 xcm.workspace = true
+=======
+primitive-types = { features = ["codec", "num-traits", "scale-info"], workspace = true }
+
+# Polkadot
+pallet-xcm = { workspace = true }
+pallet-xcm-benchmarks = { optional = true, workspace = true }
+polkadot-parachain-primitives = { workspace = true }
+polkadot-runtime-common = { workspace = true }
+rococo-runtime-constants = { workspace = true }
+xcm = { workspace = true }
+xcm-builder = { workspace = true }
+xcm-executor = { workspace = true }
+xcm-runtime-apis = { workspace = true }
+
+# Cumulus
+assets-common = { workspace = true }
+cumulus-pallet-aura-ext = { workspace = true }
+cumulus-pallet-parachain-system = { workspace = true }
+cumulus-pallet-session-benchmarking = { workspace = true }
+cumulus-pallet-weight-reclaim = { workspace = true }
+cumulus-pallet-xcm = { workspace = true }
+cumulus-pallet-xcmp-queue = { features = ["bridging"], workspace = true }
+cumulus-primitives-aura = { workspace = true }
+cumulus-primitives-core = { workspace = true }
+cumulus-primitives-utility = { workspace = true }
+pallet-collator-selection = { workspace = true }
+parachain-info = { workspace = true }
+parachains-common = { workspace = true }
+testnet-parachains-constants = { features = ["rococo"], workspace = true }
+
+# Bridges
+bp-asset-hub-rococo = { workspace = true }
+bp-asset-hub-westend = { workspace = true }
+bp-bridge-hub-rococo = { workspace = true }
+bp-bridge-hub-westend = { workspace = true }
+pallet-xcm-bridge-hub-router = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 asset-test-utils = { default-features = true, workspace = true }
@@ -140,7 +178,6 @@ runtime-benchmarks = [
 	"parachains-common/runtime-benchmarks",
 	"polkadot-parachain-primitives/runtime-benchmarks",
 	"polkadot-runtime-common/runtime-benchmarks",
-	"snowbridge-inbound-queue-primitives/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 	"xcm-builder/runtime-benchmarks",
 	"xcm-executor/runtime-benchmarks",
@@ -240,7 +277,6 @@ std = [
 	"rococo-runtime-constants/std",
 	"scale-info/std",
 	"serde_json/std",
-	"snowbridge-inbound-queue-primitives/std",
 	"sp-api/std",
 	"sp-block-builder/std",
 	"sp-consensus-aura/std",

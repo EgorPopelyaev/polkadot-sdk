@@ -16,8 +16,13 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
-[build-dependencies]
-prost-build = { workspace = true }
+[[bench]]
+name = "notifications_protocol"
+harness = false
+
+[[bench]]
+name = "request_response_protocol"
+harness = false
 
 [dependencies]
 array-bytes = { workspace = true, default-features = true }
@@ -77,10 +82,17 @@ assert_matches = { workspace = true }
 mockall = { workspace = true }
 multistream-select = { workspace = true }
 rand = { workspace = true, default-features = true }
+<<<<<<< HEAD
 sc-block-builder = { default-features = true, workspace = true }
 sp-consensus = { default-features = true, workspace = true }
 sp-crypto-hashing = { default-features = true, workspace = true }
 sp-tracing = { default-features = true, workspace = true }
+=======
+sc-block-builder = { workspace = true, default-features = true }
+sp-consensus = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 substrate-test-runtime = { workspace = true }
 substrate-test-runtime-client = { workspace = true }
 tempfile = { workspace = true }
@@ -88,6 +100,7 @@ tokio = { features = ["macros", "rt-multi-thread"], workspace = true, default-fe
 tokio-util = { features = ["compat"], workspace = true }
 
 criterion = { workspace = true, default-features = true, features = ["async_tokio"] }
+<<<<<<< HEAD
 
 [features]
 default = []
@@ -99,3 +112,11 @@ harness = false
 [[bench]]
 name = "request_response_protocol"
 harness = false
+=======
+
+[build-dependencies]
+prost-build = { workspace = true }
+
+[features]
+default = []
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

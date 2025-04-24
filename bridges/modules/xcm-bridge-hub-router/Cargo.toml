@@ -25,8 +25,12 @@ xcm-builder.workspace = true
 xcm.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-io = { default-features = true, workspace = true }
 sp-std = { default-features = true, workspace = true }
+=======
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

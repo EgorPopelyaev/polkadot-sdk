@@ -24,9 +24,29 @@ scale-info = { features = ["derive"], workspace = true }
 sp-api.workspace = true
 sp-runtime.workspace = true
 tracing = { workspace = true }
+<<<<<<< HEAD
 xcm-builder.workspace = true
 xcm-executor.workspace = true
 xcm.workspace = true
+=======
+
+# Substrate
+frame-support = { workspace = true }
+pallet-asset-conversion = { workspace = true }
+pallet-assets = { workspace = true }
+sp-api = { workspace = true }
+sp-runtime = { workspace = true }
+
+# Polkadot
+pallet-xcm = { workspace = true }
+xcm = { workspace = true }
+xcm-builder = { workspace = true }
+xcm-executor = { workspace = true }
+
+# Cumulus
+cumulus-primitives-core = { workspace = true }
+parachains-common = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -46,7 +66,6 @@ std = [
 	"xcm-executor/std",
 	"xcm/std",
 ]
-
 runtime-benchmarks = [
 	"cumulus-primitives-core/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",

@@ -14,6 +14,7 @@ workspace = true
 [dependencies]
 async-trait = { workspace = true }
 futures = { workspace = true }
+<<<<<<< HEAD
 gum.workspace = true
 itertools = { workspace = true }
 polkadot-approval-distribution.default-features = true
@@ -38,6 +39,23 @@ sc-keystore.default-features = false
 sc-keystore.workspace = true
 sp-consensus.default-features = false
 sp-consensus.workspace = true
+=======
+gum = { workspace = true }
+itertools = { workspace = true }
+
+polkadot-approval-distribution = { workspace = true, default-features = true }
+polkadot-node-core-approval-voting = { workspace = true, default-features = true }
+polkadot-node-metrics = { workspace = true, default-features = true }
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-overseer = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+
+sc-keystore = { workspace = true, default-features = false }
+sp-consensus = { workspace = true, default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 rand = { workspace = true }
 rand_core = { workspace = true }
@@ -46,9 +64,18 @@ rand_core = { workspace = true }
 assert_matches = { workspace = true }
 async-trait = { workspace = true }
 kvdb-memorydb = { workspace = true }
+<<<<<<< HEAD
 polkadot-node-subsystem-test-helpers = { default-features = true, workspace = true }
 schnorrkel = { workspace = true, default-features = true }
 sp-consensus-babe = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
 sp-keyring = { default-features = true, workspace = true }
 sp-tracing = { workspace = true, default-features = false }
+=======
+polkadot-node-subsystem-test-helpers = { workspace = true, default-features = true }
+schnorrkel = { workspace = true, default-features = true }
+sp-consensus-babe = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

@@ -21,12 +21,18 @@ exclude-from-umbrella = true
 codec = { features = ["derive"], workspace = true }
 frame-support.workspace = true
 scale-info = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 snowbridge-core.workspace = true
 snowbridge-merkle-tree.workspace = true
 snowbridge-outbound-queue-primitives.workspace = true
 sp-api.workspace = true
 sp-std.workspace = true
 xcm.workspace = true
+=======
+snowbridge-merkle-tree = { workspace = true }
+sp-api = { workspace = true }
+sp-std = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -34,10 +40,7 @@ std = [
 	"codec/std",
 	"frame-support/std",
 	"scale-info/std",
-	"snowbridge-core/std",
 	"snowbridge-merkle-tree/std",
-	"snowbridge-outbound-queue-primitives/std",
 	"sp-api/std",
 	"sp-std/std",
-	"xcm/std",
 ]

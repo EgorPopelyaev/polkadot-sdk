@@ -31,7 +31,11 @@ use polkadot_node_network_protocol::{
 		GridNeighbors, RandomRouting, RequiredRouting, SessionBoundGridTopologyStorage,
 	},
 	peer_set::{ProtocolVersion, ValidationVersion},
+<<<<<<< HEAD
 	v3 as protocol_v3, OurView, PeerId, UnifiedReputationChange as Rep, Versioned, View,
+=======
+	v3 as protocol_v3, OurView, PeerId, UnifiedReputationChange as Rep, ValidationProtocols, View,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
 use polkadot_node_subsystem::{
 	messages::*, overseer, ActiveLeavesUpdate, FromOrchestra, OverseerSignal, SpawnedSubsystem,
@@ -91,7 +95,7 @@ impl BitfieldGossipMessage {
 	) -> net_protocol::BitfieldDistributionMessage {
 		match ValidationVersion::try_from(recipient_version).ok() {
 			Some(ValidationVersion::V3) =>
-				Versioned::V3(protocol_v3::BitfieldDistributionMessage::Bitfield(
+				ValidationProtocols::V3(protocol_v3::BitfieldDistributionMessage::Bitfield(
 					self.relay_parent,
 					self.signed_availability.into(),
 				)),
@@ -103,7 +107,11 @@ impl BitfieldGossipMessage {
 				);
 
 				// fall back to v3 to avoid
+<<<<<<< HEAD
 				Versioned::V3(protocol_v3::BitfieldDistributionMessage::Bitfield(
+=======
+				ValidationProtocols::V3(protocol_v3::BitfieldDistributionMessage::Bitfield(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					self.relay_parent,
 					self.signed_availability.into(),
 				))
@@ -490,7 +498,11 @@ async fn process_incoming_peer_message<Context>(
 	rng: &mut (impl CryptoRng + Rng),
 ) {
 	let (relay_parent, bitfield) = match message {
+<<<<<<< HEAD
 		Versioned::V3(protocol_v3::BitfieldDistributionMessage::Bitfield(
+=======
+		ValidationProtocols::V3(protocol_v3::BitfieldDistributionMessage::Bitfield(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 			relay_parent,
 			bitfield,
 		)) => (relay_parent, bitfield),

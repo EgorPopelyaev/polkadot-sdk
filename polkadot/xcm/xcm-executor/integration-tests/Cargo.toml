@@ -16,6 +16,7 @@ frame-support.workspace = true
 frame-system.default-features = true
 frame-system.workspace = true
 futures = { workspace = true }
+<<<<<<< HEAD
 pallet-sudo.default-features = true
 pallet-sudo.workspace = true
 pallet-transaction-payment.default-features = true
@@ -39,6 +40,22 @@ sp-tracing.workspace = true
 xcm-executor.default-features = true
 xcm-executor.workspace = true
 xcm.workspace = true
+=======
+pallet-sudo = { workspace = true, default-features = true }
+pallet-transaction-payment = { workspace = true, default-features = true }
+pallet-xcm = { workspace = true, default-features = true }
+polkadot-runtime-parachains = { workspace = true, default-features = true }
+polkadot-test-client = { workspace = true }
+polkadot-test-runtime = { workspace = true }
+polkadot-test-service = { workspace = true }
+sp-consensus = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-runtime = { workspace = true }
+sp-state-machine = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+xcm = { workspace = true }
+xcm-executor = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

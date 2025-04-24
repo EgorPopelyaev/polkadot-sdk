@@ -15,10 +15,15 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+[[bin]]
+name = "compact"
+path = "src/compact.rs"
+
 [dependencies]
 honggfuzz = { workspace = true }
 
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 frame-election-provider-solution-type.default-features = true
 frame-election-provider-solution-type.workspace = true
 frame-election-provider-support.default-features = true
@@ -33,3 +38,11 @@ sp-runtime.workspace = true
 [[bin]]
 name = "compact"
 path = "src/compact.rs"
+=======
+frame-election-provider-solution-type = { workspace = true, default-features = true }
+frame-election-provider-support = { workspace = true, default-features = true }
+sp-arithmetic = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+# used by generate_solution_type:
+frame-support = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

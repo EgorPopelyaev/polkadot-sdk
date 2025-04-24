@@ -11,13 +11,19 @@ repository.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "statement-distribution-regression-bench"
+path = "benches/statement-distribution-regression-bench.rs"
+harness = false
+required-features = ["subsystem-benchmarks"]
+
 [dependencies]
-arrayvec = { workspace = true }
 bitvec = { workspace = true, default-features = true }
 codec = { features = ["derive"], workspace = true }
 fatality = { workspace = true }
 futures = { workspace = true }
 futures-timer = { workspace = true }
+<<<<<<< HEAD
 gum.default-features = true
 gum.workspace = true
 indexmap = { workspace = true }
@@ -34,6 +40,15 @@ polkadot-primitives.workspace = true
 sp-keystore.default-features = true
 sp-keystore.workspace = true
 sp-staking.workspace = true
+=======
+gum = { workspace = true, default-features = true }
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 
 [dev-dependencies]
@@ -46,6 +61,7 @@ polkadot-primitives-test-helpers = { workspace = true }
 polkadot-subsystem-bench = { workspace = true }
 rand_chacha = { workspace = true, default-features = true }
 rstest = { workspace = true }
+<<<<<<< HEAD
 sc-keystore = { default-features = true, workspace = true }
 sc-network = { default-features = true, workspace = true }
 sp-application-crypto = { default-features = true, workspace = true }
@@ -54,12 +70,15 @@ sp-core = { default-features = true, workspace = true }
 sp-keyring = { default-features = true, workspace = true }
 sp-keystore = { default-features = true, workspace = true }
 sp-tracing = { default-features = true, workspace = true }
-
-[[bench]]
-name = "statement-distribution-regression-bench"
-path = "benches/statement-distribution-regression-bench.rs"
-harness = false
-required-features = ["subsystem-benchmarks"]
+=======
+sc-keystore = { workspace = true, default-features = true }
+sc-network = { workspace = true, default-features = true }
+sp-application-crypto = { workspace = true, default-features = true }
+sp-authority-discovery = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 subsystem-benchmarks = []

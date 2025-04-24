@@ -14,9 +14,14 @@ workspace = true
 [dependencies]
 async-std = { features = ["attributes"], workspace = true }
 async-trait = { workspace = true }
+<<<<<<< HEAD
 bp-header-chain.default-features = true
 bp-header-chain.workspace = true
 finality-relay.workspace = true
+=======
+bp-header-chain = { workspace = true, default-features = true }
+finality-relay = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 futures = { workspace = true }
 log = { workspace = true }
 num-traits = { workspace = true, default-features = true }

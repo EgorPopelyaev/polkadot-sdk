@@ -11,18 +11,22 @@ description = "Exposes all the host functions that a contract can import."
 [lints]
 workspace = true
 
+[package.metadata.docs.rs]
+features = ["unstable-hostfn"]
+targets = ["riscv64imac-unknown-none-elf"]
+
 [dependencies]
 bitflags = { workspace = true }
 codec = { features = ["derive", "max-encoded-len"], optional = true, workspace = true }
+<<<<<<< HEAD
 pallet-revive-proc-macro.workspace = true
+=======
+pallet-revive-proc-macro = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 scale-info = { features = ["derive"], optional = true, workspace = true }
 
 [target.'cfg(target_arch = "riscv64")'.dependencies]
 polkavm-derive = { version = "0.21.0" }
-
-[package.metadata.docs.rs]
-features = ["unstable-hostfn"]
-targets = ["riscv64imac-unknown-none-elf"]
 
 [features]
 default = ["scale"]

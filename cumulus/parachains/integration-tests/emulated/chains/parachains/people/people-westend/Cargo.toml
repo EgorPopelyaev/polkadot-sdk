@@ -7,6 +7,7 @@ license = "Apache-2.0"
 description = "People Westend emulated chain"
 publish = false
 
+<<<<<<< HEAD
 [dependencies]
 cumulus-primitives-core.workspace = true
 emulated-integration-tests-common.workspace = true
@@ -15,4 +16,19 @@ parachains-common.default-features = true
 parachains-common.workspace = true
 people-westend-runtime.workspace = true
 sp-core.workspace = true
+=======
+[lints]
+workspace = true
+
+[dependencies]
+# Substrate
+frame-support = { workspace = true }
+sp-core = { workspace = true }
+
+# Cumulus
+cumulus-primitives-core = { workspace = true }
+emulated-integration-tests-common = { workspace = true }
+parachains-common = { workspace = true, default-features = true }
+people-westend-runtime = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 testnet-parachains-constants = { features = ["westend"], workspace = true, default-features = true }

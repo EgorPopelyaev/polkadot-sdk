@@ -38,7 +38,7 @@ use sc_network::{
 use polkadot_node_network_protocol::{
 	peer_set::PeerSetProtocolNames,
 	request_response::{outgoing::Requests, ReqProtocolNames},
-	view, ObservedRole, Versioned,
+	view, CollationProtocols, ObservedRole, ValidationProtocols,
 };
 use polkadot_node_subsystem::{
 	messages::{
@@ -1012,7 +1012,11 @@ fn peer_messages_sent_via_overseer() {
 			virtual_overseer.recv().await,
 			AllMessages::ApprovalDistribution(
 				ApprovalDistributionMessage::NetworkBridgeUpdate(
+<<<<<<< HEAD
 					NetworkBridgeEvent::PeerMessage(p, Versioned::V3(m))
+=======
+					NetworkBridgeEvent::PeerMessage(p, ValidationProtocols::V3(m))
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 				)
 			) => {
 				assert_eq!(p, peer);
@@ -1232,7 +1236,7 @@ fn relays_collation_protocol_messages() {
 			virtual_overseer.recv().await,
 			AllMessages::CollatorProtocol(
 				CollatorProtocolMessage::NetworkBridgeUpdate(
-					NetworkBridgeEvent::PeerMessage(p, Versioned::V1(m))
+					NetworkBridgeEvent::PeerMessage(p, CollationProtocols::V1(m))
 				)
 			) => {
 				assert_eq!(p, peer_b);
@@ -1708,7 +1712,11 @@ fn network_protocol_versioning_subsystem_msg() {
 			virtual_overseer.recv().await,
 			AllMessages::CollatorProtocol(
 				CollatorProtocolMessage::NetworkBridgeUpdate(
+<<<<<<< HEAD
 					NetworkBridgeEvent::PeerMessage(p, Versioned::V1(m))
+=======
+					NetworkBridgeEvent::PeerMessage(p, CollationProtocols::V1(m))
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 				)
 			) => {
 				assert_eq!(p, peer);

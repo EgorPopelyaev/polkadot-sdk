@@ -33,6 +33,10 @@ sp-runtime.workspace = true
 thiserror = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sc-rpc = { features = ["test-helpers"], default-features = true, workspace = true }
+=======
+sc-rpc = { features = ["test-helpers"], workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 substrate-test-runtime-client = { workspace = true }
 tokio = { features = ["macros"], workspace = true, default-features = true }

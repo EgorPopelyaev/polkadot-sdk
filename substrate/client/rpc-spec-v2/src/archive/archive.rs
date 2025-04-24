@@ -22,6 +22,10 @@ use crate::{
 	archive::{
 		archive_storage::ArchiveStorageDiff,
 		error::{Error as ArchiveError, Infallible},
+<<<<<<< HEAD
+=======
+		types::MethodResult,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		ArchiveApiServer,
 	},
 	common::{
@@ -30,7 +34,7 @@ use crate::{
 		},
 		storage::{QueryResult, StorageSubscriptionClient},
 	},
-	hex_string, MethodResult, SubscriptionTaskExecutor,
+	hex_string, SubscriptionTaskExecutor,
 };
 
 use codec::Encode;

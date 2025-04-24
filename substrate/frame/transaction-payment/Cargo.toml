@@ -22,9 +22,14 @@ frame-support.workspace = true
 frame-system.workspace = true
 scale-info = { features = ["derive"], workspace = true }
 serde = { optional = true, workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-core.workspace = true
 sp-io.workspace = true
 sp-runtime.workspace = true
+=======
+sp-io = { workspace = true }
+sp-runtime = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 pallet-balances = { default-features = true, workspace = true }
@@ -39,7 +44,6 @@ std = [
 	"frame-system/std",
 	"scale-info/std",
 	"serde",
-	"sp-core/std",
 	"sp-io/std",
 	"sp-runtime/std",
 ]

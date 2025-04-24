@@ -34,10 +34,18 @@ sp-runtime.workspace = true
 sp-staking.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-staking-reward-curve = { default-features = true, workspace = true }
 pallet-timestamp = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
 sp-io = { default-features = true, workspace = true }
+=======
+pallet-staking-reward-curve = { workspace = true, default-features = true }
+pallet-timestamp = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -59,7 +67,6 @@ std = [
 	"sp-runtime/std",
 	"sp-staking/std",
 ]
-
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-election-provider-support/runtime-benchmarks",

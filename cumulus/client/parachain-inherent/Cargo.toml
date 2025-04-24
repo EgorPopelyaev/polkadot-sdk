@@ -32,3 +32,20 @@ sp-state-machine.workspace = true
 sp-storage.default-features = true
 sp-storage.workspace = true
 tracing = { workspace = true, default-features = true }
+<<<<<<< HEAD
+=======
+
+# Substrate
+sc-client-api = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+sp-inherents = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-state-machine = { workspace = true, default-features = true }
+sp-storage = { workspace = true, default-features = true }
+
+# Cumulus
+cumulus-primitives-core = { workspace = true, default-features = true }
+cumulus-primitives-parachain-inherent = { workspace = true, default-features = true }
+cumulus-relay-chain-interface = { workspace = true, default-features = true }
+cumulus-test-relay-sproof-builder = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

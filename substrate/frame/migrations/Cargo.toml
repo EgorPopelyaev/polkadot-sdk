@@ -25,14 +25,18 @@ sp-io.workspace = true
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-executive = { default-features = true, workspace = true }
 sp-tracing = { features = ["std"], default-features = true, workspace = true }
+=======
+frame-executive = { workspace = true, default-features = true }
+sp-tracing = { features = ["std"], workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 pretty_assertions = { workspace = true }
 
 [features]
 default = ["std"]
-
 std = [
 	"codec/std",
 	"frame-benchmarking?/std",

@@ -33,8 +33,14 @@ xcm.workspace = true
 
 alloy-core = { workspace = true, features = ["sol-types"] }
 ethabi = { workspace = true }
+<<<<<<< HEAD
 snowbridge-core.workspace = true
 snowbridge-verification-primitives.workspace = true
+=======
+
+snowbridge-core = { workspace = true }
+snowbridge-verification-primitives = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

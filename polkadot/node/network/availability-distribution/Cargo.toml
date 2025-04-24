@@ -11,6 +11,12 @@ repository.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "availability-distribution-regression-bench"
+path = "benches/availability-distribution-regression-bench.rs"
+harness = false
+required-features = ["subsystem-benchmarks"]
+
 [dependencies]
 codec = { features = ["std"], workspace = true, default-features = true }
 fatality = { workspace = true }
@@ -49,13 +55,6 @@ sc-network = { default-features = true, workspace = true }
 sp-core = { features = ["std"], default-features = true, workspace = true }
 sp-keyring = { default-features = true, workspace = true }
 sp-tracing = { default-features = true, workspace = true }
-
-
-[[bench]]
-name = "availability-distribution-regression-bench"
-path = "benches/availability-distribution-regression-bench.rs"
-harness = false
-required-features = ["subsystem-benchmarks"]
 
 [features]
 subsystem-benchmarks = []

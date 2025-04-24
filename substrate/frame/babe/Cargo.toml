@@ -34,12 +34,22 @@ sp-session.workspace = true
 sp-staking = { features = ["serde"], workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-election-provider-support = { default-features = true, workspace = true }
 pallet-balances = { default-features = true, workspace = true }
 pallet-offences = { default-features = true, workspace = true }
 pallet-staking = { default-features = true, workspace = true }
 pallet-staking-reward-curve = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
+=======
+frame-election-provider-support = { workspace = true, default-features = true }
+pallet-balances = { workspace = true, default-features = true }
+pallet-offences = { workspace = true, default-features = true }
+pallet-staking = { workspace = true, default-features = true }
+pallet-staking-reward-curve = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -27,6 +27,7 @@ polkadot-primitives.workspace = true
 polkadot-runtime-parachains.default-features = true
 polkadot-runtime-parachains.workspace = true
 scale-info = { workspace = true }
+<<<<<<< HEAD
 sp-io.default-features = true
 sp-io.workspace = true
 sp-runtime.default-features = true
@@ -37,3 +38,18 @@ xcm-executor.default-features = true
 xcm-executor.workspace = true
 xcm.default-features = true
 xcm.workspace = true
+=======
+
+frame-support = { workspace = true, default-features = true }
+frame-system = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+
+polkadot-core-primitives = { workspace = true, default-features = true }
+polkadot-parachain-primitives = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+polkadot-runtime-parachains = { workspace = true, default-features = true }
+xcm = { workspace = true, default-features = true }
+xcm-builder = { workspace = true, default-features = true }
+xcm-executor = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

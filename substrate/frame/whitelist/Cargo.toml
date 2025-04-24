@@ -20,8 +20,13 @@ frame = { workspace = true, features = ["runtime"] }
 scale-info = { features = ["derive"], workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-balances = { default-features = true, workspace = true }
 pallet-preimage = { default-features = true, workspace = true }
+=======
+pallet-balances = { workspace = true, default-features = true }
+pallet-preimage = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -15,6 +15,13 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+[lib]
+bench = false
+
+[[bench]]
+name = "bench"
+harness = false
+
 [dependencies]
 bip39 = { workspace = true, default-features = false, features = ["alloc"] }
 bitflags = { workspace = true }
@@ -35,12 +42,20 @@ rand = { features = ["small_rng"], optional = true, workspace = true, default-fe
 scale-info = { features = ["derive"], workspace = true }
 secrecy = { features = ["alloc"], workspace = true }
 serde = { optional = true, features = ["alloc", "derive"], workspace = true }
+<<<<<<< HEAD
 sp-debug-derive.workspace = true
+=======
+sp-debug-derive = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 sp-externalities = { optional = true, workspace = true }
 sp-std.workspace = true
 sp-storage.workspace = true
 ss58-registry = { workspace = true }
+<<<<<<< HEAD
 substrate-bip39.workspace = true
+=======
+substrate-bip39 = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { optional = true, workspace = true }
 tracing = { optional = true, workspace = true, default-features = true }
 zeroize = { workspace = true }
@@ -63,22 +78,22 @@ secp256k1 = { features = ["alloc", "recovery"], optional = true, workspace = tru
 w3f-bls = { optional = true, workspace = true }
 # bandersnatch crypto
 ark-vrf = { optional = true, workspace = true, features = ["bandersnatch", "ring"] }
+<<<<<<< HEAD
+=======
+
+[target.'cfg(not(substrate_runtime))'.dependencies]
+sp-externalities = { workspace = true, default-features = false }
+futures = { version = "0.3.30", default-features = false, features = ["alloc"] }
+dyn-clone = "1.0.17"
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 criterion = { workspace = true, default-features = true }
 regex = { workspace = true }
 serde_json = { workspace = true, default-features = true }
 
-[[bench]]
-name = "bench"
-harness = false
-
-[lib]
-bench = false
-
 [features]
 default = ["std"]
-
 std = [
 	"ark-vrf?/std",
 	"bip39/rand",
@@ -87,10 +102,9 @@ std = [
 	"bounded-collections/std",
 	"bs58/std",
 	"codec/std",
-	"dyn-clonable",
 	"ed25519-zebra/std",
 	"full_crypto",
-	"futures",
+	"futures/std",
 	"futures/thread-pool",
 	"hash-db/std",
 	"hash256-std-hasher/std",

@@ -315,7 +315,7 @@ async fn send_message_from_peer_v3(
 		virtual_overseer,
 		ApprovalDistributionMessage::NetworkBridgeUpdate(NetworkBridgeEvent::PeerMessage(
 			*peer_id,
-			Versioned::V3(msg),
+			ValidationProtocols::V3(msg),
 		)),
 	)
 	.await;
@@ -581,7 +581,7 @@ fn try_import_the_same_assignment_v2() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -849,7 +849,11 @@ fn peer_sending_us_the_same_we_just_sent_them_is_ok() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -949,7 +953,7 @@ fn peer_sending_us_duplicates_while_aggression_enabled_is_ok() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1086,7 +1090,7 @@ fn import_approval_happy_path_v2() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1130,7 +1134,7 @@ fn import_approval_happy_path_v2() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Approvals(approvals)
 					))
 				)) => {
@@ -1234,7 +1238,7 @@ fn multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1275,7 +1279,7 @@ fn multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1316,7 +1320,7 @@ fn multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Approvals(approvals)
 					))
 				)) => {
@@ -1495,7 +1499,7 @@ fn unify_with_peer_multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1510,7 +1514,7 @@ fn unify_with_peer_multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Approvals(approvals)
 					))
 				)) => {
@@ -1525,7 +1529,7 @@ fn unify_with_peer_multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1540,7 +1544,7 @@ fn unify_with_peer_multiple_assignments_covered_with_one_approval_vote() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Approvals(approvals)
 					))
 				)) => {
@@ -1820,7 +1824,11 @@ fn update_peer_view() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -1878,7 +1886,11 @@ fn update_peer_view() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -2046,7 +2058,11 @@ fn update_peer_authority_id() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -2060,7 +2076,11 @@ fn update_peer_authority_id() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -2086,7 +2106,11 @@ fn update_peer_authority_id() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -2326,7 +2350,7 @@ fn sends_assignments_even_when_state_is_approved_v2() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 					))
 				)) => {
@@ -2339,7 +2363,7 @@ fn sends_assignments_even_when_state_is_approved_v2() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 					))
 				)) => {
@@ -2544,7 +2568,11 @@ fn propagates_locally_generated_assignment_to_both_dimensions() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					sent_peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 					))
 				)) => {
@@ -2565,7 +2593,11 @@ fn propagates_locally_generated_assignment_to_both_dimensions() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					mut sent_peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 					))
 				)) => {
@@ -2671,7 +2703,11 @@ fn propagates_assignments_along_unshared_dimension() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -2719,7 +2755,11 @@ fn propagates_assignments_along_unshared_dimension() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -2835,7 +2875,11 @@ fn propagates_to_required_after_connect() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					sent_peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 					))
 				)) => {
@@ -2856,7 +2900,11 @@ fn propagates_to_required_after_connect() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					mut sent_peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 					))
 				)) => {
@@ -2876,7 +2924,11 @@ fn propagates_to_required_after_connect() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -2890,7 +2942,11 @@ fn propagates_to_required_after_connect() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 						))
 					)) => {
@@ -2997,7 +3053,11 @@ fn sends_to_more_peers_after_getting_topology() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -3018,7 +3078,11 @@ fn sends_to_more_peers_after_getting_topology() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 						))
 					)) => {
@@ -3129,7 +3193,11 @@ fn originator_aggression_l1() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					sent_peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(_)
 					))
 				)) => {
@@ -3143,7 +3211,11 @@ fn originator_aggression_l1() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					_,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Approvals(_)
 					))
 				)) => { }
@@ -3183,7 +3255,11 @@ fn originator_aggression_l1() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -3202,7 +3278,11 @@ fn originator_aggression_l1() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 						))
 					)) => {
@@ -3309,7 +3389,11 @@ fn non_originator_aggression_l1() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					_,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(_)
 					))
 				)) => { }
@@ -3433,7 +3517,11 @@ fn non_originator_aggression_l2() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					sent_peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(_)
 					))
 				)) => {
@@ -3512,7 +3600,11 @@ fn non_originator_aggression_l2() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -3622,7 +3714,11 @@ fn resends_messages_periodically() {
 					overseer_recv(overseer).await,
 					AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 						sent_peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 						))
 					)) => {
@@ -3674,7 +3770,11 @@ fn resends_messages_periodically() {
 						overseer_recv(overseer).await,
 						AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 							sent_peers,
+<<<<<<< HEAD
 							Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+							ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 								protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 							))
 						)) => {
@@ -3764,7 +3864,11 @@ fn import_versioned_approval() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -3808,7 +3912,11 @@ fn import_versioned_approval() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Approvals(approvals)
 					))
 				)) => {
@@ -3924,7 +4032,11 @@ fn batch_test_round(message_count: usize) {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Assignments(sent_assignments)
 					))
 				)) => {
@@ -3951,7 +4063,11 @@ fn batch_test_round(message_count: usize) {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::ApprovalDistributionMessage::Approvals(sent_approvals)
 					))
 				)) => {
@@ -4345,7 +4461,7 @@ fn subsystem_accepts_tranche0_duplicate_assignments() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -4383,7 +4499,7 @@ fn subsystem_accepts_tranche0_duplicate_assignments() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {
@@ -4421,7 +4537,7 @@ fn subsystem_accepts_tranche0_duplicate_assignments() {
 				overseer_recv(overseer).await,
 				AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 					peers,
-					Versioned::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::ApprovalDistribution(
 						protocol_v3::ApprovalDistributionMessage::Assignments(assignments)
 					))
 				)) => {

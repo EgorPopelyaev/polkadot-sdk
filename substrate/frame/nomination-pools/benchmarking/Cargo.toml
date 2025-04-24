@@ -40,7 +40,6 @@ sp-io = { default-features = true, workspace = true }
 
 [features]
 default = ["std"]
-
 std = [
 	"codec/std",
 	"frame-benchmarking/std",
@@ -57,7 +56,6 @@ std = [
 	"sp-runtime/std",
 	"sp-staking/std",
 ]
-
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-election-provider-support/runtime-benchmarks",

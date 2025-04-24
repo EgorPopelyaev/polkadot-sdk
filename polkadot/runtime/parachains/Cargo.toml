@@ -15,9 +15,12 @@ workspace = true
 bitflags = { workspace = true }
 bitvec = { features = ["alloc"], workspace = true }
 codec = { features = ["derive", "max-encoded-len"], workspace = true }
+<<<<<<< HEAD
 frame-benchmarking = { optional = true, workspace = true }
 frame-support.workspace = true
 frame-system.workspace = true
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 impl-trait-for-tuples = { workspace = true }
 log = { workspace = true }
 pallet-authority-discovery.workspace = true
@@ -50,6 +53,36 @@ sp-session.workspace = true
 sp-staking = { features = ["serde"], workspace = true }
 sp-std = { workspace = true, optional = true }
 sp-tracing = { optional = true, workspace = true }
+<<<<<<< HEAD
+=======
+
+frame-benchmarking = { optional = true, workspace = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+pallet-authority-discovery = { workspace = true }
+pallet-authorship = { workspace = true }
+pallet-babe = { workspace = true }
+pallet-balances = { workspace = true }
+pallet-broker = { workspace = true }
+pallet-message-queue = { workspace = true }
+pallet-mmr = { workspace = true, optional = true }
+pallet-session = { workspace = true }
+pallet-staking = { workspace = true }
+pallet-timestamp = { workspace = true }
+
+# only used in benchmarking
+frame-election-provider-support = { workspace = true, optional = true }
+
+polkadot-primitives = { workspace = true }
+xcm = { workspace = true }
+xcm-executor = { workspace = true }
+
+polkadot-core-primitives = { workspace = true }
+polkadot-parachain-primitives = { workspace = true }
+polkadot-runtime-metrics = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 static_assertions = { optional = true, workspace = true, default-features = true }
 xcm-executor.workspace = true
 xcm.workspace = true
@@ -76,6 +109,7 @@ std = [
 	"bitvec/std",
 	"codec/std",
 	"frame-benchmarking?/std",
+	"frame-election-provider-support?/std",
 	"frame-support/std",
 	"frame-system/std",
 	"log/std",
@@ -114,6 +148,7 @@ std = [
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
+	"frame-election-provider-support/runtime-benchmarks",
 	"frame-support-test/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
@@ -135,6 +170,7 @@ runtime-benchmarks = [
 	"xcm/runtime-benchmarks",
 ]
 try-runtime = [
+	"frame-election-provider-support?/try-runtime",
 	"frame-support-test/try-runtime",
 	"frame-support/try-runtime",
 	"frame-system/try-runtime",

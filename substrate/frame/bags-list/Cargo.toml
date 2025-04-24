@@ -17,11 +17,23 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 # parity
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 frame-election-provider-support.workspace = true
 frame-support.workspace = true
 frame-system.workspace = true
 scale-info = { features = ["derive"], workspace = true }
 sp-runtime.workspace = true
+=======
+scale-info = { features = ["derive"], workspace = true }
+
+# primitives
+sp-runtime = { workspace = true }
+
+# FRAME
+frame-election-provider-support = { workspace = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 # third party
 aquamarine = { workspace = true }

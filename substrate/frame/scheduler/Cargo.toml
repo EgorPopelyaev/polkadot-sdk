@@ -25,8 +25,13 @@ sp-runtime.workspace = true
 sp-weights.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-preimage = { default-features = true, workspace = true }
 sp-core = { workspace = true, default-features = false }
+=======
+pallet-preimage = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 substrate-test-utils = { workspace = true }
 
 [features]

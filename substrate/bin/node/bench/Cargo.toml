@@ -41,6 +41,7 @@ sc-transaction-pool.default-features = true
 sc-transaction-pool.workspace = true
 serde = { workspace = true, default-features = true }
 serde_json = { workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-consensus.default-features = true
 sp-consensus.workspace = true
 sp-core.default-features = true
@@ -56,4 +57,14 @@ sp-tracing.default-features = true
 sp-tracing.workspace = true
 sp-trie.default-features = true
 sp-trie.workspace = true
+=======
+sp-consensus = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-inherents = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-state-machine = { workspace = true, default-features = true }
+sp-timestamp = { workspace = true }
+sp-tracing = { workspace = true, default-features = true }
+sp-trie = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tempfile = { workspace = true }

@@ -20,10 +20,16 @@ sp-core.workspace = true
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-balances = { features = ["std"], default-features = true, workspace = true }
 pallet-example-basic = { features = ["std"], default-features = true, workspace = true }
 sp-core = { features = ["std"], default-features = true, workspace = true }
 sp-io = { features = ["std"], default-features = true, workspace = true }
+=======
+pallet-balances = { workspace = true, default-features = true }
+pallet-example-basic = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -29,10 +29,15 @@ sp-runtime.workspace = true
 
 [dev-dependencies]
 frame-support-test = { workspace = true }
+<<<<<<< HEAD
 pallet-balances = { default-features = true, workspace = true }
 sp-core = { default-features = true, workspace = true }
 sp-crypto-hashing = { default-features = true, workspace = true }
 sp-io = { default-features = true, workspace = true }
+=======
+pallet-balances = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -11,8 +11,12 @@ publish = false
 anyhow = { workspace = true, default-features = true }
 codec = { workspace = true, features = ["derive"] }
 log = { workspace = true }
+<<<<<<< HEAD
 polkadot-primitives.workspace = true
 polkadot-primitives.default-features = true
+=======
+polkadot-primitives = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 subxt = { workspace = true, features = ["native"] }
 tokio = { workspace = true, features = ["rt-multi-thread", "macros", "time"] }
 

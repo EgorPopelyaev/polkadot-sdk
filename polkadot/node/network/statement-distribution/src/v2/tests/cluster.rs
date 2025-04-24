@@ -96,7 +96,11 @@ fn share_seconded_circulated_to_cluster() {
 			overseer.recv().await,
 			AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 				peers,
+<<<<<<< HEAD
 				Versioned::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+=======
+				ValidationProtocols::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					protocol_v3::StatementDistributionMessage::Statement(
 						r,
 						s,
@@ -603,7 +607,11 @@ fn cluster_statements_shared_seconded_first() {
 
 				assert_matches!(
 					&messages[0].1,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::StatementDistributionMessage::Statement(
 							r,
 							s,
@@ -614,7 +622,11 @@ fn cluster_statements_shared_seconded_first() {
 
 				assert_matches!(
 					&messages[1].1,
+<<<<<<< HEAD
 					Versioned::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+=======
+					ValidationProtocols::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						protocol_v3::StatementDistributionMessage::Statement(
 							r,
 							s,
@@ -702,7 +714,11 @@ fn cluster_accounts_for_implicit_view() {
 			overseer.recv().await,
 			AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendValidationMessage(
 				peers,
+<<<<<<< HEAD
 				Versioned::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+=======
+				ValidationProtocols::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					protocol_v3::StatementDistributionMessage::Statement(
 						r,
 						s,
@@ -743,7 +759,11 @@ fn cluster_accounts_for_implicit_view() {
 					&messages[0],
 					(
 						peers,
+<<<<<<< HEAD
 						Versioned::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+=======
+						ValidationProtocols::V3(protocol_v3::ValidationProtocol::StatementDistribution(
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 							protocol_v3::StatementDistributionMessage::Statement(
 								r,
 								s,

@@ -11,11 +11,9 @@ repository.workspace = true
 [lints]
 workspace = true
 
-[build-dependencies]
-substrate-wasm-builder = { optional = true, workspace = true, default-features = true }
-
 [dependencies]
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 cumulus-pallet-aura-ext.workspace = true
 cumulus-pallet-parachain-system.workspace = true
 cumulus-pallet-session-benchmarking.workspace = true
@@ -33,6 +31,8 @@ frame-system-benchmarking = { optional = true, workspace = true }
 frame-system-rpc-runtime-api.workspace = true
 frame-system.workspace = true
 frame-try-runtime = { optional = true, workspace = true }
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 log = { workspace = true }
 pallet-aura.workspace = true
 pallet-authorship.workspace = true
@@ -79,6 +79,9 @@ xcm.workspace = true
 
 [dev-dependencies]
 parachains-runtimes-test-utils = { default-features = true, workspace = true }
+
+[build-dependencies]
+substrate-wasm-builder = { optional = true, workspace = true, default-features = true }
 
 [features]
 default = ["std"]
@@ -146,7 +149,6 @@ std = [
 	"xcm-runtime-apis/std",
 	"xcm/std",
 ]
-
 runtime-benchmarks = [
 	"cumulus-pallet-parachain-system/runtime-benchmarks",
 	"cumulus-pallet-session-benchmarking/runtime-benchmarks",
@@ -179,7 +181,6 @@ runtime-benchmarks = [
 	"xcm-runtime-apis/runtime-benchmarks",
 	"xcm/runtime-benchmarks",
 ]
-
 try-runtime = [
 	"cumulus-pallet-aura-ext/try-runtime",
 	"cumulus-pallet-parachain-system/try-runtime",
@@ -208,7 +209,6 @@ try-runtime = [
 	"polkadot-runtime-common/try-runtime",
 	"sp-runtime/try-runtime",
 ]
-
 fast-runtime = [
 	"westend-runtime-constants/fast-runtime",
 ]

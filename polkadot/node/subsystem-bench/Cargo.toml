@@ -22,10 +22,12 @@ doc = false
 [dependencies]
 async-trait = { workspace = true }
 bincode = { workspace = true }
+bitvec = { workspace = true, default-features = true }
 clap = { features = ["derive"], workspace = true }
 color-eyre = { workspace = true }
 colored = { workspace = true }
 futures = { workspace = true }
+<<<<<<< HEAD
 gum.default-features = true
 gum.workspace = true
 hex = { workspace = true, default-features = true }
@@ -65,6 +67,31 @@ sp-core.workspace = true
 sp-keystore.default-features = true
 sp-keystore.workspace = true
 sp-tracing.workspace = true
+=======
+gum = { workspace = true, default-features = true }
+hex = { workspace = true, default-features = true }
+kvdb-memorydb = { workspace = true }
+polkadot-availability-bitfield-distribution = { workspace = true, default-features = true }
+polkadot-availability-distribution = { workspace = true, default-features = true }
+polkadot-availability-recovery = { features = ["subsystem-benchmarks"], workspace = true, default-features = true }
+polkadot-node-core-av-store = { workspace = true, default-features = true }
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-types = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-overseer = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, features = ["test"] }
+polkadot-statement-distribution = { workspace = true, default-features = true }
+# `rand` only supports uniform distribution, we need normal distribution for latency.
+rand = { workspace = true, default-features = true }
+rand_distr = { workspace = true }
+sc-keystore = { workspace = true, default-features = true }
+sha1 = { workspace = true }
+sp-core = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+sp-tracing = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tikv-jemallocator = { features = ["profiling", "unprefixed_malloc_on_supported_platforms"], workspace = true, optional = true }
 
 codec = { features = ["derive", "std"], workspace = true, default-features = true }
@@ -104,6 +131,16 @@ sp-timestamp.default-features = true
 sp-timestamp.workspace = true
 tokio = { features = ["parking_lot", "rt-multi-thread"], workspace = true, default-features = true }
 
+<<<<<<< HEAD
+=======
+polkadot-approval-distribution = { workspace = true, default-features = true }
+polkadot-node-core-approval-voting = { workspace = true, default-features = true }
+polkadot-node-core-approval-voting-parallel = { workspace = true, default-features = true }
+sp-consensus-babe = { workspace = true, default-features = true }
+sp-runtime = { workspace = true }
+sp-timestamp = { workspace = true, default-features = true }
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 orchestra = { features = ["futures_channel"], workspace = true }
 paste = { workspace = true, default-features = true }
 pyroscope = { workspace = true }
@@ -114,6 +151,5 @@ strum = { features = ["derive"], workspace = true, default-features = true }
 [features]
 default = []
 memprofile = [
-	"dep:jemalloc_pprof",
 	"dep:tikv-jemallocator",
 ]
