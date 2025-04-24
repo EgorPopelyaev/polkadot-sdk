@@ -10,13 +10,19 @@ license.workspace = true
 workspace = true
 
 [dependencies]
+<<<<<<< HEAD
 async-trait = { workspace = true }
 futures = { workspace = true }
 futures-channel = { workspace = true }
+=======
+codec = { features = ["derive"], workspace = true }
+fatality = { workspace = true }
+futures = { workspace = true }
+gum = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 itertools = { workspace = true }
 codec = { features = ["derive"], workspace = true }
 parking_lot = { workspace = true, default-features = true }
-pin-project = { workspace = true }
 rand = { workspace = true, default-features = true }
 thiserror = { workspace = true }
 fatality = { workspace = true }
@@ -41,6 +47,7 @@ polkadot-node-primitives.default-features = true
 polkadot-overseer.workspace = true
 polkadot-overseer.default-features = true
 metered = { features = ["futures_channel"], workspace = true }
+<<<<<<< HEAD
 sp-core.workspace = true
 sp-core.default-features = true
 sp-application-crypto.workspace = true
@@ -49,6 +56,20 @@ sp-keystore.workspace = true
 sp-keystore.default-features = true
 sc-client-api.workspace = true
 sc-client-api.default-features = true
+=======
+polkadot-erasure-coding = { workspace = true, default-features = true }
+polkadot-node-metrics = { workspace = true, default-features = true }
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-types = { workspace = true, default-features = true }
+polkadot-overseer = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+
+sp-application-crypto = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 kvdb = { workspace = true }
 parity-db = { workspace = true }
@@ -56,9 +77,15 @@ parity-db = { workspace = true }
 [dev-dependencies]
 assert_matches = { workspace = true }
 futures = { features = ["thread-pool"], workspace = true }
+<<<<<<< HEAD
 log = { workspace = true, default-features = true }
 polkadot-node-subsystem-test-helpers = { path = "../subsystem-test-helpers" }
 polkadot-primitives-test-helpers = { path = "../../primitives/test-helpers" }
 kvdb-shared-tests = { workspace = true }
+=======
+kvdb-shared-tests = { workspace = true }
+polkadot-node-subsystem-test-helpers = { workspace = true }
+polkadot-primitives-test-helpers = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tempfile = { workspace = true }
 kvdb-memorydb = { workspace = true }

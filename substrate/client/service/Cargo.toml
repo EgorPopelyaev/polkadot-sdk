@@ -15,6 +15,7 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+<<<<<<< HEAD
 [features]
 default = ["rocksdb"]
 # The RocksDB feature activates the RocksDB database backend. If it is not activated, and you pass
@@ -27,6 +28,8 @@ runtime-benchmarks = [
 	"sp-runtime/runtime-benchmarks",
 ]
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [dependencies]
 jsonrpsee = { features = ["server"], workspace = true }
 thiserror = { workspace = true }
@@ -123,5 +126,20 @@ static_init = { workspace = true }
 schnellru = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 substrate-test-runtime-client = { path = "../../test-utils/runtime/client" }
 substrate-test-runtime = { path = "../../test-utils/runtime" }
+=======
+substrate-test-runtime = { workspace = true }
+substrate-test-runtime-client = { workspace = true }
+
+[features]
+default = ["rocksdb"]
+# The RocksDB feature activates the RocksDB database backend. If it is not activated, and you pass
+# a path to a database, an error will be produced at runtime.
+rocksdb = ["sc-client-db/rocksdb"]
+runtime-benchmarks = [
+	"sc-client-db/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
+]
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

@@ -6,9 +6,14 @@ use codec::{Decode, Encode};
 use frame_support::PalletError;
 use scale_info::TypeInfo;
 use snowbridge_beacon_primitives::{BeaconHeader, ExecutionProof};
+<<<<<<< HEAD:bridges/snowbridge/primitives/core/src/inbound.rs
 use sp_core::{H160, H256};
 use sp_runtime::RuntimeDebug;
 use sp_std::vec::Vec;
+=======
+use sp_core::{RuntimeDebug, H160, H256};
+use sp_std::prelude::*;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60)):bridges/snowbridge/primitives/verification/src/lib.rs
 
 /// A trait for verifying inbound messages from Ethereum.
 pub trait Verifier {
@@ -75,8 +80,13 @@ pub struct Proof {
 }
 
 #[derive(Clone, RuntimeDebug)]
+<<<<<<< HEAD:bridges/snowbridge/primitives/core/src/inbound.rs
 pub struct InboundQueueFixture {
 	pub message: Message,
+=======
+pub struct EventFixture {
+	pub event: EventProof,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60)):bridges/snowbridge/primitives/verification/src/lib.rs
 	pub finalized_header: BeaconHeader,
 	pub block_roots_root: H256,
 }

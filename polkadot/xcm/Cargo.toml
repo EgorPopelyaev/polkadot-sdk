@@ -28,8 +28,12 @@ hex-literal = { workspace = true, default-features = true }
 frame-support.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-io = { default-features = true, path = "../../substrate/primitives/io" }
 hex = { workspace = true, default-features = true }
+=======
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

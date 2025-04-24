@@ -14,6 +14,12 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 codec = { workspace = true }
+<<<<<<< HEAD
+=======
+frame-benchmarking = { workspace = true }
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 scale-info = { features = ["derive"], workspace = true }
 frame-support.workspace = true
 frame-system.workspace = true
@@ -26,6 +32,7 @@ xcm-builder.workspace = true
 log = { workspace = true, default-features = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-balances = { default-features = true, path = "../../../substrate/frame/balances" }
 pallet-assets = { default-features = true, path = "../../../substrate/frame/assets" }
 sp-tracing = { default-features = true, path = "../../../substrate/primitives/tracing" }
@@ -35,6 +42,11 @@ pallet-xcm = { default-features = true, path = "../pallet-xcm" }
 polkadot-runtime-common = { default-features = true, path = "../../runtime/common" }
 # westend-runtime = { path = "../../runtime/westend", features = ["runtime-benchmarks"] }
 polkadot-primitives = { default-features = true, path = "../../primitives" }
+=======
+pallet-balances = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+xcm = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -43,7 +55,6 @@ std = [
 	"frame-benchmarking/std",
 	"frame-support/std",
 	"frame-system/std",
-	"log/std",
 	"scale-info/std",
 	"sp-io/std",
 	"sp-runtime/std",
@@ -54,6 +65,10 @@ runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
+<<<<<<< HEAD
+=======
+	"pallet-balances/runtime-benchmarks",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"sp-runtime/runtime-benchmarks",
 	"xcm-builder/runtime-benchmarks",
 	"xcm-executor/runtime-benchmarks",

@@ -17,8 +17,11 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 log = { workspace = true, default-features = true }
+<<<<<<< HEAD
 cfg-if = { workspace = true }
 libc = { workspace = true }
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 parking_lot = { workspace = true, default-features = true }
 
 # When bumping wasmtime do not forget to also bump rustix

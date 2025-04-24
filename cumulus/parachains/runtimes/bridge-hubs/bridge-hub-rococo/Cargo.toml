@@ -107,11 +107,19 @@ snowbridge-runtime-common.workspace = true
 bridge-hub-common.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 bridge-hub-test-utils = { default-features = true, path = "../test-utils" }
 bridge-runtime-common = { features = ["integrity-test"], default-features = true, path = "../../../../../bridges/bin/runtime-common" }
 pallet-bridge-relayers = { features = ["integrity-test"], path = "../../../../../bridges/modules/relayers", default-features = false }
 snowbridge-runtime-test-common = { default-features = true, path = "../../../../../bridges/snowbridge/runtime/test-common" }
 parachains-runtimes-test-utils = { default-features = true, path = "../../test-utils" }
+=======
+bridge-hub-test-utils = { workspace = true, default-features = true }
+bridge-runtime-common = { features = ["integrity-test"], workspace = true, default-features = true }
+pallet-bridge-relayers = { features = ["integrity-test"], workspace = true }
+parachains-runtimes-test-utils = { workspace = true, default-features = true }
+snowbridge-runtime-test-common = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -209,7 +217,6 @@ std = [
 	"xcm-runtime-apis/std",
 	"xcm/std",
 ]
-
 runtime-benchmarks = [
 	"bridge-hub-common/runtime-benchmarks",
 	"bridge-runtime-common/runtime-benchmarks",
@@ -251,7 +258,6 @@ runtime-benchmarks = [
 	"xcm-executor/runtime-benchmarks",
 	"xcm-runtime-apis/runtime-benchmarks",
 ]
-
 try-runtime = [
 	"cumulus-pallet-aura-ext/try-runtime",
 	"cumulus-pallet-parachain-system/try-runtime",
@@ -285,7 +291,6 @@ try-runtime = [
 	"snowbridge-pallet-system/try-runtime",
 	"sp-runtime/try-runtime",
 ]
-
 fast-runtime = []
 
 # A feature that should be enabled when the runtime should be built for on-chain

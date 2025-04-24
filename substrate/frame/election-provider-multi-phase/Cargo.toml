@@ -15,6 +15,7 @@ workspace = true
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
+<<<<<<< HEAD
 codec = { features = [
 	"derive",
 ], workspace = true }
@@ -30,20 +31,41 @@ sp-runtime.workspace = true
 sp-npos-elections.workspace = true
 sp-arithmetic.workspace = true
 frame-election-provider-support.workspace = true
+=======
+codec = { features = ["derive"], workspace = true }
+log = { workspace = true }
+scale-info = { features = ["derive"], workspace = true }
+
+frame-support = { workspace = true }
+frame-system = { workspace = true }
+
+frame-election-provider-support = { workspace = true }
+sp-arithmetic = { workspace = true }
+sp-core = { workspace = true }
+sp-io = { workspace = true }
+sp-npos-elections = { workspace = true }
+sp-runtime = { workspace = true }
+
+# Optional imports for benchmarking
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 frame-benchmarking = { optional = true, workspace = true }
-pallet-election-provider-support-benchmarking = { optional = true, workspace = true }
 rand = { features = ["alloc", "small_rng"], optional = true, workspace = true }
 strum = { features = ["derive"], optional = true, workspace = true }
 
 [dev-dependencies]
 parking_lot = { workspace = true, default-features = true }
 rand = { workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-core = { path = "../../primitives/core", default-features = false }
 sp-io = { default-features = true, path = "../../primitives/io" }
 sp-npos-elections = { path = "../../primitives/npos-elections", default-features = false }
 sp-tracing = { default-features = true, path = "../../primitives/tracing" }
 pallet-balances = { default-features = true, path = "../balances" }
 frame-benchmarking = { default-features = true, path = "../benchmarking" }
+=======
+sp-npos-elections = { workspace = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -54,7 +76,11 @@ std = [
 	"frame-support/std",
 	"frame-system/std",
 	"log/std",
+<<<<<<< HEAD
 	"pallet-election-provider-support-benchmarking?/std",
+=======
+	"pallet-balances/std",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"rand/std",
 	"scale-info/std",
 	"sp-arithmetic/std",
@@ -69,7 +95,11 @@ runtime-benchmarks = [
 	"frame-election-provider-support/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
+<<<<<<< HEAD
 	"pallet-election-provider-support-benchmarking?/runtime-benchmarks",
+=======
+	"pallet-balances/runtime-benchmarks",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"rand",
 	"sp-runtime/runtime-benchmarks",
 	"strum",

@@ -62,12 +62,22 @@ tokio = { workspace = true, default-features = true }
 
 [dev-dependencies]
 assert_matches = { workspace = true }
+<<<<<<< HEAD
 sc-block-builder = { default-features = true, path = "../block-builder" }
 sc-network = { default-features = true, path = "../network" }
 sc-network-common = { default-features = true, path = "../network/common" }
 sc-transaction-pool = { default-features = true, path = "../transaction-pool" }
 sp-consensus = { default-features = true, path = "../../primitives/consensus/common" }
 sp-crypto-hashing = { default-features = true, path = "../../primitives/crypto/hashing" }
+=======
+pretty_assertions = { workspace = true }
+sc-block-builder = { workspace = true, default-features = true }
+sc-network = { workspace = true, default-features = true }
+sc-transaction-pool = { workspace = true, default-features = true }
+sp-consensus = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+substrate-test-runtime-client = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tokio = { workspace = true, default-features = true }
 sp-io = { default-features = true, path = "../../primitives/io" }
 substrate-test-runtime-client = { path = "../../test-utils/runtime/client" }

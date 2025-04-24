@@ -20,9 +20,13 @@ xcm.workspace = true
 xcm-executor.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-system = { path = "../../../substrate/frame/system", default-features = false }
 sp-io = { path = "../../../substrate/primitives/io", default-features = false }
 xcm-builder = { path = "../xcm-builder", package = "staging-xcm-builder", default-features = false }
+=======
+frame-system = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 hex-literal = { workspace = true }
 pallet-xcm = { path = "../pallet-xcm", default-features = false }
 pallet-balances = { path = "../../../substrate/frame/balances", default-features = false }

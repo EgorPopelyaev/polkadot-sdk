@@ -23,7 +23,6 @@
 #![warn(missing_docs)]
 #![deny(unused_crate_dependencies)]
 
-use serde::{Deserialize, Serialize};
 use sp_core::hexdisplay::{AsBytesRef, HexDisplay};
 
 mod common;
@@ -36,6 +35,7 @@ pub mod transaction;
 /// Task executor that is being used by RPC subscriptions.
 pub type SubscriptionTaskExecutor = std::sync::Arc<dyn sp_core::traits::SpawnNamed>;
 
+<<<<<<< HEAD
 /// The result of an RPC method.
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(untagged)]
@@ -78,10 +78,13 @@ pub struct MethodResultErr {
 	pub error: String,
 }
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 /// Util function to encode a value as a hex string
 pub fn hex_string<Data: AsBytesRef>(data: &Data) -> String {
 	format!("0x{:?}", HexDisplay::from(data))
 }
+<<<<<<< HEAD
 
 #[cfg(test)]
 mod tests {
@@ -111,3 +114,5 @@ mod tests {
 		assert_eq!(ok_dec, ok);
 	}
 }
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

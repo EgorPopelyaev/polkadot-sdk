@@ -21,6 +21,7 @@ use super::*;
 use alloc::vec::Vec;
 use rlp::{Decodable, Encodable};
 
+<<<<<<< HEAD
 impl TransactionLegacyUnsigned {
 	/// Get the rlp encoded bytes of a signed transaction with a dummy 65 bytes signature.
 	pub fn dummy_signed_payload(&self) -> Vec<u8> {
@@ -29,6 +30,93 @@ impl TransactionLegacyUnsigned {
 		const DUMMY_SIGNATURE: [u8; 65] = [0u8; 65];
 		s.append_raw(&DUMMY_SIGNATURE.as_ref(), 1);
 		s.out().to_vec()
+=======
+impl TransactionUnsigned {
+	/// Return the bytes to be signed by the private key.
+	pub fn unsigned_payload(&self) -> Vec<u8> {
+		use TransactionUnsigned::*;
+		let mut s = rlp::RlpStream::new();
+		match self {
+			Transaction2930Unsigned(ref tx) => {
+				s.append(&tx.r#type.value());
+				s.append(tx);
+			},
+			Transaction1559Unsigned(ref tx) => {
+				s.append(&tx.r#type.value());
+				s.append(tx);
+			},
+			Transaction4844Unsigned(ref tx) => {
+				s.append(&tx.r#type.value());
+				s.append(tx);
+			},
+			TransactionLegacyUnsigned(ref tx) => {
+				s.append(tx);
+			},
+		}
+
+		s.out().to_vec()
+	}
+}
+
+impl TransactionSigned {
+	/// Extract the unsigned transaction from a signed transaction.
+	pub fn unsigned(self) -> TransactionUnsigned {
+		use TransactionSigned::*;
+		use TransactionUnsigned::*;
+		match self {
+			Transaction2930Signed(tx) => Transaction2930Unsigned(tx.transaction_2930_unsigned),
+			Transaction1559Signed(tx) => Transaction1559Unsigned(tx.transaction_1559_unsigned),
+			Transaction4844Signed(tx) => Transaction4844Unsigned(tx.transaction_4844_unsigned),
+			TransactionLegacySigned(tx) =>
+				TransactionLegacyUnsigned(tx.transaction_legacy_unsigned),
+		}
+	}
+
+	/// Encode the Ethereum transaction into bytes.
+	pub fn signed_payload(&self) -> Vec<u8> {
+		use TransactionSigned::*;
+		let mut s = rlp::RlpStream::new();
+		match self {
+			Transaction2930Signed(ref tx) => {
+				s.append(&tx.transaction_2930_unsigned.r#type.value());
+				s.append(tx);
+			},
+			Transaction1559Signed(ref tx) => {
+				s.append(&tx.transaction_1559_unsigned.r#type.value());
+				s.append(tx);
+			},
+			Transaction4844Signed(ref tx) => {
+				s.append(&tx.transaction_4844_unsigned.r#type.value());
+				s.append(tx);
+			},
+			TransactionLegacySigned(ref tx) => {
+				s.append(tx);
+			},
+		}
+
+		s.out().to_vec()
+	}
+
+	/// Decode the Ethereum transaction from bytes.
+	pub fn decode(data: &[u8]) -> Result<Self, rlp::DecoderError> {
+		if data.len() < 1 {
+			return Err(rlp::DecoderError::RlpIsTooShort);
+		}
+		match data[0] {
+			TYPE_EIP2930 => rlp::decode::<Transaction2930Signed>(&data[1..]).map(Into::into),
+			TYPE_EIP1559 => rlp::decode::<Transaction1559Signed>(&data[1..]).map(Into::into),
+			TYPE_EIP4844 => rlp::decode::<Transaction4844Signed>(&data[1..]).map(Into::into),
+			_ => rlp::decode::<TransactionLegacySigned>(data).map(Into::into),
+		}
+	}
+}
+
+impl TransactionUnsigned {
+	/// Get a signed transaction payload with a dummy 65 bytes signature.
+	pub fn dummy_signed_payload(self) -> Vec<u8> {
+		const DUMMY_SIGNATURE: [u8; 65] = [1u8; 65];
+		self.with_signature(DUMMY_SIGNATURE).signed_payload()
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	}
 }
 
@@ -81,13 +169,7 @@ impl Decodable for TransactionLegacyUnsigned {
 			},
 			value: rlp.val_at(4)?,
 			input: Bytes(rlp.val_at(5)?),
-			chain_id: {
-				if let Ok(chain_id) = rlp.val_at(6) {
-					Some(chain_id)
-				} else {
-					None
-				}
-			},
+			chain_id: rlp.val_at(6).ok(),
 			..Default::default()
 		})
 	}
@@ -169,6 +251,7 @@ mod test {
 			r#type: Type0,
 		};
 
+<<<<<<< HEAD
 		let rlp_bytes = rlp::encode(&tx);
 		let decoded = rlp::decode::<TransactionLegacyUnsigned>(&rlp_bytes).unwrap();
 		assert_eq!(&tx, &decoded);
@@ -215,5 +298,10 @@ mod test {
 		let recovered_address = tx.recover_eth_address().unwrap();
 
 		assert_eq!(account.address(), recovered_address);
+=======
+		let dummy_signed_payload = tx.clone().dummy_signed_payload();
+		let payload = Account::default().sign_transaction(tx).signed_payload();
+		assert_eq!(dummy_signed_payload.len(), payload.len());
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	}
 }

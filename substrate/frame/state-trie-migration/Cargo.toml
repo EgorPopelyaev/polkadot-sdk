@@ -31,7 +31,12 @@ sp-runtime.workspace = true
 substrate-state-trie-migration-rpc = { optional = true, workspace = true, default-features = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 parking_lot = { workspace = true, default-features = true }
+=======
+pallet-balances = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tokio = { features = ["macros"], workspace = true, default-features = true }
 pallet-balances = { default-features = true, path = "../balances" }
 sp-tracing = { default-features = true, path = "../../primitives/tracing" }

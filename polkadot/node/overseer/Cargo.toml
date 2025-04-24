@@ -16,6 +16,7 @@ sp-api.workspace = true
 sp-api.default-features = true
 futures = { workspace = true }
 futures-timer = { workspace = true }
+<<<<<<< HEAD
 parking_lot = { workspace = true, default-features = true }
 polkadot-node-network-protocol.workspace = true
 polkadot-node-network-protocol.default-features = true
@@ -33,10 +34,25 @@ gum.default-features = true
 sp-core.workspace = true
 sp-core.default-features = true
 async-trait = { workspace = true }
+=======
+gum = { workspace = true, default-features = true }
+orchestra = { features = ["futures_channel"], workspace = true }
+polkadot-node-metrics = { workspace = true, default-features = true }
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem-types = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+sc-client-api = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tikv-jemalloc-ctl = { optional = true, workspace = true }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+tikv-jemalloc-ctl = { workspace = true }
 
 [dev-dependencies]
 metered = { features = ["futures_channel"], workspace = true }
+<<<<<<< HEAD
 sp-core = { default-features = true, path = "../../../substrate/primitives/core" }
 futures = { features = ["thread-pool"], workspace = true }
 femme = { workspace = true }
@@ -46,6 +62,10 @@ polkadot-node-subsystem-test-helpers = { path = "../subsystem-test-helpers" }
 
 [target.'cfg(target_os = "linux")'.dependencies]
 tikv-jemalloc-ctl = "0.5.0"
+=======
+polkadot-node-subsystem-test-helpers = { workspace = true }
+polkadot-primitives-test-helpers = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["futures_channel"]

@@ -30,24 +30,32 @@ mod tests;
 extern crate alloc;
 
 use alloc::vec::Vec;
+<<<<<<< HEAD
 use pallet_session::historical::IdentificationTuple;
 use pallet_staking::{BalanceOf, Exposure, ExposureOf, Pallet as Staking};
 use sp_runtime::Perbill;
 use sp_staking::offence::OnOffenceHandler;
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 pub use pallet::*;
+use pallet_session::historical::IdentificationTuple;
+use sp_runtime::{traits::Convert, Perbill};
+use sp_staking::offence::OnOffenceHandler;
 
 #[frame_support::pallet]
 pub mod pallet {
 	use super::*;
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
+	use sp_staking::SessionIndex;
 
 	#[pallet::config]
 	pub trait Config:
 		frame_system::Config
 		+ pallet_staking::Config
 		+ pallet_session::Config<ValidatorId = <Self as frame_system::Config>::AccountId>
+<<<<<<< HEAD
 		+ pallet_session::historical::Config<
 			FullIdentification = Exposure<
 				<Self as frame_system::Config>::AccountId,
@@ -55,8 +63,14 @@ pub mod pallet {
 			>,
 			FullIdentificationOf = ExposureOf<Self>,
 		>
+=======
+		+ pallet_session::historical::Config
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	{
+		#[allow(deprecated)]
 		type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
+		/// The offence handler provided by the runtime.
+		type OffenceHandler: OnOffenceHandler<Self::AccountId, IdentificationTuple<Self>, Weight>;
 	}
 
 	#[pallet::pallet]
@@ -83,19 +97,40 @@ pub mod pallet {
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
 		/// Allows the `root`, for example sudo to create an offence.
+		///
+		/// If `identifications` is `Some`, then the given identification is used for offence. Else,
+		/// it is fetched live from `session::Historical`.
 		#[pallet::call_index(0)]
 		#[pallet::weight(T::DbWeight::get().reads(2))]
 		pub fn create_offence(
 			origin: OriginFor<T>,
 			offenders: Vec<(T::AccountId, Perbill)>,
+			maybe_identifications: Option<Vec<T::FullIdentification>>,
+			maybe_session_index: Option<SessionIndex>,
 		) -> DispatchResult {
 			ensure_root(origin)?;
 
+			ensure!(
+				maybe_identifications.as_ref().map_or(true, |ids| ids.len() == offenders.len()),
+				"InvalidIdentificationLength"
+			);
+
+			let identifications =
+				maybe_identifications.ok_or("Unreachable-NoIdentification").or_else(|_| {
+					offenders
+						.iter()
+						.map(|(who, _)| {
+							T::FullIdentificationOf::convert(who.clone())
+								.ok_or("failed to call FullIdentificationOf")
+						})
+						.collect::<Result<Vec<_>, _>>()
+				})?;
+
 			let slash_fraction =
 				offenders.clone().into_iter().map(|(_, fraction)| fraction).collect::<Vec<_>>();
-			let offence_details = Self::get_offence_details(offenders.clone())?;
+			let offence_details = Self::get_offence_details(offenders.clone(), identifications)?;
 
-			Self::submit_offence(&offence_details, &slash_fraction);
+			Self::submit_offence(&offence_details, &slash_fraction, maybe_session_index);
 			Self::deposit_event(Event::OffenceCreated { offenders });
 			Ok(())
 		}
@@ -105,6 +140,7 @@ pub mod pallet {
 		/// Returns a vector of offenders that are going to be slashed.
 		fn get_offence_details(
 			offenders: Vec<(T::AccountId, Perbill)>,
+			identifications: Vec<T::FullIdentification>,
 		) -> Result<Vec<OffenceDetails<T>>, DispatchError> {
 			let now = Staking::<T>::active_era()
 				.map(|e| e.index)
@@ -113,14 +149,21 @@ pub mod pallet {
 			Ok(offenders
 				.clone()
 				.into_iter()
+<<<<<<< HEAD
 				.map(|(o, _)| OffenceDetails::<T> {
 					offender: (o.clone(), Staking::<T>::eras_stakers(now, &o)),
+=======
+				.zip(identifications.into_iter())
+				.map(|((o, _), i)| OffenceDetails::<T> {
+					offender: (o.clone(), i),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					reporters: Default::default(),
 				})
 				.collect())
 		}
 
 		/// Submits the offence by calling the `on_offence` function.
+<<<<<<< HEAD
 		fn submit_offence(offenders: &[OffenceDetails<T>], slash_fraction: &[Perbill]) {
 			let session_index = <pallet_session::Pallet<T> as frame_support::traits::ValidatorSet<T::AccountId>>::session_index();
 
@@ -129,6 +172,19 @@ pub mod pallet {
 				IdentificationTuple<T>,
 				Weight,
 			>>::on_offence(&offenders, &slash_fraction, session_index);
+=======
+		fn submit_offence(
+			offenders: &[OffenceDetails<T>],
+			slash_fraction: &[Perbill],
+			maybe_session_index: Option<SessionIndex>,
+		) {
+			let session_index = maybe_session_index.unwrap_or_else(|| {
+				<pallet_session::Pallet<T> as frame_support::traits::ValidatorSet<
+						T::AccountId,
+					>>::session_index()
+			});
+			T::OffenceHandler::on_offence(&offenders, &slash_fraction, session_index);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		}
 	}
 }

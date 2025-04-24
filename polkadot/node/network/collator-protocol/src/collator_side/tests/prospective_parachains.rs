@@ -188,7 +188,7 @@ pub(super) async fn expect_declare_msg_v2(
 		overseer_recv(virtual_overseer).await,
 		AllMessages::NetworkBridgeTx(NetworkBridgeTxMessage::SendCollationMessage(
 			to,
-			Versioned::V2(protocol_v2::CollationProtocol::CollatorProtocol(
+			CollationProtocols::V2(protocol_v2::CollationProtocol::CollatorProtocol(
 				wire_message,
 			)),
 		)) => {

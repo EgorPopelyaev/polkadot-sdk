@@ -20,9 +20,18 @@ use sp_keyring::Sr25519Keyring as Keyring;
 
 // Cumulus
 use emulated_integration_tests_common::{
+<<<<<<< HEAD
 	accounts, build_genesis_storage, collators, PenpalASiblingSovereignAccount,
 	PenpalATeleportableAssetLocation, PenpalBSiblingSovereignAccount,
 	PenpalBTeleportableAssetLocation, RESERVABLE_ASSET_ID, SAFE_XCM_VERSION, USDT_ID,
+=======
+	accounts, build_genesis_storage, collators,
+	snowbridge::{ETHER_MIN_BALANCE, WETH},
+	xcm_emulator::ConvertLocation,
+	PenpalASiblingSovereignAccount, PenpalATeleportableAssetLocation,
+	PenpalBSiblingSovereignAccount, PenpalBTeleportableAssetLocation, RESERVABLE_ASSET_ID,
+	SAFE_XCM_VERSION, USDT_ID,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
 use parachains_common::{AccountId, Balance};
 
@@ -89,6 +98,29 @@ pub fn genesis() -> Storage {
 					false,
 					ED,
 				),
+<<<<<<< HEAD
+=======
+				// Ether
+				(
+					xcm::v5::Location::new(2, [GlobalConsensus(EthereumNetwork::get())]),
+					EthereumSovereignAccount::get(),
+					true,
+					ETHER_MIN_BALANCE,
+				),
+				// Weth
+				(
+					xcm::v5::Location::new(
+						2,
+						[
+							GlobalConsensus(EthereumNetwork::get()),
+							AccountKey20 { network: None, key: WETH.into() },
+						],
+					),
+					EthereumSovereignAccount::get(),
+					true,
+					ETHER_MIN_BALANCE,
+				),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 			],
 			..Default::default()
 		},

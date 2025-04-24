@@ -24,18 +24,22 @@ sp-core.workspace = true
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-executive = { default-features = true, path = "../executive" }
 sp-api = { features = ["std"], default-features = true, path = "../../primitives/api" }
 sp-block-builder = { features = ["std"], default-features = true, path = "../../primitives/block-builder" }
 sp-io = { features = ["std"], default-features = true, path = "../../primitives/io" }
 sp-tracing = { features = ["std"], default-features = true, path = "../../primitives/tracing" }
 sp-version = { features = ["std"], default-features = true, path = "../../primitives/version" }
+=======
+frame-executive = { workspace = true, default-features = true }
+sp-tracing = { features = ["std"], workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 pretty_assertions = { workspace = true }
 
 [features]
 default = ["std"]
-
 std = [
 	"codec/std",
 	"frame-benchmarking?/std",

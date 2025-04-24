@@ -39,3 +39,15 @@ bls-experimental = [
 	"sp-core/bls-experimental",
 	"sp-keystore/bls-experimental",
 ]
+<<<<<<< HEAD
+=======
+
+# This feature adds Bandersnatch crypto primitives.
+# It should not be used in production since the implementation and interface may still
+# be subject to significant changes.
+bandersnatch-experimental = [
+	"sp-application-crypto/bandersnatch-experimental",
+	"sp-core/bandersnatch-experimental",
+	"sp-keystore/bandersnatch-experimental",
+]
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

@@ -22,6 +22,15 @@ sp-runtime.workspace = true
 cumulus-pallet-parachain-system.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
+=======
+rstest = { workspace = true }
+
+# Cumulus
+cumulus-pallet-parachain-system = { workspace = true, default-features = true }
+cumulus-primitives-core = { workspace = true, default-features = true }
+cumulus-test-relay-sproof-builder = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 # Cumulus
 cumulus-pallet-parachain-system = { default-features = true, path = "../parachain-system" }

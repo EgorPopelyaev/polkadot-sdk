@@ -20,6 +20,7 @@
 #![cfg(feature = "runtime-benchmarks")]
 
 use super::*;
+<<<<<<< HEAD
 use frame_benchmarking::{benchmarks, whitelisted_caller};
 use frame_support::{
 	assert_ok,
@@ -30,8 +31,16 @@ use frame_support::{
 	},
 };
 use frame_system::{pallet_prelude::BlockNumberFor, RawOrigin as SystemOrigin};
+=======
+use frame::benchmarking::prelude::*;
+
+use frame::deps::frame_support::assert_ok;
+use fungible::{Inspect as InspectFungible, Mutate as MutateFungible};
+use nonfungibles_v2::{Create, Mutate};
+
+use frame_system::RawOrigin as SystemOrigin;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 use pallet_nfts::{CollectionConfig, CollectionSettings, ItemConfig, MintSettings};
-use sp_runtime::traits::StaticLookup;
 
 use crate::Pallet as NftFractionalization;
 

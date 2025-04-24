@@ -307,10 +307,16 @@ pub trait EthExtra {
 			InvalidTransaction::BadProof
 		})?;
 
+<<<<<<< HEAD
 		let signer =
 			<Self::Config as crate::Config>::AddressMapper::to_fallback_account_id(&signer);
 		let TransactionLegacyUnsigned { nonce, chain_id, to, value, input, gas, gas_price, .. } =
 			tx.transaction_legacy_unsigned;
+=======
+		let signer = <Self::Config as Config>::AddressMapper::to_fallback_account_id(&signer);
+		let GenericTransaction { nonce, chain_id, to, value, input, gas, gas_price, .. } =
+			GenericTransaction::from_signed(tx, crate::GAS_PRICE.into(), None);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 		if chain_id.unwrap_or_default() != <Self::Config as crate::Config>::ChainId::get().into() {
 			log::debug!(target: LOG_TARGET, "Invalid chain_id {chain_id:?}");

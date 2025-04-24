@@ -81,6 +81,17 @@ pub struct RunCmd {
 	/// we compute per block.
 	#[arg(long, default_value_t = 1)]
 	pub pvf_complexity: u32,
+<<<<<<< HEAD
+=======
+
+	/// Specifies the malicious behavior of the collator.
+	#[arg(long, value_enum, default_value_t = MalusType::None)]
+	pub malus_type: MalusType,
+
+	/// Whether or not the collator should send the experimental ApprovedPeer UMP signal.
+	#[arg(long)]
+	pub experimental_send_approved_peer: bool,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 #[allow(missing_docs)]

@@ -170,7 +170,25 @@ impl<T: frame_system::Config> pallet_core_fellowship::WeightInfo for WeightInfo<
 			.saturating_add(T::DbWeight::get().reads(5))
 			.saturating_add(T::DbWeight::get().writes(6))
 	}
+<<<<<<< HEAD
 	fn promote_fast(r: u32, ) -> Weight {
+=======
+	/// Storage: `FellowshipCollective::Members` (r:1 w:1)
+	/// Proof: `FellowshipCollective::Members` (`max_values`: None, `max_size`: Some(42), added: 2517, mode: `MaxEncodedLen`)
+	/// Storage: `FellowshipCore::Member` (r:1 w:1)
+	/// Proof: `FellowshipCore::Member` (`max_values`: None, `max_size`: Some(49), added: 2524, mode: `MaxEncodedLen`)
+	/// Storage: `FellowshipCollective::MemberCount` (r:9 w:9)
+	/// Proof: `FellowshipCollective::MemberCount` (`max_values`: None, `max_size`: Some(14), added: 2489, mode: `MaxEncodedLen`)
+	/// Storage: `FellowshipCore::MemberEvidence` (r:1 w:1)
+	/// Proof: `FellowshipCore::MemberEvidence` (`max_values`: None, `max_size`: Some(65581), added: 68056, mode: `MaxEncodedLen`)
+	/// Storage: `FellowshipCollective::IndexToId` (r:0 w:9)
+	/// Proof: `FellowshipCollective::IndexToId` (`max_values`: None, `max_size`: Some(54), added: 2529, mode: `MaxEncodedLen`)
+	/// Storage: `FellowshipCollective::IdToIndex` (r:0 w:9)
+	/// Proof: `FellowshipCollective::IdToIndex` (`max_values`: None, `max_size`: Some(54), added: 2529, mode: `MaxEncodedLen`)
+	/// The range of component `r` is `[1, 9]`.
+	/// The range of component `r` is `[1, 9]`.
+	fn promote_fast(r: u16, ) -> Weight {
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		// Proof Size summary in bytes:
 		//  Measured:  `16844`
 		//  Estimated: `19894 + r * (2489 ±0)`

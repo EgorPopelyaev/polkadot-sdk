@@ -28,11 +28,17 @@ frame-support.workspace = true
 frame-system.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 frame-support-test = { path = "../support/test" }
 pallet-balances = { default-features = true, path = "../balances" }
 sp-core = { default-features = true, path = "../../primitives/core" }
 sp-crypto-hashing = { default-features = true, path = "../../primitives/crypto/hashing" }
 sp-io = { default-features = true, path = "../../primitives/io" }
+=======
+frame-support-test = { workspace = true }
+pallet-balances = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

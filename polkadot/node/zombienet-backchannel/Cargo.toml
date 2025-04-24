@@ -16,6 +16,7 @@ tokio = { features = ["macros", "net", "rt-multi-thread", "sync"], workspace = t
 url = { workspace = true }
 tokio-tungstenite = { workspace = true }
 futures-util = { workspace = true, default-features = true }
+<<<<<<< HEAD
 codec = { features = ["derive"], workspace = true, default-features = true }
 reqwest = { features = ["rustls-tls"], workspace = true }
 thiserror = { workspace = true }
@@ -23,3 +24,11 @@ gum.workspace = true
 gum.default-features = true
 serde = { features = ["derive"], workspace = true, default-features = true }
 serde_json = { workspace = true, default-features = true }
+=======
+gum = { workspace = true, default-features = true }
+serde = { features = ["derive"], workspace = true, default-features = true }
+serde_json = { workspace = true, default-features = true }
+thiserror = { workspace = true }
+tokio = { features = ["macros", "net", "rt-multi-thread", "sync"], workspace = true }
+tokio-tungstenite = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

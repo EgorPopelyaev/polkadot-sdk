@@ -18,6 +18,10 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 clap = { features = ["derive"], optional = true, workspace = true }
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
+=======
+docify = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 memmap2 = { workspace = true }
 serde = { features = ["derive"], workspace = true, default-features = true }
 serde_json = { workspace = true, default-features = true }

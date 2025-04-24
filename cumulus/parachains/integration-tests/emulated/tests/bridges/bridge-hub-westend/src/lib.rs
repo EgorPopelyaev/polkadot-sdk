@@ -31,6 +31,7 @@ mod imports {
 	// Cumulus
 	pub use emulated_integration_tests_common::{
 		accounts::ALICE,
+		create_pool_with_native_on,
 		impls::Inspect,
 		test_dry_run_transfer_across_pk_bridge, test_parachain_is_trusted_teleporter,
 		test_parachain_is_trusted_teleporter_for_relay, test_relay_is_trusted_teleporter,
@@ -43,6 +44,7 @@ mod imports {
 	pub use parachains_common::AccountId;
 	pub use rococo_westend_system_emulated_network::{
 		asset_hub_rococo_emulated_chain::{
+			asset_hub_rococo_runtime::xcm_config::TreasuryAccount,
 			genesis::ED as ASSET_HUB_ROCOCO_ED, AssetHubRococoParaPallet as AssetHubRococoPallet,
 		},
 		asset_hub_westend_emulated_chain::{
@@ -50,8 +52,15 @@ mod imports {
 			AssetHubWestendParaPallet as AssetHubWestendPallet,
 		},
 		bridge_hub_westend_emulated_chain::{
+<<<<<<< HEAD
 			genesis::ED as BRIDGE_HUB_WESTEND_ED, BridgeHubWestendExistentialDeposit,
 			BridgeHubWestendParaPallet as BridgeHubWestendPallet, BridgeHubWestendXcmConfig,
+=======
+			bridge_hub_westend_runtime, genesis::ED as BRIDGE_HUB_WESTEND_ED,
+			BridgeHubWestendExistentialDeposit,
+			BridgeHubWestendParaPallet as BridgeHubWestendPallet, BridgeHubWestendRuntimeOrigin,
+			BridgeHubWestendXcmConfig,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		},
 		penpal_emulated_chain::{
 			penpal_runtime::xcm_config::{

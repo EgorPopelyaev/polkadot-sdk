@@ -32,7 +32,7 @@ jobs:
           result-encoding: string
           script: |
             const fs = require("fs");
-            try {              
+            try {
               const org = '${{ github.event.repository.owner.login }}';
               const username = '${{ github.event.comment.user.login }}';
 
@@ -123,8 +123,8 @@ jobs:
                     (
                       (
                         (
-                          comment.body.startsWith('Command') || 
-                          comment.body.startsWith('<details><summary>Command') || 
+                          comment.body.startsWith('Command') ||
+                          comment.body.startsWith('<details><summary>Command') ||
                           comment.body.startsWith('Sorry, only ')
                         ) && comment.user.type === 'Bot'
                       ) ||
@@ -173,11 +173,11 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `<details><summary>Command help:</summary> 
+              body: `<details><summary>Command help:</summary>
 
             \`\`\`
             ${{ steps.help.outputs.help }}
-            \`\`\` 
+            \`\`\`
 
             </details>`
             })
@@ -242,9 +242,28 @@ jobs:
   get-pr-branch:
     needs: [set-image]
     runs-on: ubuntu-latest
+<<<<<<< HEAD
     outputs:
       pr-branch: ${{ steps.get-pr.outputs.pr_branch }}
       repo: ${{ steps.get-pr.outputs.repo }}
+=======
+    # don't run on help command
+    if: ${{ startsWith(github.event.comment.body, '/cmd') && !contains(github.event.comment.body, '--help') }}
+    permissions: # run workflow
+      contents: read
+      issues: write
+      pull-requests: write
+      actions: write
+    env:
+      CMD: ${{ needs.get-pr-info.outputs.CMD }}
+      PR_BRANCH: ${{ needs.get-pr-info.outputs.pr-branch }}
+      RUNNER: ${{ needs.set-image.outputs.RUNNER }}
+      IMAGE: ${{ needs.set-image.outputs.IMAGE }}
+      REPO: ${{ needs.get-pr-info.outputs.repo }}
+      IS_ORG_MEMBER: ${{ needs.is-org-member.outputs.member }}
+      COMMENT_ID: ${{ github.event.comment.id }}
+      PR_NUMBER: ${{ github.event.issue.number }}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
     steps:
       - name: Check if the issue is a PR
         id: check-pr

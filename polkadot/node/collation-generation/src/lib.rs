@@ -363,6 +363,73 @@ impl CollationGenerationSubsystem {
 							},
 						};
 
+<<<<<<< HEAD
+=======
+					// Use the core_selector method from CandidateCommitments to extract
+					// CoreSelector and ClaimQueueOffset.
+					let mut commitments = CandidateCommitments::default();
+					commitments.upward_messages = collation.upward_messages.clone();
+
+					let ump_signals = match commitments.ump_signals() {
+						Ok(signals) => signals,
+						Err(err) => {
+							gum::debug!(
+								target: LOG_TARGET,
+								?para_id,
+								"error processing UMP signals: {}",
+								err
+							);
+							return
+						},
+					};
+
+					let (cs_index, cq_offset) = ump_signals
+						.core_selector()
+						.map(|(cs_index, cq_offset)| (cs_index.0 as usize, cq_offset.0 as usize))
+						.unwrap_or((i, 0));
+
+					// Identify the cores to build collations on using the given claim queue offset.
+					let cores_to_build_on = claim_queue
+						.iter_claims_at_depth(cq_offset)
+						.filter_map(|(core_idx, para_id)| {
+							(para_id == task_config.para_id).then_some(core_idx)
+						})
+						.collect::<Vec<_>>();
+
+					if cores_to_build_on.is_empty() {
+						gum::debug!(
+							target: LOG_TARGET,
+							?para_id,
+							"no core is assigned to para at depth {}",
+							cq_offset,
+						);
+						return
+					}
+
+					let descriptor_core_index =
+						cores_to_build_on[cs_index % cores_to_build_on.len()];
+
+					// Ensure the core index has not been used before.
+					if used_cores.contains(&descriptor_core_index.0) {
+						gum::warn!(
+							target: LOG_TARGET,
+							?para_id,
+							"parachain repeatedly selected the same core index: {}",
+							descriptor_core_index.0,
+						);
+						return
+					}
+
+					used_cores.insert(descriptor_core_index.0);
+					gum::trace!(
+						target: LOG_TARGET,
+						?para_id,
+						"selected core index: {}",
+						descriptor_core_index.0,
+					);
+
+					// Distribute the collation.
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					let parent_head = collation.head_data.clone();
 					if let Err(err) = construct_and_distribute_receipt(
 						PreparedCollation {
@@ -546,15 +613,15 @@ async fn construct_and_distribute_receipt(
 				commitments.head_data.hash(),
 				validation_code_hash,
 			),
-			commitments,
+			commitments: commitments.clone(),
 		};
 
-		ccr.check_core_index(&transposed_claim_queue)
+		ccr.parse_ump_signals(&transposed_claim_queue)
 			.map_err(Error::CandidateReceiptCheck)?;
 
 		ccr.to_plain()
 	} else {
-		if commitments.core_selector().map_err(Error::CandidateReceiptCheck)?.is_some() {
+		if !commitments.ump_signals().map_err(Error::CandidateReceiptCheck)?.is_empty() {
 			gum::warn!(
 				target: LOG_TARGET,
 				?pov_hash,
@@ -587,8 +654,15 @@ async fn construct_and_distribute_receipt(
 		?relay_parent,
 		para_id = %para_id,
 		?core_index,
-		"candidate is generated",
+		"Candidate generated",
 	);
+	gum::trace!(
+		target: LOG_TARGET,
+		?commitments,
+		candidate_hash = ?receipt.hash(),
+		"Candidate commitments",
+	);
+
 	metrics.on_collation_generated();
 
 	sender

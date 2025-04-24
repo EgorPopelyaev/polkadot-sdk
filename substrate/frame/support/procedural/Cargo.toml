@@ -17,6 +17,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 [lib]
 proc-macro = true
 
+[[example]]
+name = "proc_main"
+
 [dependencies]
 derive-syn-parse = { workspace = true }
 docify = { workspace = true }
@@ -34,6 +37,7 @@ expander = { workspace = true }
 sp-crypto-hashing.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 codec = { features = [
 	"derive",
 	"max-encoded-len",
@@ -48,11 +52,32 @@ frame-system = { path = "../../system", default-features = false }
 frame-support = { path = "..", default-features = false }
 pretty_assertions = { workspace = true }
 static_assertions = { workspace = true }
+=======
+codec = { features = ["derive", "max-encoded-len"], workspace = true, default-features = true }
+frame-support = { workspace = true, default-features = true }
+frame-system = { workspace = true, default-features = true }
+pretty_assertions = { workspace = true }
+regex = { workspace = true }
+scale-info = { features = ["derive"], workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+sp-metadata-ir = { workspace = true, default-features = true }
+sp-runtime = { features = ["serde"], workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
 std = [
+<<<<<<< HEAD
 	"sp-crypto-hashing/std",
+=======
+	"codec/std",
+	"frame-support/std",
+	"frame-system/std",
+	"scale-info/std",
+	"sp-crypto-hashing/std",
+	"sp-metadata-ir/std",
+	"sp-runtime/std",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 ]
 no-metadata-docs = []
 experimental = []
@@ -60,6 +85,3 @@ experimental = []
 # pallets in a runtime grows. Does increase the compile time!
 tuples-96 = []
 tuples-128 = []
-
-[[example]]
-name = "proc_main"

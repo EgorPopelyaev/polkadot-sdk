@@ -13,6 +13,10 @@ workspace = true
 impl-trait-for-tuples = { workspace = true }
 bitvec = { features = ["alloc"], workspace = true }
 codec = { features = ["derive", "max-encoded-len"], workspace = true }
+<<<<<<< HEAD
+=======
+impl-trait-for-tuples = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 log = { workspace = true }
 scale-info = { features = ["derive"], workspace = true }
 serde = { features = ["alloc", "derive"], workspace = true }
@@ -48,6 +52,19 @@ xcm.workspace = true
 xcm-executor.workspace = true
 polkadot-primitives.workspace = true
 
+<<<<<<< HEAD
+=======
+# only used in benchmarking
+frame-election-provider-support = { workspace = true, optional = true }
+
+polkadot-primitives = { workspace = true }
+xcm = { workspace = true }
+xcm-executor = { workspace = true }
+
+polkadot-core-primitives = { workspace = true }
+polkadot-parachain-primitives = { workspace = true }
+polkadot-runtime-metrics = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 rand = { workspace = true }
 rand_chacha = { workspace = true }
 static_assertions = { optional = true, workspace = true, default-features = true }
@@ -58,7 +75,12 @@ polkadot-core-primitives.workspace = true
 [dev-dependencies]
 polkadot-primitives = { features = ["test"], path = "../../primitives", default-features = false }
 
+<<<<<<< HEAD
 futures = { workspace = true }
+=======
+assert_matches = { workspace = true }
+frame-support-test = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 hex-literal = { workspace = true, default-features = true }
 sp-keyring = { default-features = true, path = "../../../substrate/primitives/keyring" }
 frame-support-test = { path = "../../../substrate/frame/support/test" }
@@ -78,6 +100,7 @@ std = [
 	"bitvec/std",
 	"codec/std",
 	"frame-benchmarking?/std",
+	"frame-election-provider-support?/std",
 	"frame-support/std",
 	"frame-system/std",
 	"log/std",
@@ -117,6 +140,11 @@ std = [
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
+<<<<<<< HEAD
+=======
+	"frame-election-provider-support/runtime-benchmarks",
+	"frame-support-test/runtime-benchmarks",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"frame-support/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
 	"pallet-babe/runtime-benchmarks",
@@ -137,6 +165,11 @@ runtime-benchmarks = [
 	"xcm-executor/runtime-benchmarks",
 ]
 try-runtime = [
+<<<<<<< HEAD
+=======
+	"frame-election-provider-support?/try-runtime",
+	"frame-support-test/try-runtime",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"frame-support/try-runtime",
 	"frame-system/try-runtime",
 	"pallet-authority-discovery/try-runtime",

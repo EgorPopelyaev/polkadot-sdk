@@ -20,10 +20,16 @@ sp-runtime.workspace = true
 frame-benchmarking = { optional = true, workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-core = { features = ["std"], default-features = true, path = "../../primitives/core" }
 sp-io = { features = ["std"], default-features = true, path = "../../primitives/io" }
 pallet-example-basic = { features = ["std"], default-features = true, path = "../examples/basic" }
 pallet-balances = { features = ["std"], default-features = true, path = "../balances" }
+=======
+pallet-balances = { workspace = true, default-features = true }
+pallet-example-basic = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

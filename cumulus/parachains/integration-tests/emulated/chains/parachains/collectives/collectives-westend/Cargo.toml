@@ -11,6 +11,7 @@ publish = false
 workspace = true
 
 [dependencies]
+<<<<<<< HEAD
 sp-core.workspace = true
 frame-support.workspace = true
 parachains-common.workspace = true
@@ -18,4 +19,15 @@ parachains-common.default-features = true
 cumulus-primitives-core.workspace = true
 emulated-integration-tests-common.workspace = true
 collectives-westend-runtime.workspace = true
+=======
+# Substrate
+frame-support = { workspace = true }
+sp-core = { workspace = true }
+
+# Cumulus
+collectives-westend-runtime = { workspace = true }
+cumulus-primitives-core = { workspace = true }
+emulated-integration-tests-common = { workspace = true }
+parachains-common = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 testnet-parachains-constants = { features = ["westend"], workspace = true, default-features = true }

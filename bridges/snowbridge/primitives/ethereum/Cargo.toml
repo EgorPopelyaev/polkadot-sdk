@@ -27,11 +27,14 @@ sp-runtime.workspace = true
 
 ethabi = { workspace = true }
 
+<<<<<<< HEAD
 [dev-dependencies]
 wasm-bindgen-test = { workspace = true }
 rand = { workspace = true, default-features = true }
 serde_json = { workspace = true, default-features = true }
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [features]
 default = ["std"]
 expensive_tests = []

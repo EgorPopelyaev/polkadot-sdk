@@ -20,6 +20,31 @@ codec = { workspace = true, default-features = true }
 fs_extra = { workspace = true }
 futures = { workspace = true }
 log = { workspace = true, default-features = true }
+<<<<<<< HEAD
+=======
+node-cli = { workspace = true }
+node-primitives = { workspace = true, default-features = true }
+pallet-asset-conversion = { workspace = true, default-features = true }
+pallet-asset-conversion-tx-payment = { workspace = true, default-features = true }
+pallet-skip-feeless-payment = { workspace = true, default-features = true }
+sc-block-builder = { workspace = true, default-features = true }
+sc-client-api = { workspace = true, default-features = true }
+sc-client-db = { features = ["rocksdb"], workspace = true, default-features = true }
+sc-consensus = { workspace = true, default-features = true }
+sc-executor = { workspace = true, default-features = true }
+sc-service = { features = ["rocksdb"], workspace = true, default-features = true }
+sp-api = { workspace = true, default-features = true }
+sp-block-builder = { workspace = true, default-features = true }
+sp-blockchain = { workspace = true, default-features = true }
+sp-consensus = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+sp-inherents = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-timestamp = { workspace = true }
+substrate-test-client = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tempfile = { workspace = true }
 frame-metadata-hash-extension.workspace = true
 frame-metadata-hash-extension.default-features = true

@@ -478,11 +478,12 @@ fn expand_functions(def: &EnvDef) -> TokenStream2 {
 				.map(|s| format!("{s}: {{:?}}"))
 				.collect::<Vec<_>>()
 				.join(", ");
-			let trace_fmt_str = format!("{}({}) = {{:?}}\n", name, params_fmt_str);
+			let trace_fmt_str = format!("{}({}) = {{:?}} gas_consumed: {{:?}}", name, params_fmt_str);
 
 			quote! {
 				// wrap body in closure to make sure the tracing is always executed
 				let result = (|| #body)();
+<<<<<<< HEAD
 				if ::log::log_enabled!(target: "runtime::revive::strace", ::log::Level::Trace) {
 						use core::fmt::Write;
 						let mut w = sp_std::Writer::default();
@@ -490,6 +491,9 @@ fn expand_functions(def: &EnvDef) -> TokenStream2 {
 						let msg = core::str::from_utf8(&w.inner()).unwrap_or_default();
 						self.ext().append_debug_buffer(msg);
 				}
+=======
+				::log::trace!(target: "runtime::revive::strace", #trace_fmt_str, #( #trace_fmt_args, )* result, self.ext.gas_meter().gas_consumed());
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 				result
 			}
 		};

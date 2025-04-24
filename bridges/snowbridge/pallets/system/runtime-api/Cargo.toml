@@ -15,6 +15,7 @@ workspace = true
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
+<<<<<<< HEAD
 codec = { features = [
 	"derive",
 ], workspace = true }
@@ -22,6 +23,13 @@ sp-std.workspace = true
 sp-api.workspace = true
 xcm.workspace = true
 snowbridge-core.workspace = true
+=======
+codec = { features = ["derive"], workspace = true }
+snowbridge-core = { workspace = true }
+sp-api = { workspace = true }
+sp-std = { workspace = true }
+xcm = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

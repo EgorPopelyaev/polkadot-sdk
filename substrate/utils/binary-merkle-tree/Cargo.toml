@@ -19,9 +19,14 @@ hash-db = { workspace = true }
 
 [dev-dependencies]
 array-bytes = { workspace = true, default-features = true }
+<<<<<<< HEAD
 sp-tracing = { default-features = true, path = "../../primitives/tracing" }
 sp-core = { default-features = true, path = "../../primitives/core" }
 sp-runtime = { default-features = true, path = "../../primitives/runtime" }
+=======
+sp-core = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 debug = ["array-bytes", "log"]

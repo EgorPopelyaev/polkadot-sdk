@@ -26,8 +26,20 @@ use uapi::{HostFn, HostFnImpl as api, ReturnErrorCode};
 #[polkavm_derive::polkavm_export]
 pub extern "C" fn deploy() {}
 
+<<<<<<< HEAD:substrate/frame/revive/fixtures/contracts/debug_message_logging_disabled.rs
 #[no_mangle]
 #[polkavm_derive::polkavm_export]
 pub extern "C" fn call() {
 	assert_eq!(api::debug_message(b"Hello World!"), Err(ReturnErrorCode::LoggingDisabled));
+=======
+	#[pallet::storage]
+	pub type MyStorage<T> = StorageValue<_, u32>;
+
+	#[pallet::view_functions]
+	impl<T: Config> Pallet<T> {
+		pub fn get_value() -> Option<u32> {
+			MyStorage::<T>::get()
+		}
+	}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60)):substrate/frame/support/test/tests/pallet_ui/pass/view_function_valid.rs
 }

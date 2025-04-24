@@ -26,11 +26,17 @@ codec = { features = ["derive"], workspace = true }
 scale-info = { features = ["derive"], workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-core = { path = "../../../primitives/core", default-features = false }
 sp-io = { path = "../../../primitives/io", default-features = false }
 sp-storage = { path = "../../../primitives/storage", default-features = false }
 pallet-assets = { default-features = true, path = "../../assets" }
 pallet-balances = { default-features = true, path = "../../balances" }
+=======
+pallet-assets = { workspace = true, default-features = true }
+pallet-balances = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

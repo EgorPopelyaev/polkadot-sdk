@@ -261,7 +261,6 @@ mod select_candidates {
 		BlockNumber, CandidateCommitments, PersistedValidationData,
 	};
 	use polkadot_primitives_test_helpers::{dummy_candidate_descriptor_v2, dummy_hash};
-	use rstest::rstest;
 	use std::ops::Not;
 	use CoreState::{Free, Scheduled};
 
@@ -303,7 +302,7 @@ mod select_candidates {
 					},
 					Vec::new(),
 					default_bitvec(MOCK_GROUP_SIZE),
-					None,
+					CoreIndex(0),
 				)
 			})
 			.collect();
@@ -679,10 +678,14 @@ mod select_candidates {
 				select_candidates(
 					&[],
 					&[],
+<<<<<<< HEAD
 					&[],
 					prospective_parachains_mode,
 					false,
 					Default::default(),
+=======
+					&new_leaf(Default::default(), BLOCK_UNDER_PRODUCTION - 1),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					&mut tx,
 				)
 				.await
@@ -838,7 +841,7 @@ mod select_candidates {
 					committed_receipt.clone(),
 					Vec::new(),
 					default_bitvec(MOCK_GROUP_SIZE),
-					None,
+					CoreIndex(0),
 				)
 			})
 			.collect();
@@ -868,10 +871,14 @@ mod select_candidates {
 				let result = select_candidates(
 					&mock_cores,
 					&[],
+<<<<<<< HEAD
 					&candidates,
 					prospective_parachains_mode,
 					false,
 					Default::default(),
+=======
+					&new_leaf(Default::default(), BLOCK_UNDER_PRODUCTION - 1),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					&mut tx,
 				)
 				.await
@@ -953,7 +960,7 @@ mod select_candidates {
 					committed_receipt.clone(),
 					Vec::new(),
 					default_bitvec(MOCK_GROUP_SIZE),
-					None,
+					CoreIndex(0),
 				)
 			})
 			.collect();
@@ -983,10 +990,14 @@ mod select_candidates {
 				let result = select_candidates(
 					&mock_cores,
 					&[],
+<<<<<<< HEAD
 					&candidates,
 					prospective_parachains_mode,
 					true,
 					Default::default(),
+=======
+					&new_leaf(Default::default(), BLOCK_UNDER_PRODUCTION - 1),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					&mut tx,
 				)
 				.await
@@ -1000,11 +1011,16 @@ mod select_candidates {
 			},
 		)
 	}
+<<<<<<< HEAD
 
 	#[rstest]
 	#[case(true)]
 	#[case(false)]
 	fn request_from_prospective_parachains_one_core_per_para(#[case] elastic_scaling_mvp: bool) {
+=======
+	#[test]
+	fn one_core_per_para() {
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		let mock_cores = mock_availability_cores_one_per_para();
 
 		// why those particular indices? see the comments on mock_availability_cores()
@@ -1042,10 +1058,14 @@ mod select_candidates {
 				let result = select_candidates(
 					&mock_cores,
 					&[],
+<<<<<<< HEAD
 					&[],
 					prospective_parachains_mode,
 					elastic_scaling_mvp,
 					Default::default(),
+=======
+					&new_leaf(Default::default(), BLOCK_UNDER_PRODUCTION - 1),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					&mut tx,
 				)
 				.await
@@ -1132,6 +1152,7 @@ mod select_candidates {
 				let result = select_candidates(
 					&mock_cores,
 					&[],
+<<<<<<< HEAD
 					&[],
 					prospective_parachains_mode,
 					true,
@@ -1198,6 +1219,9 @@ mod select_candidates {
 					prospective_parachains_mode,
 					false,
 					Default::default(),
+=======
+					&new_leaf(Default::default(), BLOCK_UNDER_PRODUCTION - 1),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					&mut tx,
 				)
 				.await
@@ -1249,7 +1273,7 @@ mod select_candidates {
 					},
 					Vec::new(),
 					default_bitvec(MOCK_GROUP_SIZE),
-					None,
+					CoreIndex(0),
 				)
 			})
 			.collect();
@@ -1269,10 +1293,14 @@ mod select_candidates {
 				let result = select_candidates(
 					&mock_cores,
 					&[],
+<<<<<<< HEAD
 					&[],
 					prospective_parachains_mode,
 					false,
 					Default::default(),
+=======
+					&new_leaf(Default::default(), BLOCK_UNDER_PRODUCTION - 1),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 					&mut tx,
 				)
 				.await

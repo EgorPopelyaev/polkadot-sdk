@@ -453,4 +453,67 @@ mod tests {
 			&pair.public()
 		));
 	}
+<<<<<<< HEAD
+=======
+
+	#[test]
+	#[cfg(feature = "bandersnatch-experimental")]
+	fn bandersnatch_vrf_sign() {
+		use sp_core::testing::BANDERSNATCH;
+
+		let store = MemoryKeystore::new();
+
+		let secret_uri = "//Alice";
+		let key_pair =
+			bandersnatch::Pair::from_string(secret_uri, None).expect("Generates key pair");
+		let sign_data = bandersnatch::vrf::VrfSignData::new(b"vrf_input", b"aux_data");
+
+		let result = store.bandersnatch_vrf_sign(BANDERSNATCH, &key_pair.public(), &sign_data);
+		assert!(result.unwrap().is_none());
+
+		store
+			.insert(BANDERSNATCH, secret_uri, key_pair.public().as_ref())
+			.expect("Inserts unknown key");
+
+		let result = store.bandersnatch_vrf_sign(BANDERSNATCH, &key_pair.public(), &sign_data);
+
+		assert!(result.unwrap().is_some());
+	}
+
+	#[test]
+	#[cfg(feature = "bandersnatch-experimental")]
+	fn bandersnatch_ring_vrf_sign() {
+		use sp_core::testing::BANDERSNATCH;
+
+		let store = MemoryKeystore::new();
+
+		let ring_ctx = bandersnatch::ring_vrf::RingContext::<1024>::new_testing();
+
+		let mut pks: Vec<_> = (0..16)
+			.map(|i| bandersnatch::Pair::from_seed(&[i as u8; 32]).public())
+			.collect();
+
+		let prover_idx = 3;
+		let prover = ring_ctx.prover(&pks, prover_idx);
+
+		let secret_uri = "//Alice";
+		let pair = bandersnatch::Pair::from_string(secret_uri, None).expect("Generates key pair");
+		pks[prover_idx] = pair.public();
+
+		let sign_data = bandersnatch::vrf::VrfSignData::new(b"vrf_input", b"aux_data");
+
+		let result =
+			store.bandersnatch_ring_vrf_sign(BANDERSNATCH, &pair.public(), &sign_data, &prover);
+		assert!(result.unwrap().is_none());
+
+		store
+			.insert(BANDERSNATCH, secret_uri, pair.public().as_ref())
+			.expect("Inserts unknown key");
+
+		let result =
+			store.bandersnatch_ring_vrf_sign(BANDERSNATCH, &pair.public(), &sign_data, &prover);
+
+		assert!(result.unwrap().is_some());
+	}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }

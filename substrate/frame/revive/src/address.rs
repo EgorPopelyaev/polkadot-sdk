@@ -100,7 +100,21 @@ where
 	T: Config<AccountId = AccountId32>,
 {
 	fn to_address(account_id: &AccountId32) -> H160 {
+<<<<<<< HEAD
 		H160::from_slice(&<AccountId32 as AsRef<[u8; 32]>>::as_ref(&account_id)[..20])
+=======
+		let account_bytes: &[u8; 32] = account_id.as_ref();
+		if is_eth_derived(account_id) {
+			// this was originally an eth address
+			// we just strip the 0xEE suffix to get the original address
+			H160::from_slice(&account_bytes[..20])
+		} else {
+			// this is an (ed|sr)25510 derived address
+			// avoid truncating the public key by hashing it first
+			let account_hash = keccak_256(account_bytes);
+			H160::from_slice(&account_hash[12..])
+		}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	}
 
 	fn to_account_id(address: &H160) -> AccountId32 {
@@ -151,10 +165,27 @@ where
 	}
 
 	fn is_mapped(account_id: &T::AccountId) -> bool {
+<<<<<<< HEAD
 		let account_bytes: &[u8; 32] = account_id.as_ref();
 		&account_bytes[20..] == &[0xEE; 12] ||
 			<AddressSuffix<T>>::contains_key(Self::to_address(account_id))
 	}
+=======
+		is_eth_derived(account_id) ||
+			<OriginalAccount<T>>::contains_key(Self::to_address(account_id))
+	}
+}
+
+/// Returns true if the passed account id is controlled by an eth key.
+///
+/// This is a stateless check that just compares the last 12 bytes. Please note that it is
+/// theoretically possible to create an ed25519 keypair that passed this filter. However,
+/// this can't be used for an attack. It also won't happen by accident since everbody is using
+/// sr25519 where this is not a valid public key.
+pub fn is_eth_derived(account_id: &AccountId32) -> bool {
+	let account_bytes: &[u8; 32] = account_id.as_ref();
+	&account_bytes[20..] == &[0xEE; 12]
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 impl<T> AddressMapper<T> for H160Mapper<T>

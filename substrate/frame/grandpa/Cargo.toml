@@ -34,6 +34,7 @@ sp-staking = { features = ["serde"], workspace = true }
 
 [dev-dependencies]
 finality-grandpa = { features = ["derive-codec"], workspace = true, default-features = true }
+<<<<<<< HEAD
 frame-benchmarking = { default-features = true, path = "../benchmarking" }
 frame-election-provider-support = { default-features = true, path = "../election-provider-support" }
 pallet-balances = { default-features = true, path = "../balances" }
@@ -42,6 +43,17 @@ pallet-staking = { default-features = true, path = "../staking" }
 pallet-staking-reward-curve = { default-features = true, path = "../staking/reward-curve" }
 pallet-timestamp = { default-features = true, path = "../timestamp" }
 sp-keyring = { default-features = true, path = "../../primitives/keyring" }
+=======
+frame-benchmarking = { workspace = true, default-features = true }
+frame-election-provider-support = { workspace = true, default-features = true }
+pallet-balances = { workspace = true, default-features = true }
+pallet-offences = { workspace = true, default-features = true }
+pallet-staking = { workspace = true, default-features = true }
+pallet-staking-reward-curve = { workspace = true, default-features = true }
+pallet-timestamp = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

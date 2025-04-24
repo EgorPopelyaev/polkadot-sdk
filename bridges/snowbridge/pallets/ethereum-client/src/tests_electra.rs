@@ -19,7 +19,11 @@ use snowbridge_beacon_primitives::{
 	types::deneb,
 	Fork, ForkVersions, NextSyncCommitteeUpdate, VersionedExecutionPayloadHeader,
 };
+<<<<<<< HEAD
 use snowbridge_core::inbound::{VerificationError, Verifier};
+=======
+use snowbridge_verification_primitives::{VerificationError, Verifier};
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 use sp_core::H256;
 use sp_runtime::DispatchError;
 

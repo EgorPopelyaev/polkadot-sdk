@@ -11,6 +11,11 @@ workspace = true
 
 [dependencies]
 bitvec = { features = ["alloc", "serde"], workspace = true }
+<<<<<<< HEAD
+=======
+bounded-collections = { features = ["serde"], workspace = true }
+codec = { features = ["bit-vec", "derive"], workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 hex-literal = { workspace = true, default-features = true }
 codec = { features = ["bit-vec", "derive"], workspace = true }
 scale-info = { features = ["bit-vec", "derive", "serde"], workspace = true }
@@ -32,13 +37,17 @@ sp-std = { workspace = true, optional = true }
 polkadot-core-primitives.workspace = true
 polkadot-parachain-primitives.workspace = true
 
+<<<<<<< HEAD
 [dev-dependencies]
 polkadot-primitives-test-helpers = { path = "test-helpers" }
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [features]
 default = ["std"]
 std = [
 	"bitvec/std",
+	"bounded-collections/std",
 	"codec/std",
 	"log/std",
 	"polkadot-core-primitives/std",

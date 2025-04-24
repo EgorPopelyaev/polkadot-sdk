@@ -38,10 +38,17 @@ sp-weights.workspace = true
 xcm.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 bp-test-utils = { path = "../../primitives/test-utils", default-features = false }
 pallet-balances = { path = "../../../substrate/frame/balances", default-features = false }
 pallet-bridge-messages = { features = ["std", "test-helpers"], path = "../../modules/messages", default-features = false }
 sp-core = { path = "../../../substrate/primitives/core", default-features = false }
+=======
+bp-test-utils = { workspace = true }
+pallet-balances = { workspace = true, default-features = true }
+pallet-bridge-messages = { features = ["std", "test-helpers"], workspace = true }
+sp-core = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

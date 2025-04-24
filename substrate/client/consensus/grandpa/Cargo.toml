@@ -82,7 +82,15 @@ sp-runtime.default-features = true
 [dev-dependencies]
 assert_matches = { workspace = true }
 finality-grandpa = { features = ["derive-codec", "test-helpers"], workspace = true, default-features = true }
+<<<<<<< HEAD
 serde = { workspace = true, default-features = true }
+=======
+sc-network = { workspace = true, default-features = true }
+sc-network-test = { workspace = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+substrate-test-runtime-client = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tokio = { workspace = true, default-features = true }
 sc-network = { default-features = true, path = "../../network" }
 sc-network-test = { path = "../../network/test" }

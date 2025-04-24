@@ -36,6 +36,7 @@ xcm-runtime-apis.workspace = true
 pallet-xcm.workspace = true
 polkadot-parachain-primitives.workspace = true
 
+<<<<<<< HEAD
 [dev-dependencies]
 hex-literal = { workspace = true, default-features = true }
 
@@ -43,6 +44,8 @@ hex-literal = { workspace = true, default-features = true }
 substrate-wasm-builder.workspace = true
 substrate-wasm-builder.default-features = true
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [features]
 default = ["std"]
 std = [

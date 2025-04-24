@@ -11,6 +11,7 @@ description = "Exposes all the host functions that a contract can import."
 [lints]
 workspace = true
 
+<<<<<<< HEAD
 [dependencies]
 paste = { workspace = true }
 bitflags = { workspace = true }
@@ -20,8 +21,16 @@ codec = { features = [
 	"max-encoded-len",
 ], optional = true, workspace = true }
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [package.metadata.docs.rs]
 default-target = ["wasm32-unknown-unknown"]
+
+[dependencies]
+bitflags = { workspace = true }
+codec = { features = ["derive", "max-encoded-len"], optional = true, workspace = true }
+paste = { workspace = true }
+scale-info = { features = ["derive"], optional = true, workspace = true }
 
 [features]
 default = ["scale"]

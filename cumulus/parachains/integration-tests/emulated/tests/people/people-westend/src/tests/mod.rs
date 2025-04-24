@@ -13,5 +13,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+mod aliases;
 mod claim_assets;
+<<<<<<< HEAD
+=======
+mod governance;
+mod identity;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 mod teleport;

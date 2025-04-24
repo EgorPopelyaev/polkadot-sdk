@@ -107,7 +107,24 @@ This process aims to release the `stable` branch as a *Stable* release every two
 
 ## Nightly Release
 
+<<<<<<< HEAD
 Cadence: every day at 00:00 UTC+1. Responsible: Release Team
+=======
+1. Sync the forks before continuing with the release using
+[Sync the forked repo with the upstream](https://github.com/paritytech-release/polkadot-sdk/actions/workflows/fork-sync-action.yml)
+2. To build binaries trigger [Release - Build node release candidate](/.github/workflows/release-20_build-rc.yml)
+3. When an rc build is ready to trigger [Release - Publish draft](/.github/workflows/release-30_publish_release_draft.yml)
+to create a new release draft for the upcoming rc
+4. When the release is finalized and ready to go, publish crates using `parity-publish` tool and push changes
+to the release branch
+5. Repeat steps 1-3 to prepare the rc
+6. Trigger [Release - Promote RC to final candidate on S3](/.github/workflows/release-31_promote-rc-to-final.yml)
+to have it as a final rc on the S3
+7. Publish deb package for the `polkadot` binary using
+[Release - Publish Polkadot deb package](/.github/workflows/release-40_publish-deb-package.yml)
+8. Adjust the release draft and publish release on the GitHub.
+9. Publish docker images using [Release - Publish Docker Image](/.github/workflows/release-50_publish-docker.yml)
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 This process aims to release the `master` branch as a *Nightly* release. The process can start at 00:00 UTC+1 and should
 automatically do the following steps.

@@ -174,7 +174,14 @@ pub mod snowbridge {
 	use xcm::prelude::{Location, NetworkId};
 
 	/// The pallet index of the Ethereum inbound queue pallet in the bridge hub runtime.
+<<<<<<< HEAD
 	pub const INBOUND_QUEUE_PALLET_INDEX: u8 = 80;
+=======
+	pub const INBOUND_QUEUE_PALLET_INDEX_V1: u8 = 80;
+	pub const INBOUND_QUEUE_PALLET_INDEX_V2: u8 = 91;
+
+	pub const FRONTEND_PALLET_INDEX: u8 = 36;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 	parameter_types! {
 		/// Network and location for the Ethereum chain. On Westend, the Ethereum chain bridged

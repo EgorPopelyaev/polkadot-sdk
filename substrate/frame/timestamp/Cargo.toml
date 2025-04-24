@@ -20,6 +20,7 @@ targets = ["x86_64-unknown-linux-gnu"]
 codec = { features = ["derive", "max-encoded-len"], workspace = true }
 log = { workspace = true }
 scale-info = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 frame-benchmarking = { optional = true, workspace = true }
 frame-support.workspace = true
 frame-system.workspace = true
@@ -28,12 +29,22 @@ sp-io = { optional = true, workspace = true }
 sp-runtime.workspace = true
 sp-storage.workspace = true
 sp-timestamp.workspace = true
+=======
+sp-inherents = { workspace = true }
+sp-runtime = { workspace = true }
+sp-storage = { workspace = true }
+sp-timestamp = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 docify = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-core = { default-features = true, path = "../../primitives/core" }
 sp-io = { default-features = true, path = "../../primitives/io" }
+=======
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -45,7 +56,6 @@ std = [
 	"log/std",
 	"scale-info/std",
 	"sp-inherents/std",
-	"sp-io?/std",
 	"sp-runtime/std",
 	"sp-storage/std",
 	"sp-timestamp/std",
@@ -54,7 +64,6 @@ runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
-	"sp-io",
 	"sp-runtime/runtime-benchmarks",
 ]
 try-runtime = [

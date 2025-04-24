@@ -84,11 +84,13 @@ benchmarks! {
 		let mut executor = new_executor::<T>(Default::default());
 		executor.set_holding(holding);
 
-		let fee_asset = AssetId(Here.into());
+		// The worst case we want for buy execution in terms of
+		// fee asset and weight
+		let (fee_asset, weight_limit) = T::worst_case_for_trader()?;
 
 		let instruction = Instruction::<XcmCallOf<T>>::BuyExecution {
-			fees: (fee_asset, 100_000_000u128).into(), // should be something inside of holding
-			weight_limit: WeightLimit::Unlimited,
+			fees: fee_asset,
+			weight_limit: weight_limit.into(),
 		};
 
 		let xcm = Xcm(vec![instruction]);
@@ -106,7 +108,7 @@ benchmarks! {
 		// Set some weight to be paid for.
 		executor.set_message_weight(Weight::from_parts(100_000_000, 100_000));
 
-		let fee_asset: Asset = T::fee_asset().unwrap();
+		let (fee_asset, _): (Asset, WeightLimit) = T::worst_case_for_trader().unwrap();
 
 		let instruction = Instruction::<XcmCallOf<T>>::PayFees { asset: fee_asset };
 
@@ -169,8 +171,17 @@ benchmarks! {
 		let mut executor = new_executor::<T>(Default::default());
 		let holding_assets = T::worst_case_holding(1);
 		// We can already buy execution since we'll load the holding register manually
+<<<<<<< HEAD
 		let asset_for_fees = T::fee_asset().unwrap();
 		let previous_xcm = Xcm(vec![BuyExecution { fees: asset_for_fees, weight_limit: Limited(Weight::from_parts(1337, 1337)) }]);
+=======
+		let (asset_for_fees, _): (Asset, WeightLimit) = T::worst_case_for_trader().unwrap();
+
+		let previous_xcm = Xcm(vec![BuyExecution {
+			fees: asset_for_fees,
+			weight_limit: Limited(Weight::from_parts(1337, 1337)),
+		}]);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		executor.set_holding(holding_assets.into());
 		executor.set_total_surplus(Weight::from_parts(1337, 1337));
 		executor.set_total_refunded(Weight::zero());
@@ -591,10 +602,19 @@ benchmarks! {
 			maximal: true,
 		};
 		let xcm = Xcm(vec![instruction]);
+<<<<<<< HEAD
 	}: {
 		executor.bench_process(xcm)?;
 	} verify {
 		assert_eq!(executor.holding(), &want.into());
+=======
+		#[block]
+		{
+			executor.bench_process(xcm)?;
+		}
+		assert!(executor.holding().contains(&want.into()));
+		Ok(())
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	}
 
 	universal_origin {

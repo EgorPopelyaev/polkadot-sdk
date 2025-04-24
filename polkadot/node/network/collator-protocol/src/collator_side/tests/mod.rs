@@ -631,6 +631,7 @@ async fn expect_advertise_collation_msg(
 				)
 			) => {
 				assert!(any_peers.iter().any(|p| to.contains(p)));
+<<<<<<< HEAD
 				match (candidate_hashes.as_mut(), wire_message) {
 					(None, Versioned::V1(protocol_v1::CollationProtocol::CollatorProtocol(wire_message))) => {
 						assert_matches!(
@@ -648,6 +649,12 @@ async fn expect_advertise_collation_msg(
 							wire_message,
 						)),
 					) => {
+=======
+				match wire_message {
+					CollationProtocols::V2(protocol_v2::CollationProtocol::CollatorProtocol(
+						wire_message,
+					)) => {
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 						assert_matches!(
 							wire_message,
 							protocol_v2::CollatorProtocolMessage::AdvertiseCollation {
@@ -1310,7 +1317,7 @@ fn collators_reject_declare_messages() {
 				virtual_overseer,
 				CollatorProtocolMessage::NetworkBridgeUpdate(NetworkBridgeEvent::PeerMessage(
 					peer,
-					Versioned::V1(protocol_v1::CollatorProtocolMessage::Declare(
+					CollationProtocols::V1(protocol_v1::CollatorProtocolMessage::Declare(
 						collator_pair2.public(),
 						ParaId::from(5),
 						collator_pair2.sign(b"garbage"),

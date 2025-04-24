@@ -174,6 +174,87 @@ fn write_output(build_dir: &Path, out_dir: &Path, entries: Vec<Entry>) -> Result
 	Ok(())
 }
 
+<<<<<<< HEAD
+=======
+/// Create a directory in the `target` as output directory
+fn create_out_dir() -> Result<PathBuf> {
+	let temp_dir: PathBuf =
+		env::var("OUT_DIR").context("Failed to fetch `OUT_DIR` env variable")?.into();
+
+	// this is set in case the user has overriden the target directory
+	let out_dir = if let Ok(path) = env::var("CARGO_TARGET_DIR") {
+		let path = PathBuf::from(path);
+
+		if path.is_absolute() {
+			path
+		} else {
+			let output = std::process::Command::new(env!("CARGO"))
+				.arg("locate-project")
+				.arg("--workspace")
+				.arg("--message-format=plain")
+				.output()
+				.context("Failed to determine workspace root")?
+				.stdout;
+
+			let workspace_root = Path::new(
+				std::str::from_utf8(&output)
+					.context("Invalid output from `locate-project`")?
+					.trim(),
+			)
+			.parent()
+			.expect("Workspace root path contains the `Cargo.toml`; qed");
+
+			PathBuf::from(workspace_root).join(path)
+		}
+	} else {
+		// otherwise just traverse up from the out dir
+		let mut out_dir: PathBuf = temp_dir.clone();
+		loop {
+			if !out_dir.pop() {
+				bail!("Cannot find project root.")
+			}
+			if out_dir.join("Cargo.lock").exists() {
+				break;
+			}
+		}
+		out_dir.join("target")
+	}
+	.join("pallet-revive-fixtures");
+
+	// clean up some leftover symlink from previous versions of this script
+	let mut out_exists = out_dir.exists();
+	if out_exists && !out_dir.is_dir() {
+		fs::remove_file(&out_dir).context("Failed to remove `OUT_DIR`.")?;
+		out_exists = false;
+	}
+
+	if !out_exists {
+		fs::create_dir(&out_dir)
+			.context(format!("Failed to create output directory: {})", out_dir.display(),))?;
+	}
+
+	// write the location of the out dir so it can be found later
+	let mut file = fs::File::create(temp_dir.join("fixture_location.rs"))
+		.context("Failed to create fixture_location.rs")?;
+	write!(
+		file,
+		r#"
+			#[allow(dead_code)]
+			const FIXTURE_DIR: &str = "{0}";
+			macro_rules! fixture {{
+				($name: literal) => {{
+					include_bytes!(concat!("{0}", "/", $name, ".polkavm"))
+				}};
+			}}
+		"#,
+		out_dir.display()
+	)
+	.context("Failed to write to fixture_location.rs")?;
+
+	Ok(out_dir)
+}
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 pub fn main() -> Result<()> {
 	let fixtures_dir: PathBuf = env::var("CARGO_MANIFEST_DIR")?.into();
 	let contracts_dir = fixtures_dir.join("contracts");

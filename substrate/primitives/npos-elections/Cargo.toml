@@ -24,8 +24,12 @@ sp-core.workspace = true
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 rand = { workspace = true, default-features = true }
 substrate-test-utils = { path = "../../test-utils" }
+=======
+substrate-test-utils = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

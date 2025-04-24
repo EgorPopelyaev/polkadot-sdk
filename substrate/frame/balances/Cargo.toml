@@ -26,10 +26,15 @@ sp-runtime.workspace = true
 docify = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-transaction-payment = { default-features = true, path = "../transaction-payment" }
 frame-support = { features = ["experimental"], default-features = true, path = "../support" }
 sp-core = { default-features = true, path = "../../primitives/core" }
 sp-io = { default-features = true, path = "../../primitives/io" }
+=======
+frame-support = { features = ["experimental"], workspace = true, default-features = true }
+pallet-transaction-payment = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 paste = { workspace = true, default-features = true }
 
 [features]

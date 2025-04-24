@@ -133,6 +133,20 @@ impl<T: crate::Config> WeightInfo for SubstrateWeight<T> {
 		// Minimum execution time: 2_887_000 picoseconds.
 		Weight::from_parts(3_006_000, 0)
 	}
+<<<<<<< HEAD
+=======
+	/// Storage: `System::AllExtrinsicsLen` (r:1 w:1)
+	/// Proof: `System::AllExtrinsicsLen` (`max_values`: Some(1), `max_size`: Some(4), added: 499, mode: `MaxEncodedLen`)
+	fn weight_reclaim() -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `24`
+		//  Estimated: `1489`
+		// Minimum execution time: 4_375_000 picoseconds.
+		Weight::from_parts(4_747_000, 1489)
+			.saturating_add(T::DbWeight::get().reads(1_u64))
+			.saturating_add(T::DbWeight::get().writes(1_u64))
+	}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 // For backwards compatibility and tests.

@@ -41,7 +41,7 @@ use sp_keystore::{Keystore, KeystorePtr};
 
 use polkadot_node_network_protocol::{
 	authority_discovery::AuthorityDiscovery, peer_set::PeerSet, GossipSupportNetworkMessage,
-	PeerId, Versioned,
+	PeerId, ValidationProtocols,
 };
 use polkadot_node_subsystem::{
 	messages::{
@@ -577,9 +577,7 @@ where
 			NetworkBridgeEvent::PeerMessage(_, message) => {
 				// match void -> LLVM unreachable
 				match message {
-					Versioned::V1(m) => match m {},
-					Versioned::V2(m) => match m {},
-					Versioned::V3(m) => match m {},
+					ValidationProtocols::V3(m) => match m {},
 				}
 			},
 		}

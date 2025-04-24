@@ -10,6 +10,7 @@ license.workspace = true
 workspace = true
 
 [dependencies]
+<<<<<<< HEAD
 sp-application-crypto.workspace = true
 sp-application-crypto.default-features = true
 sp-keystore.workspace = true
@@ -30,6 +31,18 @@ polkadot-node-subsystem-util.workspace = true
 polkadot-node-subsystem-util.default-features = true
 polkadot-primitives.workspace = true
 polkadot-primitives.default-features = true
+=======
+sc-network = { workspace = true, default-features = true }
+sp-application-crypto = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 futures = { workspace = true }
 futures-timer = { workspace = true }

@@ -26,11 +26,18 @@ sp-io.workspace = true
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-balances = { default-features = true, path = "../balances" }
 pallet-root-testing = { default-features = true, path = "../root-testing" }
 pallet-collective = { default-features = true, path = "../collective" }
 pallet-timestamp = { default-features = true, path = "../timestamp" }
 sp-core = { default-features = true, path = "../../primitives/core" }
+=======
+pallet-balances = { workspace = true, default-features = true }
+pallet-collective = { workspace = true, default-features = true }
+pallet-root-testing = { workspace = true, default-features = true }
+pallet-timestamp = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -75,7 +75,37 @@ async fn test_jsonrpsee_server() -> anyhow::Result<()> {
 		}
 	});
 
+<<<<<<< HEAD
 	let client = ws_client_with_retry("ws://localhost:45788").await;
+=======
+	let ethan = Account::from(subxt_signer::eth::dev::ethan());
+	let initial_balance = client.get_balance(ethan.address(), BlockTag::Latest.into()).await?;
+
+	let value = 1_000_000_000_000_000_000_000u128.into();
+	let tx = TransactionBuilder::new(&client).value(value).to(ethan.address()).send().await?;
+
+	let receipt = tx.wait_for_receipt().await?;
+	assert_eq!(
+		Some(ethan.address()),
+		receipt.to,
+		"Receipt should have the correct contract address."
+	);
+
+	let balance = client.get_balance(ethan.address(), BlockTag::Latest.into()).await?;
+	assert_eq!(
+		Some(value),
+		balance.checked_sub(initial_balance),
+		"Ethan {:?} {balance:?} should have increased by {value:?} from {initial_balance}.",
+		ethan.address()
+	);
+	Ok(())
+}
+
+#[tokio::test]
+async fn deploy_and_call() -> anyhow::Result<()> {
+	let _lock = SHARED_RESOURCES.write();
+	let client = std::sync::Arc::new(SharedResources::client().await);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	let account = Account::default();
 
 	// Balance transfer
@@ -94,8 +124,18 @@ async fn test_jsonrpsee_server() -> anyhow::Result<()> {
 		"Receipt should have the correct contract address."
 	);
 
+<<<<<<< HEAD
 	let ethan_balance = client.get_balance(ethan.address(), BlockTag::Latest.into()).await?;
 	assert_eq!(value, ethan_balance, "ethan's balance should be the same as the value sent.");
+=======
+	let balance = client.get_balance(ethan.address(), BlockTag::Latest.into()).await?;
+	assert_eq!(
+		Some(value),
+		balance.checked_sub(initial_balance),
+		"Ethan {:?} {balance:?} should have increased by {value:?} from {initial_balance}.",
+		ethan.address()
+	);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 	// Deploy contract
 	let data = b"hello world".to_vec();
@@ -109,11 +149,14 @@ async fn test_jsonrpsee_server() -> anyhow::Result<()> {
 	assert_eq!(
 		Some(contract_address),
 		receipt.contract_address,
-		"Contract should be deployed with the correct address."
+		"Contract should be deployed at {contract_address:?}."
 	);
 
-	let balance = client.get_balance(contract_address, BlockTag::Latest.into()).await?;
-	assert_eq!(value, balance, "Contract balance should be the same as the value sent.");
+	let initial_balance = client.get_balance(contract_address, BlockTag::Latest.into()).await?;
+	assert_eq!(
+		value, initial_balance,
+		"Contract {contract_address:?} balance should be the same as the value sent ({value})."
+	);
 
 	// Call contract
 	let hash =
@@ -123,8 +166,51 @@ async fn test_jsonrpsee_server() -> anyhow::Result<()> {
 	assert_eq!(
 		Some(contract_address),
 		receipt.to,
-		"Receipt should have the correct contract address."
+		"Receipt should have the correct contract address {contract_address:?}."
 	);
 
+<<<<<<< HEAD
+=======
+	let balance = client.get_balance(contract_address, BlockTag::Latest.into()).await?;
+	assert_eq!(Some(value), balance.checked_sub(initial_balance), "Contract {contract_address:?} Balance {balance} should have increased from {initial_balance} by {value}.");
+
+	// Balance transfer to contract
+	let initial_balance = client.get_balance(contract_address, BlockTag::Latest.into()).await?;
+	let tx = TransactionBuilder::new(&client)
+		.value(value)
+		.to(contract_address)
+		.send()
+		.await?;
+
+	tx.wait_for_receipt().await?;
+
+	let balance = client.get_balance(contract_address, BlockTag::Latest.into()).await?;
+
+	assert_eq!(
+		Some(value),
+		balance.checked_sub(initial_balance),
+		"Balance {balance} should have increased from {initial_balance} by {value}."
+	);
+	Ok(())
+}
+
+#[tokio::test]
+async fn invalid_transaction() -> anyhow::Result<()> {
+	let _lock = SHARED_RESOURCES.write();
+	let client = Arc::new(SharedResources::client().await);
+	let ethan = Account::from(subxt_signer::eth::dev::ethan());
+
+	let err = TransactionBuilder::new(&client)
+		.value(U256::from(1_000_000_000_000u128))
+		.to(ethan.address())
+		.mutate(|tx| tx.chain_id = Some(42u32.into()))
+		.send()
+		.await
+		.unwrap_err();
+
+	let call_err = unwrap_call_err!(err.source().unwrap());
+	assert_eq!(call_err.message(), "Invalid Transaction");
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	Ok(())
 }

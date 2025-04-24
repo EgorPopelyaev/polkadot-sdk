@@ -23,8 +23,13 @@ sp-runtime.workspace = true
 log = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-balances = { default-features = true, path = "../balances" }
 sp-core = { path = "../../primitives/core", default-features = false }
+=======
+pallet-balances = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

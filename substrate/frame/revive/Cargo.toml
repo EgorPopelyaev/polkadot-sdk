@@ -22,11 +22,22 @@ targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
 environmental = { workspace = true }
+<<<<<<< HEAD
+=======
+ethereum-types = { workspace = true, features = ["codec", "rlp", "serialize"] }
+hex-literal = { workspace = true }
+impl-trait-for-tuples = { workspace = true }
+log = { workspace = true }
+num-bigint = { workspace = true }
+num-integer = { workspace = true }
+num-traits = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 paste = { workspace = true }
 polkavm = { version = "0.13.0", default-features = false }
 bitflags = { workspace = true }
 codec = { features = ["derive", "max-encoded-len"], workspace = true }
 scale-info = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 log = { workspace = true }
 serde = { features = [
 	"alloc",
@@ -38,11 +49,18 @@ derive_more = { workspace = true }
 hex = { workspace = true }
 jsonrpsee = { workspace = true, features = ["full"], optional = true }
 ethereum-types = { workspace = true, features = ["codec", "rlp", "serialize"] }
+=======
+serde = { features = ["alloc", "derive"], workspace = true, default-features = false }
+
+# Polkadot SDK Dependencies
+bn = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 frame-benchmarking = { optional = true, workspace = true }
 frame-support.workspace = true
 frame-system.workspace = true
 pallet-balances = { optional = true, workspace = true }
 pallet-revive-fixtures = { workspace = true, optional = true }
+<<<<<<< HEAD
 pallet-revive-uapi.workspace = true
 pallet-revive-uapi.default-features = true
 pallet-revive-proc-macro.workspace = true
@@ -60,6 +78,23 @@ xcm-builder.workspace = true
 subxt-signer = { workspace = true, optional = true, features = [
 	"unstable-eth",
 ] }
+=======
+pallet-revive-proc-macro = { workspace = true }
+pallet-revive-uapi = { workspace = true, features = ["scale"] }
+pallet-transaction-payment = { workspace = true }
+ripemd = { workspace = true }
+sp-api = { workspace = true }
+sp-arithmetic = { workspace = true }
+sp-consensus-aura = { workspace = true, optional = true }
+sp-consensus-babe = { workspace = true, optional = true }
+sp-consensus-slots = { workspace = true, optional = true }
+sp-core = { workspace = true }
+sp-io = { workspace = true }
+sp-runtime = { workspace = true }
+subxt-signer = { workspace = true, optional = true, features = ["unstable-eth"] }
+xcm = { workspace = true }
+xcm-builder = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 array-bytes = { workspace = true, default-features = true }

@@ -64,6 +64,10 @@ sp-runtime.default-features = true
 sp-trie.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
+=======
+relay-substrate-client = { features = ["test-helpers"], workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 scale-info = { features = ["derive"], workspace = true }
 pallet-transaction-payment = { default-features = true, path = "../../../substrate/frame/transaction-payment" }
 relay-substrate-client = { features = ["test-helpers"], path = "../client-substrate" }

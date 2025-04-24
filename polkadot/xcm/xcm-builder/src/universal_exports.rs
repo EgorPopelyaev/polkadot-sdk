@@ -71,7 +71,7 @@ impl<Exporter: ExportXcm, UniversalLocation: Get<InteriorLocation>> SendXcm
 		msg: &mut Option<Xcm<()>>,
 	) -> SendResult<Exporter::Ticket> {
 		// This `clone` ensures that `dest` is not consumed in any case.
-		let d = dest.clone().take().ok_or(MissingArgument)?;
+		let d = dest.clone().ok_or(MissingArgument)?;
 		let universal_source = UniversalLocation::get();
 		let devolved = ensure_is_remote(universal_source.clone(), d).map_err(|_| NotApplicable)?;
 		let (remote_network, remote_location) = devolved;
@@ -95,6 +95,60 @@ impl<Exporter: ExportXcm, UniversalLocation: Get<InteriorLocation>> SendXcm
 	fn deliver(ticket: Exporter::Ticket) -> Result<XcmHash, SendError> {
 		Exporter::deliver(ticket)
 	}
+<<<<<<< HEAD
+=======
+
+	#[cfg(feature = "runtime-benchmarks")]
+	fn ensure_successful_delivery(_: Option<Location>) {}
+}
+
+/// Implementation of `SendXcm` which uses the given `ExportXcm` implementation in order to forward
+/// the message over a bridge.
+///
+/// This is only useful when the local chain has bridging capabilities.
+pub struct LocalExporter<Exporter, UniversalLocation>(PhantomData<(Exporter, UniversalLocation)>);
+impl<Exporter: ExportXcm, UniversalLocation: Get<InteriorLocation>> SendXcm
+	for LocalExporter<Exporter, UniversalLocation>
+{
+	type Ticket = Exporter::Ticket;
+
+	fn validate(
+		dest: &mut Option<Location>,
+		msg: &mut Option<Xcm<()>>,
+	) -> SendResult<Exporter::Ticket> {
+		// This `clone` ensures that `dest` is not consumed in any case.
+		let d = dest.clone().ok_or(MissingArgument)?;
+		let universal_source = UniversalLocation::get();
+		let devolved = ensure_is_remote(universal_source.clone(), d).map_err(|_| NotApplicable)?;
+		let (remote_network, remote_location) = devolved;
+		let xcm = msg.take().ok_or(MissingArgument)?;
+
+		let hash =
+			(Some(Location::here()), &remote_location).using_encoded(sp_io::hashing::blake2_128);
+		let channel = u32::decode(&mut hash.as_ref()).unwrap_or(0);
+
+		validate_export::<Exporter>(
+			remote_network,
+			channel,
+			universal_source,
+			remote_location,
+			xcm.clone(),
+		)
+		.inspect_err(|err| {
+			if let NotApplicable = err {
+				// We need to make sure that msg is not consumed in case of `NotApplicable`.
+				*msg = Some(xcm);
+			}
+		})
+	}
+
+	fn deliver(ticket: Exporter::Ticket) -> Result<XcmHash, SendError> {
+		Exporter::deliver(ticket)
+	}
+
+	#[cfg(feature = "runtime-benchmarks")]
+	fn ensure_successful_delivery(_: Option<Location>) {}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 pub trait ExporterFor {
@@ -214,7 +268,7 @@ impl<Bridges: ExporterFor, Router: SendXcm, UniversalLocation: Get<InteriorLocat
 		msg: &mut Option<Xcm<()>>,
 	) -> SendResult<Router::Ticket> {
 		// This `clone` ensures that `dest` is not consumed in any case.
-		let d = dest.clone().take().ok_or(MissingArgument)?;
+		let d = dest.clone().ok_or(MissingArgument)?;
 		let devolved = ensure_is_remote(UniversalLocation::get(), d).map_err(|_| NotApplicable)?;
 		let (remote_network, remote_location) = devolved;
 		let xcm = msg.take().ok_or(MissingArgument)?;
@@ -291,7 +345,7 @@ impl<Bridges: ExporterFor, Router: SendXcm, UniversalLocation: Get<InteriorLocat
 		msg: &mut Option<Xcm<()>>,
 	) -> SendResult<Router::Ticket> {
 		// This `clone` ensures that `dest` is not consumed in any case.
-		let d = dest.clone().take().ok_or(MissingArgument)?;
+		let d = dest.clone().ok_or(MissingArgument)?;
 		let devolved = ensure_is_remote(UniversalLocation::get(), d).map_err(|_| NotApplicable)?;
 		let (remote_network, remote_location) = devolved;
 		let xcm = msg.take().ok_or(MissingArgument)?;
@@ -464,7 +518,7 @@ impl<
 			message.0.insert(0, DescendOrigin(bridge_instance));
 		}
 
-		let _ = send_xcm::<Router>(dest, message).map_err(|_| DispatchBlobError::RoutingError)?;
+		send_xcm::<Router>(dest, message).map_err(|_| DispatchBlobError::RoutingError)?;
 		Ok(())
 	}
 }

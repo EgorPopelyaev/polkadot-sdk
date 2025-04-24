@@ -46,6 +46,7 @@ cumulus-relay-chain-interface.default-features = true
 [dev-dependencies]
 portpicker = { workspace = true }
 tokio = { features = ["macros"], workspace = true, default-features = true }
+<<<<<<< HEAD
 url = { workspace = true }
 rstest = { workspace = true }
 
@@ -57,6 +58,15 @@ sp-core = { default-features = true, path = "../../../substrate/primitives/core"
 sp-keyring = { default-features = true, path = "../../../substrate/primitives/keyring" }
 sp-keystore = { default-features = true, path = "../../../substrate/primitives/keystore" }
 substrate-test-utils = { path = "../../../substrate/test-utils" }
+=======
+
+# Substrate
+sc-client-api = { workspace = true, default-features = true }
+sp-consensus = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 # Polkadot
 polkadot-test-client = { path = "../../../polkadot/node/test/client" }

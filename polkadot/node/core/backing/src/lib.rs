@@ -108,7 +108,6 @@ use polkadot_node_subsystem_util::{
 };
 use polkadot_parachain_primitives::primitives::IsSystem;
 use polkadot_primitives::{
-	node_features::FeatureIndex,
 	vstaging::{
 		BackedCandidate, CandidateReceiptV2 as CandidateReceipt,
 		CommittedCandidateReceiptV2 as CommittedCandidateReceipt, CoreState,
@@ -235,9 +234,6 @@ struct PerRelayParentState {
 	fallbacks: HashMap<CandidateHash, AttestingData>,
 	/// The minimum backing votes threshold.
 	minimum_backing_votes: u32,
-	/// If true, we're appending extra bits in the BackedCandidate validator indices bitfield,
-	/// which represent the assigned core index. True if ElasticScalingMVP is enabled.
-	inject_core_index: bool,
 	/// The number of cores.
 	n_cores: u32,
 	/// Claim queue state. If the runtime API is not available, it'll be populated with info from
@@ -495,7 +491,6 @@ fn table_attested_to_backed(
 		ValidatorSignature,
 	>,
 	table_context: &TableContext,
-	inject_core_index: bool,
 ) -> Option<BackedCandidate> {
 	let TableAttestedCandidate { candidate, validity_votes, group_id: core_index } = attested;
 
@@ -534,7 +529,7 @@ fn table_attested_to_backed(
 			.map(|(pos_in_votes, _pos_in_group)| validity_votes[pos_in_votes].clone())
 			.collect(),
 		validator_indices,
-		inject_core_index.then_some(core_index),
+		core_index,
 	))
 }
 
@@ -1106,6 +1101,7 @@ async fn construct_per_relay_parent_state<Context>(
 
 	let session_index = try_runtime_api!(session_index);
 
+<<<<<<< HEAD
 	let inject_core_index = request_node_features(parent, session_index, ctx.sender())
 		.await?
 		.unwrap_or(NodeFeatures::EMPTY)
@@ -1114,6 +1110,19 @@ async fn construct_per_relay_parent_state<Context>(
 		.unwrap_or(false);
 
 	gum::debug!(target: LOG_TARGET, inject_core_index, ?parent, "New state");
+=======
+	let validators = per_session_cache.validators(session_index, parent, ctx.sender()).await;
+	let validators = try_runtime_api!(validators);
+
+	let node_features = per_session_cache.node_features(session_index, parent, ctx.sender()).await;
+	let node_features = try_runtime_api!(node_features);
+
+	let executor_params =
+		per_session_cache.executor_params(session_index, parent, ctx.sender()).await;
+	let executor_params = try_runtime_api!(executor_params);
+
+	gum::debug!(target: LOG_TARGET, ?parent, "New state");
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 	let validators: Vec<_> = try_runtime_api!(validators);
 	let (validator_groups, group_rotation_info) = try_runtime_api!(groups);
@@ -1226,8 +1235,12 @@ async fn construct_per_relay_parent_state<Context>(
 		awaiting_validation: HashSet::new(),
 		fallbacks: HashMap::new(),
 		minimum_backing_votes,
+<<<<<<< HEAD
 		inject_core_index,
 		n_cores: cores.len() as u32,
+=======
+		n_cores: validator_groups.len() as u32,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		claim_queue: ClaimQueueSnapshot::from(claim_queue),
 		validator_to_group: validator_to_group.clone(),
 		group_rotation_info,
@@ -1709,11 +1722,7 @@ async fn post_import_statement_actions<Context>(
 
 		// `HashSet::insert` returns true if the thing wasn't in there already.
 		if rp_state.backed.insert(candidate_hash) {
-			if let Some(backed) = table_attested_to_backed(
-				attested,
-				&rp_state.table_context,
-				rp_state.inject_core_index,
-			) {
+			if let Some(backed) = table_attested_to_backed(attested, &rp_state.table_context) {
 				let para_id = backed.candidate().descriptor.para_id();
 				gum::debug!(
 					target: LOG_TARGET,
@@ -2201,13 +2210,7 @@ fn handle_get_backable_candidates_message(
 					&rp_state.table_context,
 					rp_state.minimum_backing_votes,
 				)
-				.and_then(|attested| {
-					table_attested_to_backed(
-						attested,
-						&rp_state.table_context,
-						rp_state.inject_core_index,
-					)
-				});
+				.and_then(|attested| table_attested_to_backed(attested, &rp_state.table_context));
 
 			if let Some(backed_candidate) = maybe_backed_candidate {
 				backed

@@ -140,9 +140,12 @@ pallet-timestamp.default-features = true
 
 [dev-dependencies]
 futures = { workspace = true }
+<<<<<<< HEAD
 portpicker = { workspace = true }
 sp-authority-discovery = { default-features = true, path = "../../../substrate/primitives/authority-discovery" }
 cumulus-test-client = { path = "../client" }
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 # Polkadot dependencies
 polkadot-test-service = { path = "../../../polkadot/node/test/service" }

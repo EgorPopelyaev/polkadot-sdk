@@ -26,8 +26,15 @@ use uapi::{HostFn, HostFnImpl as api};
 #[polkavm_derive::polkavm_export]
 pub extern "C" fn deploy() {}
 
+<<<<<<< HEAD:substrate/frame/revive/fixtures/contracts/debug_message_invalid_utf8.rs
 #[no_mangle]
 #[polkavm_derive::polkavm_export]
 pub extern "C" fn call() {
 	api::debug_message(b"\xFC").unwrap();
+=======
+	#[pallet::view_functions]
+	impl<T: Config> Pallet<T> {
+		pub const SECONDS_PER_MINUTE: u32 = 60;
+	}
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60)):substrate/frame/support/test/tests/pallet_ui/view_function_invalid_item.rs
 }

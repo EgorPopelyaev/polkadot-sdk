@@ -19,14 +19,21 @@
 
 use alloc::vec::Vec;
 use codec::Codec;
-use frame_election_provider_support::{
-	ElectionProvider, ElectionProviderBase, SortedListProvider, VoteWeight,
-};
+use frame_election_provider_support::{ElectionProvider, SortedListProvider, VoteWeight};
 use frame_support::{
 	pallet_prelude::*,
 	traits::{
+<<<<<<< HEAD
 		Currency, Defensive, DefensiveSaturating, EnsureOrigin, EstimateNextNewSession, Get,
 		InspectLockableCurrency, LockableCurrency, OnUnbalanced, UnixTime,
+=======
+		fungible::{
+			hold::{Balanced as FunHoldBalanced, Mutate as FunHoldMutate},
+			Mutate as FunMutate,
+		},
+		Contains, Defensive, EnsureOrigin, EstimateNextNewSession, Get, InspectLockableCurrency,
+		Nothing, OnUnbalanced, UnixTime,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	},
 	weights::Weight,
 	BoundedVec,
@@ -69,7 +76,11 @@ pub mod pallet {
 	use super::*;
 
 	/// The in-code storage version.
+<<<<<<< HEAD
 	const STORAGE_VERSION: StorageVersion = StorageVersion::new(15);
+=======
+	const STORAGE_VERSION: StorageVersion = StorageVersion::new(16);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 	#[pallet::pallet]
 	#[pallet::storage_version(STORAGE_VERSION)]
@@ -172,6 +183,7 @@ pub mod pallet {
 
 		/// The overarching event type.
 		#[pallet::no_default_bounds]
+		#[allow(deprecated)]
 		type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
 
 		/// Handler for the unbalanced reduction when slashing a staker.
@@ -231,6 +243,10 @@ pub mod pallet {
 		/// without handling it in a migration.
 		#[pallet::constant]
 		type MaxExposurePageSize: Get<u32>;
+
+		/// The absolute maximum of winner validators this pallet should return.
+		#[pallet::constant]
+		type MaxValidatorSet: Get<u32>;
 
 		/// Something that provides a best-effort sorted list of voters aka electing nominators,
 		/// used for NPoS election.
@@ -350,6 +366,7 @@ pub mod pallet {
 			type NextNewSession = ();
 			type MaxExposurePageSize = ConstU32<64>;
 			type MaxUnlockingChunks = ConstU32<32>;
+			type MaxValidatorSet = ConstU32<100>;
 			type MaxControllersInDeprecationBatch = ConstU32<100>;
 			type EventListeners = ();
 			type DisablingStrategy = crate::UpToLimitDisablingStrategy;
@@ -683,8 +700,7 @@ pub mod pallet {
 	/// `[active_era - bounding_duration; active_era]`
 	#[pallet::storage]
 	#[pallet::unbounded]
-	pub(crate) type BondedEras<T: Config> =
-		StorageValue<_, Vec<(EraIndex, SessionIndex)>, ValueQuery>;
+	pub type BondedEras<T: Config> = StorageValue<_, Vec<(EraIndex, SessionIndex)>, ValueQuery>;
 
 	/// All slashing events on validators, mapped by era to the highest slash proportion
 	/// and slash value of the era.
@@ -810,7 +826,8 @@ pub mod pallet {
 				});
 				assert!(
 					ValidatorCount::<T>::get() <=
-						<T::ElectionProvider as ElectionProviderBase>::MaxWinners::get()
+						<T::ElectionProvider as ElectionProvider>::MaxWinnersPerPage::get() *
+							<T::ElectionProvider as ElectionProvider>::Pages::get()
 				);
 			}
 
@@ -983,8 +1000,8 @@ pub mod pallet {
 
 			// ensure election results are always bounded with the same value
 			assert!(
-				<T::ElectionProvider as ElectionProviderBase>::MaxWinners::get() ==
-					<T::GenesisElectionProvider as ElectionProviderBase>::MaxWinners::get()
+				<T::ElectionProvider as ElectionProvider>::MaxWinnersPerPage::get() ==
+					<T::GenesisElectionProvider as ElectionProvider>::MaxWinnersPerPage::get()
 			);
 
 			assert!(
@@ -1088,6 +1105,8 @@ pub mod pallet {
 		/// period ends. If this leaves an amount actively bonded less than
 		/// [`asset::existential_deposit`], then it is increased to the full amount.
 		///
+		/// The stash may be chilled if the ledger total amount falls to 0 after unbonding.
+		///
 		/// The dispatch origin for this call must be _Signed_ by the controller, not the stash.
 		///
 		/// Once the unlock period is done, you can call `withdraw_unbonded` to actually move
@@ -1105,16 +1124,15 @@ pub mod pallet {
 		/// See also [`Call::withdraw_unbonded`].
 		#[pallet::call_index(2)]
 		#[pallet::weight(
-            T::WeightInfo::withdraw_unbonded_kill(SPECULATIVE_NUM_SPANS).saturating_add(T::WeightInfo::unbond()))
+            T::WeightInfo::withdraw_unbonded_kill(SPECULATIVE_NUM_SPANS).saturating_add(T::WeightInfo::unbond()).saturating_add(T::WeightInfo::chill()))
         ]
 		pub fn unbond(
 			origin: OriginFor<T>,
 			#[pallet::compact] value: BalanceOf<T>,
 		) -> DispatchResultWithPostInfo {
 			let controller = ensure_signed(origin)?;
-			let unlocking =
-				Self::ledger(Controller(controller.clone())).map(|l| l.unlocking.len())?;
 
+<<<<<<< HEAD
 			// if there are no unlocking chunks available, try to withdraw chunks older than
 			// `BondingDuration` to proceed with the unbonding.
 			let maybe_withdraw_weight = {
@@ -1183,15 +1201,22 @@ pub mod pallet {
 				}
 
 				Self::deposit_event(Event::<T>::Unbonded { stash, amount: value });
-			}
+=======
+			let ledger = Self::ledger(StakingAccount::Controller(controller.clone()))?;
 
-			let actual_weight = if let Some(withdraw_weight) = maybe_withdraw_weight {
-				Some(T::WeightInfo::unbond().saturating_add(withdraw_weight))
+			let mut total_weight = if value >= ledger.total {
+				Self::chill_stash(&ledger.stash);
+				T::WeightInfo::chill()
 			} else {
-				Some(T::WeightInfo::unbond())
+				Zero::zero()
 			};
 
-			Ok(actual_weight.into())
+			if let Some(withdraw_weight) = Self::do_unbond(controller, value)? {
+				total_weight.saturating_accrue(withdraw_weight);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
+			}
+
+			Ok(Some(total_weight).into())
 		}
 
 		/// Remove any unlocked chunks from the `unlocking` queue from our management.
@@ -1389,7 +1414,7 @@ pub mod pallet {
 				Error::<T>::ControllerDeprecated
 			);
 
-			let _ = ledger
+			ledger
 				.set_payee(payee)
 				.defensive_proof("ledger was retrieved from storage, thus its bonded; qed.")?;
 
@@ -1425,7 +1450,7 @@ pub mod pallet {
 					return Err(Error::<T>::AlreadyPaired.into())
 				}
 
-				let _ = ledger.set_controller_to_stash()?;
+				ledger.set_controller_to_stash()?;
 				Ok(())
 			})?
 		}
@@ -1445,10 +1470,8 @@ pub mod pallet {
 			ensure_root(origin)?;
 			// ensure new validator count does not exceed maximum winners
 			// support by election provider.
-			ensure!(
-				new <= <T::ElectionProvider as ElectionProviderBase>::MaxWinners::get(),
-				Error::<T>::TooManyValidators
-			);
+			ensure!(new <= T::MaxValidatorSet::get(), Error::<T>::TooManyValidators);
+
 			ValidatorCount::<T>::put(new);
 			Ok(())
 		}
@@ -1469,10 +1492,7 @@ pub mod pallet {
 			ensure_root(origin)?;
 			let old = ValidatorCount::<T>::get();
 			let new = old.checked_add(additional).ok_or(ArithmeticError::Overflow)?;
-			ensure!(
-				new <= <T::ElectionProvider as ElectionProviderBase>::MaxWinners::get(),
-				Error::<T>::TooManyValidators
-			);
+			ensure!(new <= T::MaxValidatorSet::get(), Error::<T>::TooManyValidators);
 
 			ValidatorCount::<T>::put(new);
 			Ok(())
@@ -1492,10 +1512,7 @@ pub mod pallet {
 			let old = ValidatorCount::<T>::get();
 			let new = old.checked_add(factor.mul_floor(old)).ok_or(ArithmeticError::Overflow)?;
 
-			ensure!(
-				new <= <T::ElectionProvider as ElectionProviderBase>::MaxWinners::get(),
-				Error::<T>::TooManyValidators
-			);
+			ensure!(new <= T::MaxValidatorSet::get(), Error::<T>::TooManyValidators);
 
 			ValidatorCount::<T>::put(new);
 			Ok(())
@@ -1603,6 +1620,7 @@ pub mod pallet {
 		/// Can be called by the `T::AdminOrigin`.
 		///
 		/// Parameters: era and indices of the slashes for that era to kill.
+		/// They **must** be sorted in ascending order, *and* unique.
 		#[pallet::call_index(17)]
 		#[pallet::weight(T::WeightInfo::cancel_deferred_slash(slash_indices.len() as u32))]
 		pub fn cancel_deferred_slash(
@@ -1724,7 +1742,7 @@ pub mod pallet {
 			stash: T::AccountId,
 			num_slashing_spans: u32,
 		) -> DispatchResultWithPostInfo {
-			let _ = ensure_signed(origin)?;
+			ensure_signed(origin)?;
 
 			// virtual stakers should not be allowed to be reaped.
 			ensure!(!Self::is_virtual_staker(&stash), Error::<T>::VirtualStakerNotAllowed);
@@ -2007,7 +2025,7 @@ pub mod pallet {
 			origin: OriginFor<T>,
 			controller: T::AccountId,
 		) -> DispatchResultWithPostInfo {
-			let _ = ensure_signed(origin)?;
+			ensure_signed(origin)?;
 			let ledger = Self::ledger(StakingAccount::Controller(controller.clone()))?;
 
 			ensure!(
@@ -2018,7 +2036,7 @@ pub mod pallet {
 				Error::<T>::NotController
 			);
 
-			let _ = ledger
+			ledger
 				.set_payee(RewardDestination::Account(controller))
 				.defensive_proof("ledger should have been previously retrieved from storage.")?;
 
@@ -2167,6 +2185,7 @@ pub mod pallet {
 			Ok(())
 		}
 
+<<<<<<< HEAD
 		/// Adjusts the staking ledger by withdrawing any excess staked amount.
 		///
 		/// This function corrects cases where a user's recorded stake in the ledger
@@ -2177,6 +2196,23 @@ pub mod pallet {
 		#[pallet::weight(T::DbWeight::get().reads_writes(2, 1))]
 		pub fn withdraw_overstake(origin: OriginFor<T>, stash: T::AccountId) -> DispatchResult {
 			let _ = ensure_signed(origin)?;
+=======
+		/// Removes the legacy Staking locks if they exist.
+		///
+		/// This removes the legacy lock on the stake with [`Config::OldCurrency`] and creates a
+		/// hold on it if needed. If all stake cannot be held, the best effort is made to hold as
+		/// much as possible. The remaining stake is forced withdrawn from the ledger.
+		///
+		/// The fee is waived if the migration is successful.
+		#[pallet::call_index(30)]
+		#[pallet::weight(T::WeightInfo::migrate_currency())]
+		pub fn migrate_currency(
+			origin: OriginFor<T>,
+			stash: T::AccountId,
+		) -> DispatchResultWithPostInfo {
+			ensure_signed(origin)?;
+			Self::do_migrate_currency(&stash)?;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 			// Virtual stakers are controlled by some other pallet.
 			ensure!(!Self::is_virtual_staker(&stash), Error::<T>::VirtualStakerNotAllowed);

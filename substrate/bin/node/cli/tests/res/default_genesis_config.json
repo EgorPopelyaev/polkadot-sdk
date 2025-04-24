@@ -38,6 +38,9 @@
     "nonAuthorityKeys": []
 
   },
+  "revive": {
+    "mappedAccounts": []
+  },
   "democracy": {},
   "council": {
     "members": []

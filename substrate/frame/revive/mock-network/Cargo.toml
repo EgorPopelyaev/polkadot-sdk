@@ -60,9 +60,13 @@ xcm-simulator.workspace = true
 xcm-simulator.default-features = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 assert_matches = { workspace = true }
 pretty_assertions = { workspace = true }
 pallet-revive-fixtures = { path = "../fixtures", default-features = false }
+=======
+pallet-revive-fixtures = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

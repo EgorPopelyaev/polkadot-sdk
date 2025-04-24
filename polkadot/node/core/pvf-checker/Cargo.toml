@@ -11,6 +11,7 @@ workspace = true
 
 [dependencies]
 futures = { workspace = true }
+<<<<<<< HEAD
 thiserror = { workspace = true }
 gum.workspace = true
 gum.default-features = true
@@ -26,6 +27,15 @@ polkadot-overseer.workspace = true
 polkadot-overseer.default-features = true
 sp-keystore.workspace = true
 sp-keystore.default-features = true
+=======
+gum = { workspace = true, default-features = true }
+
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+
+sp-keystore = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 sp-core = { default-features = true, path = "../../../../substrate/primitives/core" }

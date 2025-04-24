@@ -58,7 +58,12 @@ pub mod pallet {
 		Clone,
 		Encode,
 		Decode,
+<<<<<<< HEAD
 		sp_core::RuntimeDebug,
+=======
+		DecodeWithMemTracking,
+		Debug,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		scale_info::TypeInfo,
 		MaxEncodedLen,
 	)]

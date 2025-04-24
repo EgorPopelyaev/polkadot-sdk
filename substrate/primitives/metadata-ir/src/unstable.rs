@@ -18,23 +18,39 @@
 //! Convert the IR to V16 metadata.
 
 use crate::{
+<<<<<<< HEAD
 	DeprecationInfoIR, DeprecationStatusIR, OuterEnumsIR, PalletAssociatedTypeMetadataIR,
 	PalletCallMetadataIR, PalletConstantMetadataIR, PalletErrorMetadataIR, PalletEventMetadataIR,
 	PalletStorageMetadataIR, StorageEntryMetadataIR,
+=======
+	DeprecationInfoIR, DeprecationStatusIR, PalletAssociatedTypeMetadataIR, PalletCallMetadataIR,
+	PalletConstantMetadataIR, PalletErrorMetadataIR, PalletEventMetadataIR,
+	PalletStorageMetadataIR, PalletViewFunctionMetadataIR, PalletViewFunctionParamMetadataIR,
+	StorageEntryMetadataIR,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
 
 use super::types::{
 	ExtrinsicMetadataIR, MetadataIR, PalletMetadataIR, RuntimeApiMetadataIR,
-	RuntimeApiMethodMetadataIR, RuntimeApiMethodParamMetadataIR, TransactionExtensionMetadataIR,
+	RuntimeApiMethodMetadataIR, TransactionExtensionMetadataIR,
 };
 
 use frame_metadata::v16::{
-	CustomMetadata, DeprecationInfo, DeprecationStatus, ExtrinsicMetadata, OuterEnums,
+	CustomMetadata, DeprecationInfo, DeprecationStatus, ExtrinsicMetadata, FunctionParamMetadata,
 	PalletAssociatedTypeMetadata, PalletCallMetadata, PalletConstantMetadata, PalletErrorMetadata,
+<<<<<<< HEAD
 	PalletEventMetadata, PalletMetadata, PalletStorageMetadata, RuntimeApiMetadata,
 	RuntimeApiMethodMetadata, RuntimeApiMethodParamMetadata, RuntimeMetadataV16,
 	StorageEntryMetadata, TransactionExtensionMetadata,
+=======
+	PalletEventMetadata, PalletMetadata, PalletStorageMetadata, PalletViewFunctionMetadata,
+	RuntimeApiMetadata, RuntimeApiMethodMetadata, RuntimeMetadataV16, StorageEntryMetadata,
+	TransactionExtensionMetadata,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
+
+use codec::Compact;
+use scale_info::form::MetaForm;
 
 impl From<MetadataIR> for RuntimeMetadataV16 {
 	fn from(ir: MetadataIR) -> Self {
@@ -70,12 +86,6 @@ impl From<RuntimeApiMethodMetadataIR> for RuntimeApiMethodMetadata {
 			docs: ir.docs,
 			deprecation_info: ir.deprecation_info.into(),
 		}
-	}
-}
-
-impl From<RuntimeApiMethodParamMetadataIR> for RuntimeApiMethodParamMetadata {
-	fn from(ir: RuntimeApiMethodParamMetadataIR) -> Self {
-		RuntimeApiMethodParamMetadata { name: ir.name, ty: ir.ty }
 	}
 }
 
@@ -142,6 +152,28 @@ impl From<PalletCallMetadataIR> for PalletCallMetadata {
 	}
 }
 
+<<<<<<< HEAD
+=======
+impl From<PalletViewFunctionMetadataIR> for PalletViewFunctionMetadata {
+	fn from(ir: PalletViewFunctionMetadataIR) -> Self {
+		PalletViewFunctionMetadata {
+			name: ir.name,
+			id: ir.id,
+			inputs: ir.inputs.into_iter().map(Into::into).collect(),
+			output: ir.output,
+			docs: ir.docs.into_iter().map(Into::into).collect(),
+			deprecation_info: ir.deprecation_info.into(),
+		}
+	}
+}
+
+impl From<PalletViewFunctionParamMetadataIR> for FunctionParamMetadata<MetaForm> {
+	fn from(ir: PalletViewFunctionParamMetadataIR) -> Self {
+		FunctionParamMetadata { name: ir.name, ty: ir.ty }
+	}
+}
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 impl From<PalletConstantMetadataIR> for PalletConstantMetadata {
 	fn from(ir: PalletConstantMetadataIR) -> Self {
 		PalletConstantMetadata {
@@ -163,7 +195,7 @@ impl From<TransactionExtensionMetadataIR> for TransactionExtensionMetadata {
 impl From<ExtrinsicMetadataIR> for ExtrinsicMetadata {
 	fn from(ir: ExtrinsicMetadataIR) -> Self {
 		// Assume version 0 for all extensions.
-		let indexes = (0..ir.extensions.len()).map(|index| index as u32).collect();
+		let indexes = (0..ir.extensions.len()).map(|index| Compact(index as u32)).collect();
 		let transaction_extensions_by_version = [(0, indexes)].iter().cloned().collect();
 
 		ExtrinsicMetadata {
@@ -172,16 +204,6 @@ impl From<ExtrinsicMetadataIR> for ExtrinsicMetadata {
 			signature_ty: ir.signature_ty,
 			transaction_extensions_by_version,
 			transaction_extensions: ir.extensions.into_iter().map(Into::into).collect(),
-		}
-	}
-}
-
-impl From<OuterEnumsIR> for OuterEnums {
-	fn from(ir: OuterEnumsIR) -> Self {
-		OuterEnums {
-			call_enum_ty: ir.call_enum_ty,
-			event_enum_ty: ir.event_enum_ty,
-			error_enum_ty: ir.error_enum_ty,
 		}
 	}
 }

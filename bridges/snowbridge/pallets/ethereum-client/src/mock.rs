@@ -5,7 +5,11 @@ use crate::config;
 use frame_support::{derive_impl, dispatch::DispatchResult, parameter_types};
 use pallet_timestamp;
 use snowbridge_beacon_primitives::{Fork, ForkVersions};
+<<<<<<< HEAD
 use snowbridge_core::inbound::{Log, Proof};
+=======
+use snowbridge_verification_primitives::{Log, Proof};
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 use sp_std::default::Default;
 use std::{fs::File, path::PathBuf};
 

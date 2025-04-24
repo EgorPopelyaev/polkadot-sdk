@@ -20,17 +20,44 @@ use sp_keyring::Sr25519Keyring as Keyring;
 
 // Cumulus
 use emulated_integration_tests_common::{
+<<<<<<< HEAD
 	accounts, build_genesis_storage, collators, PenpalASiblingSovereignAccount,
+=======
+	accounts, build_genesis_storage, collators, snowbridge::ETHER_MIN_BALANCE,
+	xcm_emulator::ConvertLocation, PenpalASiblingSovereignAccount,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	PenpalATeleportableAssetLocation, PenpalBSiblingSovereignAccount,
 	PenpalBTeleportableAssetLocation, RESERVABLE_ASSET_ID, SAFE_XCM_VERSION, USDT_ID,
 };
 use parachains_common::{AccountId, Balance};
+<<<<<<< HEAD
+=======
+use testnet_parachains_constants::rococo::snowbridge::EthereumNetwork;
+use xcm::{
+	latest::prelude::*,
+	opaque::latest::{ROCOCO_GENESIS_HASH, WESTEND_GENESIS_HASH},
+};
+use xcm_builder::ExternalConsensusLocationsConverterFor;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 pub const PARA_ID: u32 = 1000;
 pub const ED: Balance = testnet_parachains_constants::rococo::currency::EXISTENTIAL_DEPOSIT;
 
 parameter_types! {
 	pub AssetHubRococoAssetOwner: AccountId = Keyring::Alice.to_account_id();
+<<<<<<< HEAD
+=======
+	pub RococoGlobalConsensusNetwork: NetworkId = NetworkId::ByGenesis(ROCOCO_GENESIS_HASH);
+	pub AssetHubRococoUniversalLocation: InteriorLocation = [GlobalConsensus(RococoGlobalConsensusNetwork::get()), Parachain(PARA_ID)].into();
+	pub AssetHubWestendSovereignAccount: AccountId = ExternalConsensusLocationsConverterFor::<
+			AssetHubRococoUniversalLocation,
+			AccountId,
+		>::convert_location(&Location::new(
+			2,
+			[Junction::GlobalConsensus( NetworkId::ByGenesis(WESTEND_GENESIS_HASH)), Parachain(PARA_ID)],
+		))
+		.unwrap();
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 pub fn genesis() -> Storage {
@@ -92,6 +119,18 @@ pub fn genesis() -> Storage {
 					false,
 					ED,
 				),
+<<<<<<< HEAD
+=======
+				// Ether
+				(
+					xcm::v5::Location::new(2, [GlobalConsensus(EthereumNetwork::get())]),
+					AssetHubWestendSovereignAccount::get(), /* To emulate double bridging, where
+					                                         * WAH is the owner of assets from
+					                                         * Ethereum on RAH */
+					true,
+					ETHER_MIN_BALANCE,
+				),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 			],
 			..Default::default()
 		},

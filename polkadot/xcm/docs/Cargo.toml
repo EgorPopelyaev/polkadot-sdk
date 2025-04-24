@@ -21,6 +21,7 @@ pallet-xcm.workspace = true
 pallet-xcm.default-features = true
 frame = { features = ["experimental", "runtime"], workspace = true, default-features = true }
 codec = { workspace = true, default-features = true }
+<<<<<<< HEAD
 scale-info = { workspace = true }
 polkadot-parachain-primitives.workspace = true
 polkadot-parachain-primitives.default-features = true
@@ -42,6 +43,21 @@ pallet-balances.default-features = true
 # For building docs
 simple-mermaid = { git = "https://github.com/kianenigma/simple-mermaid.git", branch = "main" }
 docify = { workspace = true }
+=======
+frame = { features = ["runtime"], workspace = true, default-features = true }
+polkadot-runtime-parachains = { workspace = true, default-features = true }
+scale-info = { workspace = true }
+sp-io = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+
+# Some pallets
+pallet-balances = { workspace = true, default-features = true }
+pallet-message-queue = { workspace = true, default-features = true }
+
+# For building docs
+docify = { workspace = true }
+simple-mermaid = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 test-log = { workspace = true }

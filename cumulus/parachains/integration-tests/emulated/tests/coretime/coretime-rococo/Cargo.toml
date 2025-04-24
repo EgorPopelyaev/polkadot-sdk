@@ -7,6 +7,7 @@ license = "Apache-2.0"
 description = "Coretime Rococo runtime integration tests with xcm-emulator"
 publish = false
 
+<<<<<<< HEAD
 [dependencies]
 frame-support.workspace = true
 pallet-balances.workspace = true
@@ -27,3 +28,25 @@ cumulus-pallet-parachain-system.workspace = true
 cumulus-pallet-parachain-system.default-features = true
 emulated-integration-tests-common.workspace = true
 rococo-system-emulated-network.workspace = true
+=======
+[lints]
+workspace = true
+
+[dependencies]
+# Substrate
+frame-support = { workspace = true }
+pallet-broker = { workspace = true, default-features = true }
+pallet-message-queue = { workspace = true }
+sp-runtime = { workspace = true }
+
+# Polkadot
+polkadot-runtime-parachains = { workspace = true, default-features = true }
+rococo-runtime-constants = { workspace = true, default-features = true }
+xcm = { workspace = true }
+xcm-executor = { workspace = true }
+
+# Cumulus
+cumulus-pallet-parachain-system = { workspace = true, default-features = true }
+emulated-integration-tests-common = { workspace = true }
+rococo-system-emulated-network = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

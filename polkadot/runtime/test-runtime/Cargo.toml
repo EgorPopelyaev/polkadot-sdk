@@ -61,6 +61,7 @@ xcm-builder.workspace = true
 xcm-executor.workspace = true
 xcm.workspace = true
 
+<<<<<<< HEAD
 [dev-dependencies]
 hex-literal = { workspace = true, default-features = true }
 tiny-keccak = { features = ["keccak"], workspace = true }
@@ -68,6 +69,8 @@ sp-keyring = { default-features = true, path = "../../../substrate/primitives/ke
 sp-trie = { default-features = true, path = "../../../substrate/primitives/trie" }
 serde_json = { workspace = true, default-features = true }
 
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 [build-dependencies]
 substrate-wasm-builder.workspace = true
 substrate-wasm-builder.default-features = true
@@ -80,7 +83,6 @@ runtime-metrics = [
 	"polkadot-runtime-parachains/runtime-metrics",
 	"sp-io/with-tracing",
 ]
-
 std = [
 	"codec/std",
 	"frame-election-provider-support/std",
@@ -130,7 +132,6 @@ std = [
 	"xcm-executor/std",
 	"xcm/std",
 ]
-
 runtime-benchmarks = [
 	"frame-election-provider-support/runtime-benchmarks",
 	"frame-support/runtime-benchmarks",

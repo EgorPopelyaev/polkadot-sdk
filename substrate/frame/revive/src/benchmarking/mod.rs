@@ -1747,7 +1747,64 @@ mod benchmarks {
 			AsRef::<[u8; 65]>::as_ref(&sig).to_vec()
 		};
 
+<<<<<<< HEAD
 		build_runtime!(runtime, memory: [signature, message_hash, [0u8; 33], ]);
+=======
+		let result;
+
+		#[block]
+		{
+			result = pure_precompiles::ECRecover::execute(ext.gas_meter_mut(), &input);
+		}
+
+		assert_eq!(result.unwrap().data, expected);
+	}
+
+	#[benchmark(pov_mode = Measured)]
+	fn bn128_add() {
+		use hex_literal::hex;
+		let input = hex!("089142debb13c461f61523586a60732d8b69c5b38a3380a74da7b2961d867dbf2d5fc7bbc013c16d7945f190b232eacc25da675c0eb093fe6b9f1b4b4e107b3625f8c89ea3437f44f8fc8b6bfbb6312074dc6f983809a5e809ff4e1d076dd5850b38c7ced6e4daef9c4347f370d6d8b58f4b1d8dc61a3c59d651a0644a2a27cf");
+		let expected = hex!("0a6678fd675aa4d8f0d03a1feb921a27f38ebdcb860cc083653519655acd6d79172fd5b3b2bfdd44e43bcec3eace9347608f9f0a16f1e184cb3f52e6f259cbeb");
+		let mut call_setup = CallSetup::<T>::default();
+		let (mut ext, _) = call_setup.ext();
+
+		let result;
+
+		#[block]
+		{
+			result = pure_precompiles::Bn128Add::execute(ext.gas_meter_mut(), &input);
+		}
+
+		assert_eq!(result.unwrap().data, expected);
+	}
+
+	#[benchmark(pov_mode = Measured)]
+	fn bn128_mul() {
+		use hex_literal::hex;
+		let input = hex!("089142debb13c461f61523586a60732d8b69c5b38a3380a74da7b2961d867dbf2d5fc7bbc013c16d7945f190b232eacc25da675c0eb093fe6b9f1b4b4e107b36ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+		let expected = hex!("0bf982b98a2757878c051bfe7eee228b12bc69274b918f08d9fcb21e9184ddc10b17c77cbf3c19d5d27e18cbd4a8c336afb488d0e92c18d56e64dd4ea5c437e6");
+		let mut call_setup = CallSetup::<T>::default();
+		let (mut ext, _) = call_setup.ext();
+
+		let result;
+
+		#[block]
+		{
+			result = pure_precompiles::Bn128Mul::execute(ext.gas_meter_mut(), &input);
+		}
+
+		assert_eq!(result.unwrap().data, expected);
+	}
+
+	// `n`: pairings to perform
+	// This is a slow call: We reduce the number of runs to 20 to avoid the benchmark taking too
+	// long.
+	#[benchmark(pov_mode = Measured)]
+	fn bn128_pairing(n: Linear<0, 20>) {
+		let input = pure_precompiles::generate_random_ecpairs(n as usize);
+		let mut call_setup = CallSetup::<T>::default();
+		let (mut ext, _) = call_setup.ext();
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 		let result;
 		#[block]

@@ -42,7 +42,6 @@ cumulus-relay-chain-interface.workspace = true
 cumulus-relay-chain-interface.default-features = true
 
 [dev-dependencies]
-
 # Substrate
 sp-keyring = { default-features = true, path = "../../../substrate/primitives/keyring" }
 

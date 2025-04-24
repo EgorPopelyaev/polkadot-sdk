@@ -7,6 +7,7 @@ license = "Apache-2.0"
 description = "People Rococo emulated chain"
 publish = false
 
+<<<<<<< HEAD
 [dependencies]
 sp-core.workspace = true
 frame-support.workspace = true
@@ -15,4 +16,19 @@ parachains-common.default-features = true
 cumulus-primitives-core.workspace = true
 emulated-integration-tests-common.workspace = true
 people-rococo-runtime.workspace = true
+=======
+[lints]
+workspace = true
+
+[dependencies]
+# Substrate
+frame-support = { workspace = true }
+sp-core = { workspace = true }
+
+# Cumulus
+cumulus-primitives-core = { workspace = true }
+emulated-integration-tests-common = { workspace = true }
+parachains-common = { workspace = true, default-features = true }
+people-rococo-runtime = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 testnet-parachains-constants = { features = ["rococo"], workspace = true, default-features = true }

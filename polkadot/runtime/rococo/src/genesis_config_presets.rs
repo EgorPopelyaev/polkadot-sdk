@@ -128,7 +128,13 @@ fn default_parachains_host_configuration(
 			allowed_ancestry_len: 2,
 		},
 		node_features: bitvec::vec::BitVec::from_element(
+<<<<<<< HEAD
 			1u8 << (FeatureIndex::ElasticScalingMVP as usize),
+=======
+			(1u8 << (FeatureIndex::ElasticScalingMVP as usize)) |
+				(1u8 << (FeatureIndex::EnableAssignmentsV2 as usize)) |
+				(1u8 << (FeatureIndex::CandidateReceiptV2 as usize)),
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		),
 		scheduler_params: SchedulerParams {
 			lookahead: 2,

@@ -30,7 +30,6 @@ bounded-collections = { workspace = true }
 bp-xcm-bridge-hub-router = { optional = true, workspace = true }
 
 [dev-dependencies]
-
 # Substrate
 sp-core = { default-features = true, path = "../../../substrate/primitives/core" }
 pallet-balances = { default-features = true, path = "../../../substrate/frame/balances" }
@@ -61,7 +60,6 @@ std = [
 	"xcm-executor/std",
 	"xcm/std",
 ]
-
 runtime-benchmarks = [
 	"cumulus-primitives-core/runtime-benchmarks",
 	"frame-benchmarking/runtime-benchmarks",

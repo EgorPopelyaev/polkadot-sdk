@@ -44,7 +44,14 @@ sp-runtime.workspace = true
 sp-runtime.default-features = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 serde_json = { workspace = true, default-features = true }
+=======
+sc-consensus = { workspace = true, default-features = true }
+sc-transaction-pool-api = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+substrate-test-runtime-client = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tokio = { workspace = true, default-features = true }
 sc-consensus = { default-features = true, path = "../../common" }
 sc-keystore = { default-features = true, path = "../../../keystore" }

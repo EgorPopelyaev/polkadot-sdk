@@ -30,6 +30,7 @@ pallet-session.workspace = true
 frame-benchmarking = { optional = true, workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-core = { default-features = true, path = "../../../substrate/primitives/core" }
 sp-io = { default-features = true, path = "../../../substrate/primitives/io" }
 sp-tracing = { default-features = true, path = "../../../substrate/primitives/tracing" }
@@ -37,6 +38,14 @@ sp-runtime = { default-features = true, path = "../../../substrate/primitives/ru
 pallet-timestamp = { default-features = true, path = "../../../substrate/frame/timestamp" }
 sp-consensus-aura = { default-features = true, path = "../../../substrate/primitives/consensus/aura" }
 pallet-aura = { default-features = true, path = "../../../substrate/frame/aura" }
+=======
+pallet-aura = { workspace = true, default-features = true }
+pallet-timestamp = { workspace = true, default-features = true }
+sp-consensus-aura = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

@@ -14,6 +14,10 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+[[bench]]
+name = "bench"
+harness = false
+
 [dependencies]
 sp-api.workspace = true
 sp-api.default-features = true
@@ -41,10 +45,6 @@ futures = { workspace = true }
 log = { workspace = true, default-features = true }
 sp-core = { default-features = true, path = "../../core" }
 static_assertions = { workspace = true, default-features = true }
-
-[[bench]]
-name = "bench"
-harness = false
 
 [features]
 "enable-staging-api" = []

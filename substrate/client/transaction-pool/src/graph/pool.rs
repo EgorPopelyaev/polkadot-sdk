@@ -33,6 +33,7 @@ use std::{
 	sync::Arc,
 	time::{Duration, Instant},
 };
+use tracing::{debug, trace};
 
 use super::{
 	base_pool as base,
@@ -234,11 +235,11 @@ impl<B: ChainApi> Pool<B> {
 	) {
 		let now = Instant::now();
 		self.validated_pool.resubmit(revalidated_transactions);
-		log::trace!(
+		trace!(
 			target: LOG_TARGET,
-			"Resubmitted. Took {} ms. Status: {:?}",
-			now.elapsed().as_millis(),
-			self.validated_pool.status()
+			duration = ?now.elapsed(),
+			status = ?self.validated_pool.status(),
+			"Resubmitted transaction."
 		);
 	}
 
@@ -271,11 +272,11 @@ impl<B: ChainApi> Pool<B> {
 		parent: <B::Block as BlockT>::Hash,
 		extrinsics: &[RawExtrinsicFor<B>],
 	) {
-		log::debug!(
+		debug!(
 			target: LOG_TARGET,
-			"Starting pruning of block {:?} (extrinsics: {})",
-			at,
-			extrinsics.len()
+			?at,
+			extrinsics_count = extrinsics.len(),
+			"Starting pruning of block."
 		);
 		// Get details of all extrinsics that are already in the pool
 		let in_pool_hashes =
@@ -308,23 +309,37 @@ impl<B: ChainApi> Pool<B> {
 							)
 							.await;
 
-						log::trace!(target: LOG_TARGET,"[{:?}] prune::revalidated {:?}", self.validated_pool.api().hash_and_length(&extrinsic.clone()).0, validity);
-
+						trace!(
+							target: LOG_TARGET,
+							tx_hash = ?self.validated_pool.api().hash_and_length(&extrinsic.clone()).0,
+							?validity,
+							"prune::revalidated"
+						);
 						if let Ok(Ok(validity)) = validity {
 							future_tags.extend(validity.provides);
 						}
 					} else {
-						log::trace!(
+						trace!(
 							target: LOG_TARGET,
-							"txpool is empty, skipping validation for block {at:?}",
+							at = ?at,
+							"txpool is empty, skipping validation for block"
 						);
 					}
 				},
 			}
 		}
 
+<<<<<<< HEAD
 		log::trace!(target: LOG_TARGET,"prune: validated_counter:{validated_counter}");
 
+=======
+		debug!(
+			target: LOG_TARGET,
+			validated_counter,
+			duration = ?now.elapsed(),
+			"prune completed"
+		);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		self.prune_tags(at, future_tags, in_pool_hashes).await
 	}
 
@@ -355,7 +370,12 @@ impl<B: ChainApi> Pool<B> {
 		tags: impl IntoIterator<Item = Tag>,
 		known_imported_hashes: impl IntoIterator<Item = ExtrinsicHash<B>> + Clone,
 	) {
+<<<<<<< HEAD
 		log::trace!(target: LOG_TARGET, "Pruning at {:?}", at);
+=======
+		let now = Instant::now();
+		trace!(target: LOG_TARGET, ?at, "Pruning tags.");
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		// Prune all transactions that provide given tags
 		let prune_status = self.validated_pool.prune_tags(tags);
 
@@ -373,10 +393,22 @@ impl<B: ChainApi> Pool<B> {
 		let reverified_transactions =
 			self.verify(at, pruned_transactions, CheckBannedBeforeVerify::Yes).await;
 
+<<<<<<< HEAD
 		let pruned_hashes = reverified_transactions.keys().map(Clone::clone).collect();
 
 		log::trace!(target: LOG_TARGET, "Pruning at {:?}. Resubmitting transactions: {}", &at, reverified_transactions.len());
 		log_xt_trace!(data: tuple, target: LOG_TARGET, &reverified_transactions, "[{:?}] Resubmitting transaction: {:?}");
+=======
+		let pruned_hashes = reverified_transactions.keys().map(Clone::clone).collect::<Vec<_>>();
+		debug!(
+			target: LOG_TARGET,
+			?at,
+			reverified_transactions = reverified_transactions.len(),
+			duration = ?now.elapsed(),
+			"Pruned. Resubmitting transactions."
+		);
+		log_xt_trace!(data: tuple, target: LOG_TARGET, &reverified_transactions, "Resubmitting transaction: {:?}");
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 		// And finally - submit reverified transactions back to the pool
 		self.validated_pool.resubmit_pruned(
@@ -545,9 +577,18 @@ mod tests {
 		let initial_hashes = txs.iter().map(|t| api.hash_and_length(t).0).collect::<Vec<_>>();
 
 		// when
+<<<<<<< HEAD
 		let txs = txs.into_iter().map(|x| Arc::from(x)).collect::<Vec<_>>();
 		let hashes = block_on(pool.submit_at(&api.expect_hash_and_number(0), SOURCE, txs));
 		log::debug!("--> {hashes:#?}");
+=======
+		let txs = txs.into_iter().map(|x| (SOURCE, Arc::from(x))).collect::<Vec<_>>();
+		let hashes = block_on(pool.submit_at(&api.expect_hash_and_number(0), txs))
+			.into_iter()
+			.map(|r| r.map(|o| o.hash()))
+			.collect::<Vec<_>>();
+		debug!(hashes = ?hashes, "-->");
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 		// then
 		hashes.into_iter().zip(initial_hashes.into_iter()).for_each(

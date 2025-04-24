@@ -12,8 +12,17 @@ workspace = true
 [dependencies]
 bitvec = { features = ["alloc"], workspace = true }
 futures = { workspace = true }
+<<<<<<< HEAD
 gum.workspace = true
 gum.default-features = true
+=======
+futures-timer = { workspace = true }
+gum = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 polkadot-primitives.workspace = true
 polkadot-primitives.default-features = true
@@ -28,6 +37,7 @@ fatality = { workspace = true }
 schnellru = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-application-crypto = { default-features = true, path = "../../../../substrate/primitives/application-crypto" }
 sp-keystore = { default-features = true, path = "../../../../substrate/primitives/keystore" }
 polkadot-node-subsystem-test-helpers = { path = "../../subsystem-test-helpers" }
@@ -35,3 +45,10 @@ polkadot-primitives-test-helpers = { path = "../../../primitives/test-helpers" }
 polkadot-primitives = { features = ["test"], path = "../../../primitives", default-features = false }
 
 rstest = { workspace = true }
+=======
+polkadot-node-subsystem-test-helpers = { workspace = true }
+polkadot-primitives = { workspace = true, features = ["test"] }
+polkadot-primitives-test-helpers = { workspace = true }
+sp-application-crypto = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

@@ -12,6 +12,7 @@ workspace = true
 [dependencies]
 codec = { features = ["derive"], workspace = true }
 scale-info = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 sp-api.workspace = true
 sp-runtime.workspace = true
 sp-trie.workspace = true
@@ -19,6 +20,20 @@ polkadot-core-primitives.workspace = true
 polkadot-parachain-primitives.workspace = true
 polkadot-primitives.workspace = true
 xcm.workspace = true
+=======
+tracing = { workspace = true }
+
+# Substrate
+sp-api = { workspace = true }
+sp-runtime = { workspace = true }
+sp-trie = { workspace = true }
+
+# Polkadot
+polkadot-core-primitives = { workspace = true }
+polkadot-parachain-primitives = { workspace = true }
+polkadot-primitives = { workspace = true }
+xcm = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]
@@ -31,6 +46,7 @@ std = [
 	"sp-api/std",
 	"sp-runtime/std",
 	"sp-trie/std",
+	"tracing/std",
 	"xcm/std",
 ]
 runtime-benchmarks = [

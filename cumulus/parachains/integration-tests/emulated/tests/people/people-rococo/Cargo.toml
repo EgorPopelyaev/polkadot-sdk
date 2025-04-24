@@ -7,6 +7,7 @@ license = "Apache-2.0"
 description = "People Rococo runtime integration tests with xcm-emulator"
 publish = false
 
+<<<<<<< HEAD
 [dependencies]
 codec = { workspace = true }
 frame-support.workspace = true
@@ -26,3 +27,23 @@ emulated-integration-tests-common.workspace = true
 parachains-common.workspace = true
 parachains-common.default-features = true
 rococo-system-emulated-network.workspace = true
+=======
+[lints]
+workspace = true
+
+[dependencies]
+# Substrate
+frame-support = { workspace = true }
+pallet-balances = { workspace = true }
+sp-runtime = { workspace = true }
+
+# Polkadot
+xcm = { workspace = true }
+xcm-executor = { workspace = true }
+
+# Cumulus
+asset-test-utils = { workspace = true, default-features = true }
+emulated-integration-tests-common = { workspace = true }
+parachains-common = { workspace = true, default-features = true }
+rococo-system-emulated-network = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

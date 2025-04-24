@@ -70,6 +70,11 @@ pub struct Def {
 	pub frame_system: syn::Path,
 	pub frame_support: syn::Path,
 	pub dev_mode: bool,
+<<<<<<< HEAD
+=======
+	pub view_functions: Option<view_functions::ViewFunctionsImplDef>,
+	pub is_frame_system: bool,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 impl Def {
@@ -103,19 +108,27 @@ impl Def {
 		let mut storages = vec![];
 		let mut type_values = vec![];
 		let mut composites: Vec<CompositeDef> = vec![];
+<<<<<<< HEAD
+=======
+		let mut view_functions = None;
+		let mut is_frame_system = false;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 		for (index, item) in items.iter_mut().enumerate() {
 			let pallet_attr: Option<PalletAttr> = helper::take_first_item_pallet_attr(item)?;
 
 			match pallet_attr {
-				Some(PalletAttr::Config{ with_default, without_automatic_metadata, ..}) if config.is_none() =>
+				Some(PalletAttr::Config{ with_default, frame_system_config: is_frame_system_val, without_automatic_metadata, ..}) if config.is_none() => {
+					is_frame_system = is_frame_system_val;
 					config = Some(config::ConfigDef::try_from(
 						&frame_system,
 						index,
 						item,
 						with_default,
 						without_automatic_metadata,
-					)?),
+						is_frame_system,
+					)?);
+				},
 				Some(PalletAttr::Pallet(span)) if pallet_struct.is_none() => {
 					let p = pallet_struct::PalletStructDef::try_from(span, index, item)?;
 					pallet_struct = Some(p);
@@ -250,10 +263,14 @@ impl Def {
 			frame_system,
 			frame_support,
 			dev_mode,
+<<<<<<< HEAD
+=======
+			view_functions,
+			is_frame_system,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		};
 
 		def.check_instance_usage()?;
-		def.check_event_usage()?;
 
 		Ok(def)
 	}
@@ -349,26 +366,6 @@ impl Def {
 		}
 		*tasks = result;
 		Ok(())
-	}
-
-	/// Check that usage of trait `Event` is consistent with the definition, i.e. it is declared
-	/// and trait defines type RuntimeEvent, or not declared and no trait associated type.
-	fn check_event_usage(&self) -> syn::Result<()> {
-		match (self.config.has_event_type, self.event.is_some()) {
-			(true, false) => {
-				let msg = "Invalid usage of RuntimeEvent, `Config` contains associated type `RuntimeEvent`, \
-					but enum `Event` is not declared (i.e. no use of `#[pallet::event]`). \
-					Note that type `RuntimeEvent` in trait is reserved to work alongside pallet event.";
-				Err(syn::Error::new(proc_macro2::Span::call_site(), msg))
-			},
-			(false, true) => {
-				let msg = "Invalid usage of RuntimeEvent, `Config` contains no associated type \
-					`RuntimeEvent`, but enum `Event` is declared (in use of `#[pallet::event]`). \
-					An RuntimeEvent associated type must be declare on trait `Config`.";
-				Err(syn::Error::new(proc_macro2::Span::call_site(), msg))
-			},
-			_ => Ok(()),
-		}
 	}
 
 	/// Check that usage of trait `Config` is consistent with the definition, i.e. it is used with
@@ -552,6 +549,7 @@ mod keyword {
 	syn::custom_keyword!(config);
 	syn::custom_keyword!(with_default);
 	syn::custom_keyword!(without_automatic_metadata);
+	syn::custom_keyword!(frame_system_config);
 	syn::custom_keyword!(hooks);
 	syn::custom_keyword!(inherent);
 	syn::custom_keyword!(error);
@@ -563,6 +561,10 @@ mod keyword {
 	syn::custom_keyword!(pallet);
 	syn::custom_keyword!(extra_constants);
 	syn::custom_keyword!(composite_enum);
+<<<<<<< HEAD
+=======
+	syn::custom_keyword!(view_functions);
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 /// The possible values for the `#[pallet::config]` attribute.
@@ -572,6 +574,8 @@ enum ConfigValue {
 	WithDefault(keyword::with_default),
 	/// `#[pallet::config(without_automatic_metadata)]`
 	WithoutAutomaticMetadata(keyword::without_automatic_metadata),
+	/// `#[pallet::config(frame_system_config)]`
+	FrameSystemConfig(keyword::frame_system_config),
 }
 
 impl syn::parse::Parse for ConfigValue {
@@ -582,6 +586,8 @@ impl syn::parse::Parse for ConfigValue {
 			input.parse().map(ConfigValue::WithDefault)
 		} else if lookahead.peek(keyword::without_automatic_metadata) {
 			input.parse().map(ConfigValue::WithoutAutomaticMetadata)
+		} else if lookahead.peek(keyword::frame_system_config) {
+			input.parse().map(ConfigValue::FrameSystemConfig)
 		} else {
 			Err(lookahead.error())
 		}
@@ -595,6 +601,7 @@ enum PalletAttr {
 		span: proc_macro2::Span,
 		with_default: bool,
 		without_automatic_metadata: bool,
+		frame_system_config: bool,
 	},
 	Pallet(proc_macro2::Span),
 	Hooks(proc_macro2::Span),
@@ -704,6 +711,7 @@ impl syn::parse::Parse for PalletAttr {
 
 				let mut with_default = false;
 				let mut without_automatic_metadata = false;
+				let mut frame_system_config = false;
 				for config in config_values {
 					match config {
 						ConfigValue::WithDefault(_) => {
@@ -724,15 +732,30 @@ impl syn::parse::Parse for PalletAttr {
 							}
 							without_automatic_metadata = true;
 						},
+						ConfigValue::FrameSystemConfig(_) => {
+							if frame_system_config {
+								return Err(syn::Error::new(
+									span,
+									"Invalid duplicated attribute for `#[pallet::config]`. Please remove duplicates: frame_system_config.",
+								));
+							}
+							frame_system_config = true;
+						},
 					}
 				}
 
-				Ok(PalletAttr::Config { span, with_default, without_automatic_metadata })
+				Ok(PalletAttr::Config {
+					span,
+					with_default,
+					without_automatic_metadata,
+					frame_system_config,
+				})
 			} else {
 				Ok(PalletAttr::Config {
 					span,
 					with_default: false,
 					without_automatic_metadata: false,
+					frame_system_config: false,
 				})
 			}
 		} else if lookahead.peek(keyword::pallet) {
@@ -778,6 +801,11 @@ impl syn::parse::Parse for PalletAttr {
 			Ok(PalletAttr::ExtraConstants(content.parse::<keyword::extra_constants>()?.span()))
 		} else if lookahead.peek(keyword::composite_enum) {
 			Ok(PalletAttr::Composite(content.parse::<keyword::composite_enum>()?.span()))
+<<<<<<< HEAD
+=======
+		} else if lookahead.peek(keyword::view_functions) {
+			Ok(PalletAttr::ViewFunctions(content.parse::<keyword::view_functions>()?.span()))
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		} else {
 			Err(lookahead.error())
 		}

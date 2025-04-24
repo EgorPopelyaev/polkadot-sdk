@@ -16,6 +16,10 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+[[bench]]
+name = "bench"
+harness = false
+
 [dependencies]
 parking_lot = { workspace = true, default-features = true }
 schnellru = { workspace = true }
@@ -61,14 +65,21 @@ sc-tracing = { default-features = true, path = "../tracing" }
 sp-tracing = { default-features = true, path = "../../primitives/tracing" }
 tracing-subscriber = { workspace = true }
 paste = { workspace = true, default-features = true }
+<<<<<<< HEAD
 regex = { workspace = true }
 criterion = { workspace = true, default-features = true }
 num_cpus = { workspace = true }
+=======
+sc-runtime-test = { workspace = true }
+sc-tracing = { workspace = true, default-features = true }
+sp-crypto-hashing = { workspace = true, default-features = true }
+sp-maybe-compressed-blob = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-state-machine = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+substrate-test-runtime = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tempfile = { workspace = true }
-
-[[bench]]
-name = "bench"
-harness = false
 
 [features]
 default = ["std"]

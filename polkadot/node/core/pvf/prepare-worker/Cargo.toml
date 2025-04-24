@@ -9,20 +9,29 @@ license.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "prepare_rococo_runtime"
+harness = false
+
 [dependencies]
 blake3 = { workspace = true }
 cfg-if = { workspace = true }
 gum.workspace = true
 gum.default-features = true
 libc = { workspace = true }
+<<<<<<< HEAD
 rayon = { workspace = true }
 tracking-allocator.workspace = true
 tracking-allocator.default-features = true
+=======
+nix = { features = ["process", "resource", "sched"], workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 tikv-jemalloc-ctl = { optional = true, workspace = true }
 tikv-jemallocator = { optional = true, workspace = true }
 nix = { features = ["process", "resource", "sched"], workspace = true }
 
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 polkadot-node-core-pvf-common.workspace = true
 polkadot-node-core-pvf-common.default-features = true
 polkadot-node-primitives.workspace = true
@@ -35,10 +44,22 @@ sc-executor-wasmtime.workspace = true
 sc-executor-wasmtime.default-features = true
 sp-maybe-compressed-blob.workspace = true
 sp-maybe-compressed-blob.default-features = true
+=======
+
+polkadot-node-core-pvf-common = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+
+sp-maybe-compressed-blob = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [target.'cfg(target_os = "linux")'.dependencies]
 tikv-jemallocator = "0.5.0"
 tikv-jemalloc-ctl = "0.5.0"
+
+[dev-dependencies]
+criterion = { features = ["cargo_bench_support"], workspace = true }
+rococo-runtime = { workspace = true }
+sp-maybe-compressed-blob = { workspace = true, default-features = true }
 
 [features]
 builder = []
@@ -47,6 +68,7 @@ jemalloc-allocator = [
 	"dep:tikv-jemallocator",
 	"polkadot-node-core-pvf-common/jemalloc-allocator",
 ]
+<<<<<<< HEAD
 
 [dev-dependencies]
 criterion = { features = ["cargo_bench_support"], workspace = true }
@@ -56,3 +78,5 @@ sp-maybe-compressed-blob = { default-features = true, path = "../../../../../sub
 [[bench]]
 name = "prepare_rococo_runtime"
 harness = false
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

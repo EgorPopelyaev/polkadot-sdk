@@ -110,6 +110,17 @@ fn polkadot_testnet_genesis(
 	const ENDOWMENT: u128 = 1_000_000 * DOTS;
 	const STASH: u128 = 100 * DOTS;
 
+<<<<<<< HEAD
+=======
+	// Prepare node features with V2 receipts
+	// and elastic scaling enabled.
+	let mut node_features = NodeFeatures::new();
+	node_features.resize(node_features::FeatureIndex::FirstUnassigned as usize + 1, false);
+
+	node_features.set(node_features::FeatureIndex::CandidateReceiptV2 as u8 as usize, true);
+	node_features.set(node_features::FeatureIndex::ElasticScalingMVP as u8 as usize, true);
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	serde_json::json!({
 		"balances": {
 			"balances": endowed_accounts.iter().map(|k| (k.clone(), ENDOWMENT)).collect::<Vec<_>>(),

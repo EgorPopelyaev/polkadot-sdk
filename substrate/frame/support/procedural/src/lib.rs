@@ -376,6 +376,7 @@ pub fn derive_eq_no_bound(input: TokenStream) -> TokenStream {
 	let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
 
 	quote::quote_spanned!(name.span() =>
+		#[allow(deprecated)]
 		const _: () = {
 			impl #impl_generics ::core::cmp::Eq for #name #ty_generics #where_clause {}
 		};
@@ -1093,6 +1094,19 @@ pub fn validate_unsigned(_: TokenStream, _: TokenStream) -> TokenStream {
 ///
 /// ---
 ///
+<<<<<<< HEAD
+=======
+/// Documentation for this macro can be found at
+/// `frame_support::pallet_macros::view_functions`.
+#[proc_macro_attribute]
+pub fn view_functions(_: TokenStream, _: TokenStream) -> TokenStream {
+	pallet_macro_stub()
+}
+
+///
+/// ---
+///
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 /// Documentation for this macro can be found at `frame_support::pallet_macros::origin`.
 #[proc_macro_attribute]
 pub fn origin(_: TokenStream, _: TokenStream) -> TokenStream {

@@ -22,6 +22,7 @@ log = { workspace = true, default-features = true }
 serde = { features = ["derive"], workspace = true, default-features = true }
 serde_json = { workspace = true, default-features = true }
 polkadot-omni-node-lib = { features = ["rococo-native", "westend-native"], workspace = true }
+<<<<<<< HEAD
 rococo-parachain-runtime.workspace = true
 glutton-westend-runtime.workspace = true
 asset-hub-rococo-runtime.workspace = true
@@ -56,6 +57,25 @@ xcm.workspace = true
 xcm.default-features = true
 cumulus-primitives-core.workspace = true
 cumulus-primitives-core.default-features = true
+=======
+rococo-parachain-runtime = { workspace = true }
+
+# Substrate
+sc-chain-spec = { workspace = true, default-features = true }
+sc-cli = { workspace = true, default-features = true }
+sc-service = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-genesis-builder = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+
+# Polkadot
+xcm = { workspace = true, default-features = true }
+
+# Cumulus
+cumulus-client-consensus-aura = { workspace = true }
+cumulus-primitives-core = { workspace = true, default-features = true }
+yet-another-parachain-runtime = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [build-dependencies]
 substrate-build-script-utils.workspace = true
@@ -80,7 +100,12 @@ runtime-benchmarks = [
 	"people-westend-runtime/runtime-benchmarks",
 	"polkadot-omni-node-lib/runtime-benchmarks",
 	"rococo-parachain-runtime/runtime-benchmarks",
+<<<<<<< HEAD
 	"sc-service/runtime-benchmarks",
+=======
+	"xcm/runtime-benchmarks",
+	"yet-another-parachain-runtime/runtime-benchmarks",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 ]
 try-runtime = [
 	"polkadot-omni-node-lib/try-runtime",

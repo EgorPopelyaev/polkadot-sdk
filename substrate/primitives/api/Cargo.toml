@@ -26,10 +26,18 @@ sp-version.workspace = true
 sp-state-machine = { optional = true, workspace = true }
 sp-trie = { optional = true, workspace = true }
 hash-db = { optional = true, workspace = true, default-features = true }
+<<<<<<< HEAD
 thiserror = { optional = true, workspace = true }
 scale-info = { features = [
 	"derive",
 ], workspace = true }
+=======
+log = { workspace = true }
+scale-info = { features = ["derive"], workspace = true }
+sp-api-proc-macro = { workspace = true }
+sp-core = { workspace = true }
+sp-externalities = { optional = true, workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 sp-metadata-ir = { optional = true, workspace = true }
 log = { workspace = true }
 docify = { workspace = true }

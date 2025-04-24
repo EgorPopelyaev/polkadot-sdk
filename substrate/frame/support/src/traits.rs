@@ -57,6 +57,7 @@ pub use filter::{ClearFilterGuard, FilterStack, FilterStackGuard, InstanceFilter
 mod misc;
 pub use misc::{
 	defensive_prelude::{self, *},
+<<<<<<< HEAD
 	AccountTouch, Backing, ConstBool, ConstI128, ConstI16, ConstI32, ConstI64, ConstI8, ConstU128,
 	ConstU16, ConstU32, ConstU64, ConstU8, DefensiveMax, DefensiveMin, DefensiveSaturating,
 	DefensiveTruncateFrom, EnsureInherentsAreFirst, EqualPrivilegeOnly, EstimateCallFee,
@@ -64,6 +65,16 @@ pub use misc::{
 	IsInherent, IsSubType, IsType, Len, OffchainWorker, OnKilledAccount, OnNewAccount,
 	PrivilegeCmp, SameOrOther, SignedTransactionBuilder, Time, TryCollect, TryDrop, TypedGet,
 	UnixTime, VariantCount, VariantCountOf, WrapperKeepOpaque, WrapperOpaque,
+=======
+	AccountTouch, Backing, ConstBool, ConstI128, ConstI16, ConstI32, ConstI64, ConstI8, ConstInt,
+	ConstU128, ConstU16, ConstU32, ConstU64, ConstU8, ConstUint, DefensiveMax, DefensiveMin,
+	DefensiveSaturating, DefensiveTruncateFrom, EnsureInherentsAreFirst, EqualPrivilegeOnly,
+	EstimateCallFee, ExecuteBlock, ExtrinsicCall, Get, GetBacking, GetDefault, HandleLifetime,
+	InherentBuilder, IsInherent, IsSubType, IsType, Len, OffchainWorker, OnKilledAccount,
+	OnNewAccount, PrivilegeCmp, RewardsReporter, SameOrOther, SignedTransactionBuilder, Time,
+	TryCollect, TryDrop, TypedGet, UnixTime, VariantCount, VariantCountOf, WrapperKeepOpaque,
+	WrapperOpaque,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
 #[allow(deprecated)]
 pub use misc::{PreimageProvider, PreimageRecipient};
@@ -96,8 +107,14 @@ mod storage;
 #[cfg(feature = "experimental")]
 pub use storage::MaybeConsideration;
 pub use storage::{
+<<<<<<< HEAD
 	Consideration, Footprint, Incrementable, Instance, LinearStoragePrice, PartialStorageInfoTrait,
 	StorageInfo, StorageInfoTrait, StorageInstance, TrackedStorageKey, WhitelistedStorageKeys,
+=======
+	Consideration, ConstantStoragePrice, Disabled, Footprint, Incrementable, Instance,
+	LinearStoragePrice, PartialStorageInfoTrait, StorageInfo, StorageInfoTrait, StorageInstance,
+	TrackedStorageKey, WhitelistedStorageKeys,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
 
 mod dispatch;
@@ -117,9 +134,9 @@ pub use preimages::{Bounded, BoundedInline, FetchResult, QueryPreimage, StorePre
 
 mod messages;
 pub use messages::{
-	EnqueueMessage, EnqueueWithOrigin, ExecuteOverweightError, HandleMessage, NoopServiceQueues,
-	ProcessMessage, ProcessMessageError, QueueFootprint, QueuePausedQuery, ServiceQueues,
-	TransformOrigin,
+	BatchFootprint, EnqueueMessage, EnqueueWithOrigin, ExecuteOverweightError, HandleMessage,
+	NoopServiceQueues, ProcessMessage, ProcessMessageError, QueueFootprint, QueueFootprintQuery,
+	QueuePausedQuery, ServiceQueues, TransformOrigin,
 };
 
 mod safe_mode;

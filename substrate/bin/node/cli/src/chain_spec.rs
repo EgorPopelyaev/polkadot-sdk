@@ -348,6 +348,7 @@ pub fn testnet_genesis(
 	let (initial_authorities, endowed_accounts, num_endowed_accounts, stakers) =
 		configure_accounts(initial_authorities, initial_nominators, endowed_accounts, STASH);
 
+<<<<<<< HEAD
 	serde_json::json!({
 		"balances": {
 			"balances": endowed_accounts.iter().cloned().map(|x| (x, ENDOWMENT)).collect::<Vec<_>>(),
@@ -415,6 +416,32 @@ fn development_config_genesis_json() -> serde_json::Value {
 		vec![],
 		Sr25519Keyring::Alice.to_account_id(),
 		None,
+=======
+	// Todo: After #7748 is done, we can refactor this to avoid
+	// calling into the native runtime.
+	kitchensink_runtime::genesis_config_presets::kitchensink_genesis(
+		initial_authorities
+			.iter()
+			.map(|x| {
+				(
+					x.0.clone(),
+					// stash account is controller
+					x.0.clone(),
+					session_keys(
+						x.2.clone(),
+						x.3.clone(),
+						x.4.clone(),
+						x.5.clone(),
+						x.6.clone(),
+						x.7.clone(),
+					),
+				)
+			})
+			.collect(),
+		root_key,
+		endowed_accounts,
+		stakers,
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	)
 }
 

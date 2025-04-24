@@ -16,6 +16,10 @@ workspace = true
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+[[bin]]
+name = "call"
+path = "src/call.rs"
+
 [dependencies]
 honggfuzz = { workspace = true }
 pallet-nomination-pools = { features = ["fuzzing"], workspace = true, default-features = true }
@@ -31,8 +35,11 @@ sp-tracing.workspace = true
 sp-tracing.default-features = true
 
 rand = { features = ["small_rng"], workspace = true, default-features = true }
+<<<<<<< HEAD
 log = { workspace = true, default-features = true }
 
 [[bin]]
 name = "call"
 path = "src/call.rs"
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

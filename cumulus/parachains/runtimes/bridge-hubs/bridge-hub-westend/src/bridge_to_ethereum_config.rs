@@ -103,6 +103,41 @@ impl snowbridge_pallet_inbound_queue::Config for Runtime {
 	type AssetTransactor = <xcm_config::XcmConfig as xcm_executor::Config>::AssetTransactor;
 }
 
+<<<<<<< HEAD
+=======
+impl snowbridge_pallet_inbound_queue_v2::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Verifier = snowbridge_pallet_ethereum_client::Pallet<Runtime>;
+	#[cfg(not(feature = "runtime-benchmarks"))]
+	type XcmSender = crate::XcmRouter;
+	#[cfg(feature = "runtime-benchmarks")]
+	type XcmSender = benchmark_helpers::DoNothingRouter;
+	type GatewayAddress = EthereumGatewayAddress;
+	#[cfg(feature = "runtime-benchmarks")]
+	type Helper = Runtime;
+	type WeightInfo = crate::weights::snowbridge_pallet_inbound_queue_v2::WeightInfo<Runtime>;
+	type AssetHubParaId = ConstU32<ASSET_HUB_ID>;
+	type XcmExecutor = XcmExecutor<XcmConfig>;
+	type MessageConverter = snowbridge_inbound_queue_primitives::v2::MessageToXcm<
+		CreateAssetCall,
+		CreateForeignAssetDeposit,
+		EthereumNetwork,
+		InboundQueueV2Location,
+		EthereumSystem,
+		EthereumGatewayAddress,
+		EthereumUniversalLocation,
+		AssetHubFromEthereum,
+	>;
+	type AccountToLocation = xcm_builder::AliasesIntoAccountId32<
+		xcm_config::RelayNetwork,
+		<Runtime as frame_system::Config>::AccountId,
+	>;
+	type RewardKind = BridgeReward;
+	type DefaultRewardKind = SnowbridgeReward;
+	type RewardPayment = BridgeRelayers;
+}
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 impl snowbridge_pallet_outbound_queue::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type Hashing = Keccak256;
@@ -118,6 +153,35 @@ impl snowbridge_pallet_outbound_queue::Config for Runtime {
 	type Channels = EthereumSystem;
 }
 
+<<<<<<< HEAD
+=======
+impl snowbridge_pallet_outbound_queue_v2::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type Hashing = Keccak256;
+	type MessageQueue = MessageQueue;
+	// Maximum payload size for outbound messages.
+	type MaxMessagePayloadSize = ConstU32<2048>;
+	// Maximum number of outbound messages that can be committed per block.
+	// It's benchmarked, including the entire process flow(initialize,submit,commit) in the
+	// worst-case, Benchmark results in `../weights/snowbridge_pallet_outbound_queue_v2.
+	// rs` show that the `process` function consumes less than 1% of the block capacity, which is
+	// safe enough.
+	type MaxMessagesPerBlock = ConstU32<32>;
+	type GasMeter = ConstantGasMeterV2;
+	type Balance = Balance;
+	type WeightToFee = WeightToFee;
+	type Verifier = snowbridge_pallet_ethereum_client::Pallet<Runtime>;
+	type GatewayAddress = EthereumGatewayAddress;
+	type WeightInfo = crate::weights::snowbridge_pallet_outbound_queue_v2::WeightInfo<Runtime>;
+	type EthereumNetwork = EthereumNetwork;
+	type RewardKind = BridgeReward;
+	type DefaultRewardKind = SnowbridgeReward;
+	type RewardPayment = BridgeRelayers;
+	#[cfg(feature = "runtime-benchmarks")]
+	type Helper = Runtime;
+}
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 #[cfg(any(feature = "std", feature = "fast-runtime", feature = "runtime-benchmarks", test))]
 parameter_types! {
 	pub const ChainForkVersions: ForkVersions = ForkVersions {
@@ -207,12 +271,40 @@ pub mod benchmark_helpers {
 	use codec::Encode;
 	use snowbridge_beacon_primitives::BeaconHeader;
 	use snowbridge_pallet_inbound_queue::BenchmarkHelper;
+<<<<<<< HEAD
+=======
+	use snowbridge_pallet_inbound_queue_v2::BenchmarkHelper as InboundQueueBenchmarkHelperV2;
+	use snowbridge_pallet_outbound_queue_v2::BenchmarkHelper as OutboundQueueBenchmarkHelperV2;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	use sp_core::H256;
 	use xcm::latest::{Assets, Location, SendError, SendResult, SendXcm, Xcm, XcmHash};
 
 	impl<T: snowbridge_pallet_ethereum_client::Config> BenchmarkHelper<T> for Runtime {
 		fn initialize_storage(beacon_header: BeaconHeader, block_roots_root: H256) {
 			EthereumBeaconClient::store_finalized_header(beacon_header, block_roots_root).unwrap();
+<<<<<<< HEAD
+=======
+			System::set_storage(
+				RuntimeOrigin::root(),
+				vec![(
+					EthereumGatewayAddress::key().to_vec(),
+					hex!("EDa338E4dC46038493b885327842fD3E301CaB39").to_vec(),
+				)],
+			)
+			.unwrap();
+		}
+	}
+
+	impl<T: snowbridge_pallet_inbound_queue_v2::Config> InboundQueueBenchmarkHelperV2<T> for Runtime {
+		fn initialize_storage(beacon_header: BeaconHeader, block_roots_root: H256) {
+			EthereumBeaconClient::store_finalized_header(beacon_header, block_roots_root).unwrap();
+		}
+	}
+
+	impl<T: snowbridge_pallet_outbound_queue_v2::Config> OutboundQueueBenchmarkHelperV2<T> for Runtime {
+		fn initialize_storage(beacon_header: BeaconHeader, block_roots_root: H256) {
+			EthereumBeaconClient::store_finalized_header(beacon_header, block_roots_root).unwrap();
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 		}
 	}
 

@@ -12,8 +12,13 @@ publish = false
 [lints]
 workspace = true
 
+[[bin]]
+name = "bags-list"
+path = "src/main.rs"
+
 [dependencies]
 honggfuzz = { workspace = true }
+<<<<<<< HEAD
 rand = { features = ["small_rng", "std"], workspace = true, default-features = true }
 frame-election-provider-support = { features = ["fuzz"], workspace = true, default-features = true }
 pallet-bags-list = { features = ["fuzz"], workspace = true, default-features = true }
@@ -21,3 +26,6 @@ pallet-bags-list = { features = ["fuzz"], workspace = true, default-features = t
 [[bin]]
 name = "bags-list"
 path = "src/main.rs"
+=======
+pallet-bags-list = { features = ["fuzz"], workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

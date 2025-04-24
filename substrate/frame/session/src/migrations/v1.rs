@@ -15,9 +15,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+<<<<<<< HEAD
 use core::str;
 use sp_io::hashing::twox_128;
 
+=======
+use crate::{Config, DisabledValidators as NewDisabledValidators, Pallet, Vec};
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 use frame_support::{
 	storage::{generator::StorageValue, StoragePrefixedMap},
 	traits::{
@@ -44,12 +48,58 @@ pub fn migrate<T: pallet_session_historical::Config, P: GetStorageVersion + Pall
 ) -> Weight {
 	let new_pallet_name = <P as PalletInfoAccess>::name();
 
+<<<<<<< HEAD
 	if new_pallet_name == OLD_PREFIX {
 		log::info!(
 			target: LOG_TARGET,
 			"New pallet name is equal to the old prefix. No migration needs to be done.",
 		);
 		return Weight::zero()
+=======
+	/// Return the list of disabled validators and their offence severity, removing them from the
+	/// underlying storage.
+	fn take_disabled() -> Vec<(u32, OffenceSeverity)>;
+}
+
+pub struct InitOffenceSeverity<T>(core::marker::PhantomData<T>);
+impl<T: Config> MigrateDisabledValidators for InitOffenceSeverity<T> {
+	#[cfg(feature = "try-runtime")]
+	fn peek_disabled() -> Vec<(u32, OffenceSeverity)> {
+		DisabledValidators::<T>::get()
+			.iter()
+			.map(|v| (*v, OffenceSeverity::max_severity()))
+			.collect::<Vec<_>>()
+	}
+
+	fn take_disabled() -> Vec<(u32, OffenceSeverity)> {
+		DisabledValidators::<T>::take()
+			.iter()
+			.map(|v| (*v, OffenceSeverity::max_severity()))
+			.collect::<Vec<_>>()
+	}
+}
+pub struct VersionUncheckedMigrateV0ToV1<T, S: MigrateDisabledValidators>(
+	core::marker::PhantomData<(T, S)>,
+);
+
+impl<T: Config, S: MigrateDisabledValidators> UncheckedOnRuntimeUpgrade
+	for VersionUncheckedMigrateV0ToV1<T, S>
+{
+	fn on_runtime_upgrade() -> Weight {
+		let disabled = S::take_disabled();
+		NewDisabledValidators::<T>::put(disabled);
+
+		T::DbWeight::get().reads_writes(1, 1)
+	}
+
+	#[cfg(feature = "try-runtime")]
+	fn pre_upgrade() -> Result<Vec<u8>, TryRuntimeError> {
+		let source_disabled = S::peek_disabled().iter().map(|(v, _s)| *v).collect::<Vec<_>>();
+		let existing_disabled = DisabledValidators::<T>::get();
+
+		ensure!(source_disabled == existing_disabled, "Disabled validators mismatch");
+		Ok(Vec::new())
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	}
 
 	let on_chain_storage_version = <P as GetStorageVersion>::on_chain_storage_version();

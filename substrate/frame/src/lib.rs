@@ -203,7 +203,20 @@ pub mod prelude {
 	/// Dispatch types from `frame-support`, other fundamental traits
 	#[doc(no_inline)]
 	pub use frame_support::dispatch::{GetDispatchInfo, PostDispatchInfo};
+<<<<<<< HEAD
 	pub use frame_support::traits::{Contains, IsSubType, OnRuntimeUpgrade};
+=======
+	pub use frame_support::{
+		defensive, defensive_assert,
+		traits::{
+			Contains, Defensive, DefensiveSaturating, EitherOf, EstimateNextSessionRotation,
+			Everything, InsideBoth, InstanceFilter, IsSubType, MapSuccess, NoOpPoll,
+			OnRuntimeUpgrade, OneSessionHandler, RankedMembers, RankedMembersSwapHandler,
+			VariantCount, VariantCountOf,
+		},
+		PalletId,
+	};
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 	/// Pallet prelude of `frame-system`.
 	#[doc(no_inline)]
@@ -216,6 +229,20 @@ pub mod prelude {
 	/// All hashing related things
 	pub use super::hashing::*;
 
+<<<<<<< HEAD
+=======
+	pub use crate::transaction::*;
+
+	/// All account related things.
+	pub use super::account::*;
+
+	/// All arithmetic types and traits used for safe math.
+	pub use super::arithmetic::*;
+
+	/// All token related types and traits.
+	pub use super::token::*;
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	/// Runtime traits
 	#[doc(no_inline)]
 	pub use sp_runtime::traits::{
@@ -263,9 +290,12 @@ pub mod benchmarking {
 	}
 
 	pub mod prelude {
-		pub use super::shared::*;
 		pub use crate::prelude::*;
-		pub use frame_benchmarking::v2::*;
+		pub use frame_benchmarking::{
+			add_benchmark, benchmarking::add_to_whitelist, v1::account, v2::*, whitelist,
+			whitelisted_caller,
+		};
+		pub use frame_system::{Pallet as System, RawOrigin};
 	}
 }
 
@@ -532,6 +562,35 @@ pub mod hashing {
 	pub use sp_runtime::traits::{BlakeTwo256, Hash, Keccak256};
 }
 
+<<<<<<< HEAD
+=======
+// Systems involved in transaction execution in the runtime.
+///
+/// This is already part of the [`prelude`].
+pub mod transaction {
+	pub use frame_support::traits::{CallMetadata, GetCallMetadata};
+	pub use sp_runtime::{
+		generic::ExtensionVersion,
+		impl_tx_ext_default,
+		traits::{
+			AsTransactionAuthorizedOrigin, DispatchTransaction, TransactionExtension,
+			ValidateResult,
+		},
+		transaction_validity::{InvalidTransaction, ValidTransaction},
+	};
+}
+
+/// All account management related traits.
+///
+/// This is already part of the [`prelude`].
+pub mod account {
+	pub use frame_support::traits::{
+		AsEnsureOriginWithArg, ChangeMembers, EitherOfDiverse, InitializeMembers,
+	};
+	pub use sp_runtime::traits::{IdentifyAccount, IdentityLookup};
+}
+
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 /// Access to all of the dependencies of this crate. In case the prelude re-exports are not enough,
 /// this module can be used.
 ///

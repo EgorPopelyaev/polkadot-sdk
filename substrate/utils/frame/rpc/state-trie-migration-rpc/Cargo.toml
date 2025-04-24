@@ -27,6 +27,7 @@ sp-trie.default-features = true
 trie-db = { workspace = true, default-features = true }
 
 jsonrpsee = { features = ["client-core", "macros", "server-core"], workspace = true }
+<<<<<<< HEAD
 sc-client-api.workspace = true
 sc-client-api.default-features = true
 sc-rpc-api.workspace = true
@@ -36,3 +37,10 @@ sp-runtime.default-features = true
 
 [dev-dependencies]
 serde_json = { workspace = true, default-features = true }
+=======
+
+# Substrate Dependencies
+sc-client-api = { workspace = true, default-features = true }
+sc-rpc-api = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

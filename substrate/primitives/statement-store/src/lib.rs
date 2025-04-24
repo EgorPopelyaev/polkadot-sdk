@@ -28,7 +28,6 @@ use scale_info::TypeInfo;
 use sp_application_crypto::RuntimeAppPublic;
 #[cfg(feature = "std")]
 use sp_core::Pair;
-use sp_runtime_interface::pass_by::PassByCodec;
 
 /// Statement topic.
 pub type Topic = [u8; 32];
@@ -174,7 +173,11 @@ impl Field {
 }
 
 /// Statement structure.
+<<<<<<< HEAD
 #[derive(TypeInfo, sp_core::RuntimeDebug, PassByCodec, Clone, PartialEq, Eq, Default)]
+=======
+#[derive(DecodeWithMemTracking, TypeInfo, sp_core::RuntimeDebug, Clone, PartialEq, Eq, Default)]
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 pub struct Statement {
 	proof: Option<Proof>,
 	decryption_key: Option<DecryptionKey>,

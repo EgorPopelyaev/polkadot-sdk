@@ -9,7 +9,14 @@ license.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "statement-distribution-regression-bench"
+path = "benches/statement-distribution-regression-bench.rs"
+harness = false
+required-features = ["subsystem-benchmarks"]
+
 [dependencies]
+<<<<<<< HEAD
 futures = { workspace = true }
 futures-timer = { workspace = true }
 gum.workspace = true
@@ -30,6 +37,20 @@ polkadot-node-network-protocol.default-features = true
 arrayvec = { workspace = true }
 indexmap = { workspace = true }
 codec = { features = ["derive"], workspace = true }
+=======
+bitvec = { workspace = true, default-features = true }
+codec = { features = ["derive"], workspace = true }
+fatality = { workspace = true }
+futures = { workspace = true }
+futures-timer = { workspace = true }
+gum = { workspace = true, default-features = true }
+polkadot-node-network-protocol = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+sp-keystore = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 fatality = { workspace = true }
 bitvec = { workspace = true, default-features = true }
@@ -52,12 +73,16 @@ polkadot-primitives-test-helpers = { path = "../../../primitives/test-helpers" }
 rand_chacha = { workspace = true, default-features = true }
 polkadot-subsystem-bench = { path = "../../subsystem-bench" }
 rstest = { workspace = true }
-
-[[bench]]
-name = "statement-distribution-regression-bench"
-path = "benches/statement-distribution-regression-bench.rs"
-harness = false
-required-features = ["subsystem-benchmarks"]
+<<<<<<< HEAD
+=======
+sc-keystore = { workspace = true, default-features = true }
+sc-network = { workspace = true, default-features = true }
+sp-application-crypto = { workspace = true, default-features = true }
+sp-authority-discovery = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-tracing = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 subsystem-benchmarks = []

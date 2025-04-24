@@ -25,7 +25,11 @@ use frame_election_provider_support::{
 };
 use frame_support::{
 	derive_impl, parameter_types,
+<<<<<<< HEAD
 	traits::{ConstU32, ConstU64, Hooks, OneSessionHandler},
+=======
+	traits::{ConstBool, ConstU32, ConstU64, OneSessionHandler},
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 };
 use pallet_staking::StakerStatus;
 use sp_runtime::{curve::PiecewiseLinear, testing::UintAuthorityId, traits::Zero, BuildStorage};
@@ -110,7 +114,9 @@ impl onchain::Config for OnChainSeqPhragmen {
 	type Solver = SequentialPhragmen<AccountId, Perbill>;
 	type DataProvider = Staking;
 	type WeightInfo = ();
-	type MaxWinners = ConstU32<100>;
+	type MaxWinnersPerPage = ConstU32<100>;
+	type MaxBackersPerWinner = ConstU32<100>;
+	type Sort = ConstBool<true>;
 	type Bounds = ElectionsBounds;
 }
 
@@ -143,8 +149,14 @@ impl pallet_staking::Config for Test {
 }
 
 impl pallet_session::historical::Config for Test {
+<<<<<<< HEAD
 	type FullIdentification = pallet_staking::Exposure<AccountId, Balance>;
 	type FullIdentificationOf = pallet_staking::ExposureOf<Test>;
+=======
+	type RuntimeEvent = RuntimeEvent;
+	type FullIdentification = ();
+	type FullIdentificationOf = pallet_staking::UnitIdentificationOf<Self>;
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 }
 
 sp_runtime::impl_opaque_keys! {
@@ -160,7 +172,7 @@ impl pallet_session::Config for Test {
 	type SessionHandler = (OtherSessionHandler,);
 	type RuntimeEvent = RuntimeEvent;
 	type ValidatorId = AccountId;
-	type ValidatorIdOf = pallet_staking::StashOf<Test>;
+	type ValidatorIdOf = sp_runtime::traits::ConvertInto;
 	type NextSessionRotation = pallet_session::PeriodicSessions<Period, Offset>;
 	type WeightInfo = ();
 }
@@ -174,6 +186,7 @@ impl pallet_timestamp::Config for Test {
 
 impl Config for Test {
 	type RuntimeEvent = RuntimeEvent;
+	type OffenceHandler = Staking;
 }
 
 pub struct ExtBuilder {
@@ -293,6 +306,11 @@ pub(crate) fn run_to_block(n: BlockNumber) {
 			Staking::on_finalize(System::block_number());
 		}
 	}
+}
+
+/// Progress by n block.
+pub(crate) fn advance_blocks(n: u64) {
+	run_to_block(System::block_number() + n);
 }
 
 pub(crate) fn active_era() -> EraIndex {

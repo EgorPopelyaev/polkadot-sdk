@@ -1,0 +1,55 @@
+[package]
+name = "bp-asset-hub-westend"
+description = "Primitives of AssetHubWestend parachain runtime."
+version = "0.14.0"
+authors.workspace = true
+edition.workspace = true
+license = "Apache-2.0"
+repository.workspace = true
+
+[package.metadata.polkadot-sdk]
+exclude-from-umbrella = true
+
+[lints]
+workspace = true
+
+[dependencies]
+codec = { workspace = true }
+scale-info = { features = ["derive"], workspace = true }
+<<<<<<< HEAD:bridges/chains/chain-asset-hub-westend/Cargo.toml
+frame-support.workspace = true
+sp-core.workspace = true
+bp-xcm-bridge-hub-router.workspace = true
+xcm.workspace = true
+=======
+
+# Substrate Dependencies
+frame-support = { workspace = true }
+sp-api = { workspace = true }
+sp-core = { workspace = true }
+
+# Bridge Dependencies
+bp-bridge-hub-cumulus = { workspace = true }
+bp-messages = { workspace = true }
+bp-runtime = { workspace = true }
+bp-xcm-bridge-hub-router = { workspace = true }
+testnet-parachains-constants = { features = ["westend"], workspace = true }
+
+# Polkadot dependencies
+xcm = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60)):cumulus/parachains/runtimes/assets/asset-hub-westend/bridge-primitives/Cargo.toml
+
+[features]
+default = ["std"]
+std = [
+	"bp-bridge-hub-cumulus/std",
+	"bp-messages/std",
+	"bp-runtime/std",
+	"bp-xcm-bridge-hub-router/std",
+	"codec/std",
+	"frame-support/std",
+	"scale-info/std",
+	"sp-api/std",
+	"sp-core/std",
+	"xcm/std",
+]

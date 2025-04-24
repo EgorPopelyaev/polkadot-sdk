@@ -5,9 +5,14 @@ use frame_support::ensure;
 use snowbridge_beacon_primitives::ExecutionProof;
 
 use snowbridge_beacon_primitives::merkle_proof::{generalized_index_length, subtree_index};
+<<<<<<< HEAD
 use snowbridge_core::inbound::{
+=======
+use snowbridge_ethereum::Receipt;
+use snowbridge_verification_primitives::{
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	VerificationError::{self, *},
-	*,
+	Verifier, *,
 };
 use snowbridge_ethereum::Receipt;
 

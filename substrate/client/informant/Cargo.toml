@@ -20,6 +20,7 @@ console = { workspace = true }
 futures = { workspace = true }
 futures-timer = { workspace = true }
 log = { workspace = true, default-features = true }
+<<<<<<< HEAD
 sc-client-api.workspace = true
 sc-client-api.default-features = true
 sc-network-common.workspace = true
@@ -32,3 +33,10 @@ sp-blockchain.workspace = true
 sp-blockchain.default-features = true
 sp-runtime.workspace = true
 sp-runtime.default-features = true
+=======
+sc-client-api = { workspace = true, default-features = true }
+sc-network = { workspace = true, default-features = true }
+sc-network-sync = { workspace = true, default-features = true }
+sp-blockchain = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

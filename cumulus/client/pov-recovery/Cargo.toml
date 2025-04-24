@@ -44,6 +44,10 @@ cumulus-relay-chain-interface.default-features = true
 async-trait = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
+=======
+assert_matches = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 rstest = { workspace = true }
 tokio = { features = ["macros"], workspace = true, default-features = true }
 portpicker = { workspace = true }
@@ -54,9 +58,16 @@ sp-tracing = { default-features = true, path = "../../../substrate/primitives/tr
 assert_matches = { workspace = true }
 
 # Cumulus
+<<<<<<< HEAD
 cumulus-test-service = { path = "../../test/service" }
 
 # Substrate
 sc-cli = { default-features = true, path = "../../../substrate/client/cli" }
 sc-client-api = { default-features = true, path = "../../../substrate/client/api" }
 substrate-test-utils = { path = "../../../substrate/test-utils" }
+=======
+cumulus-test-client = { workspace = true }
+
+# Substrate
+sc-client-api = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

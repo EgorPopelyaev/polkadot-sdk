@@ -9,7 +9,18 @@ license.workspace = true
 [lints]
 workspace = true
 
+[[bench]]
+name = "availability-distribution-regression-bench"
+path = "benches/availability-distribution-regression-bench.rs"
+harness = false
+required-features = ["subsystem-benchmarks"]
+
 [dependencies]
+<<<<<<< HEAD
+=======
+codec = { features = ["std"], workspace = true, default-features = true }
+fatality = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 futures = { workspace = true }
 gum.workspace = true
 gum.default-features = true
@@ -48,13 +59,6 @@ assert_matches = { workspace = true }
 polkadot-primitives-test-helpers = { path = "../../../primitives/test-helpers" }
 rstest = { workspace = true }
 polkadot-subsystem-bench = { path = "../../subsystem-bench" }
-
-
-[[bench]]
-name = "availability-distribution-regression-bench"
-path = "benches/availability-distribution-regression-bench.rs"
-harness = false
-required-features = ["subsystem-benchmarks"]
 
 [features]
 subsystem-benchmarks = []

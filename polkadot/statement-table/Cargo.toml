@@ -11,9 +11,14 @@ workspace = true
 
 [dependencies]
 codec = { features = ["derive"], workspace = true }
+<<<<<<< HEAD
 sp-core.workspace = true
 sp-core.default-features = true
 polkadot-primitives.workspace = true
 polkadot-primitives.default-features = true
 gum.workspace = true
 gum.default-features = true
+=======
+gum = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))

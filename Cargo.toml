@@ -10,18 +10,8 @@ resolver = "2"
 
 members = [
 	"bridges/bin/runtime-common",
-	"bridges/chains/chain-asset-hub-rococo",
-	"bridges/chains/chain-asset-hub-westend",
-	"bridges/chains/chain-bridge-hub-cumulus",
-	"bridges/chains/chain-bridge-hub-kusama",
-	"bridges/chains/chain-bridge-hub-polkadot",
-	"bridges/chains/chain-bridge-hub-rococo",
-	"bridges/chains/chain-bridge-hub-westend",
-	"bridges/chains/chain-kusama",
-	"bridges/chains/chain-polkadot",
+	"bridges/chains/chain-cumulus",
 	"bridges/chains/chain-polkadot-bulletin",
-	"bridges/chains/chain-rococo",
-	"bridges/chains/chain-westend",
 	"bridges/modules/beefy",
 	"bridges/modules/grandpa",
 	"bridges/modules/messages",
@@ -115,11 +105,15 @@ members = [
 	"cumulus/parachains/pallets/parachain-info",
 	"cumulus/parachains/pallets/ping",
 	"cumulus/parachains/runtimes/assets/asset-hub-rococo",
+	"cumulus/parachains/runtimes/assets/asset-hub-rococo/bridge-primitives",
 	"cumulus/parachains/runtimes/assets/asset-hub-westend",
+	"cumulus/parachains/runtimes/assets/asset-hub-westend/bridge-primitives",
 	"cumulus/parachains/runtimes/assets/common",
 	"cumulus/parachains/runtimes/assets/test-utils",
 	"cumulus/parachains/runtimes/bridge-hubs/bridge-hub-rococo",
+	"cumulus/parachains/runtimes/bridge-hubs/bridge-hub-rococo/bridge-primitives",
 	"cumulus/parachains/runtimes/bridge-hubs/bridge-hub-westend",
+	"cumulus/parachains/runtimes/bridge-hubs/bridge-hub-westend/bridge-primitives",
 	"cumulus/parachains/runtimes/bridge-hubs/common",
 	"cumulus/parachains/runtimes/bridge-hubs/test-utils",
 	"cumulus/parachains/runtimes/collectives/collectives-westend",
@@ -133,6 +127,7 @@ members = [
 	"cumulus/parachains/runtimes/test-utils",
 	"cumulus/parachains/runtimes/testing/penpal",
 	"cumulus/parachains/runtimes/testing/rococo-parachain",
+	"cumulus/parachains/runtimes/testing/yet-another-parachain",
 	"cumulus/polkadot-omni-node",
 	"cumulus/polkadot-omni-node/lib",
 	"cumulus/polkadot-parachain",
@@ -203,7 +198,6 @@ members = [
 	"polkadot/node/tracking-allocator",
 	"polkadot/node/zombienet-backchannel",
 	"polkadot/parachain",
-	"polkadot/parachain/test-parachains",
 	"polkadot/parachain/test-parachains/adder",
 	"polkadot/parachain/test-parachains/adder/collator",
 	"polkadot/parachain/test-parachains/halt",
@@ -217,10 +211,12 @@ members = [
 	"polkadot/runtime/metrics",
 	"polkadot/runtime/parachains",
 	"polkadot/runtime/rococo",
+	"polkadot/runtime/rococo/bridge-primitives",
 	"polkadot/runtime/rococo/constants",
 	"polkadot/runtime/test-runtime",
 	"polkadot/runtime/test-runtime/constants",
 	"polkadot/runtime/westend",
+	"polkadot/runtime/westend/bridge-primitives",
 	"polkadot/runtime/westend/constants",
 	"polkadot/statement-table",
 	"polkadot/utils/generate-bags",
@@ -341,6 +337,7 @@ members = [
 	"substrate/frame/core-fellowship",
 	"substrate/frame/delegated-staking",
 	"substrate/frame/democracy",
+	"substrate/frame/election-provider-multi-block",
 	"substrate/frame/election-provider-multi-phase",
 	"substrate/frame/election-provider-multi-phase/test-staking-e2e",
 	"substrate/frame/election-provider-support",
@@ -414,6 +411,15 @@ members = [
 	"substrate/frame/session/benchmarking",
 	"substrate/frame/society",
 	"substrate/frame/staking",
+	"substrate/frame/staking-async",
+	"substrate/frame/staking-async/ah-client",
+	"substrate/frame/staking-async/ahm-test",
+	"substrate/frame/staking-async/rc-client",
+	"substrate/frame/staking-async/reward-fn",
+	"substrate/frame/staking-async/runtime-api",
+	"substrate/frame/staking-async/runtimes/parachain",
+	"substrate/frame/staking-async/runtimes/rc",
+	"substrate/frame/staking-async/runtimes/rc/constants",
 	"substrate/frame/staking/reward-curve",
 	"substrate/frame/staking/reward-fn",
 	"substrate/frame/staking/runtime-api",
@@ -611,6 +617,7 @@ ark-ed-on-bls12-377-ext = { version = "0.4.1", default-features = false }
 ark-ed-on-bls12-381-bandersnatch = { version = "0.4.0", default-features = false }
 ark-ed-on-bls12-381-bandersnatch-ext = { version = "0.4.1", default-features = false }
 ark-scale = { version = "0.0.12", default-features = false }
+ark-vrf = { version = "0.1.0", default-features = false }
 array-bytes = { version = "6.2.2", default-features = false }
 arrayvec = { version = "0.7.4" }
 assert_cmd = { version = "2.0.14" }
@@ -629,7 +636,8 @@ backoff = { version = "0.4" }
 backtrace = { version = "0.3.71" }
 binary-merkle-tree = { path = "substrate/utils/binary-merkle-tree", default-features = false, version = "16.0.0" }
 bincode = { version = "1.3.3" }
-bip39 = { version = "2.0.0" }
+# personal fork here as workaround for: https://github.com/rust-bitcoin/rust-bip39/pull/64
+bip39 = { package = "parity-bip39", version = "2.0.1", default-features = false }
 bitflags = { version = "1.3.2" }
 bitvec = { version = "1.0.1", default-features = false }
 blake2 = { version = "0.10.4", default-features = false }
@@ -637,6 +645,7 @@ blake2b_simd = { version = "1.0.2", default-features = false }
 blake3 = { version = "1.5" }
 bounded-collections = { version = "0.2.0", default-features = false }
 bounded-vec = { version = "0.7" }
+<<<<<<< HEAD
 bp-asset-hub-rococo = { path = "bridges/chains/chain-asset-hub-rococo", default-features = false, version = "0.15.0" }
 bp-asset-hub-westend = { path = "bridges/chains/chain-asset-hub-westend", default-features = false, version = "0.14.0" }
 bp-beefy = { path = "bridges/primitives/beefy", default-features = false, version = "0.1.0" }
@@ -662,6 +671,29 @@ bp-xcm-bridge-hub-router = { path = "bridges/primitives/xcm-bridge-hub-router", 
 bridge-hub-common = { path = "cumulus/parachains/runtimes/bridge-hubs/common", default-features = false, version = "0.12.0" }
 bridge-hub-rococo-emulated-chain = { path = "cumulus/parachains/integration-tests/emulated/chains/parachains/bridges/bridge-hub-rococo", version = "0.1.0" }
 bridge-hub-rococo-runtime = { path = "cumulus/parachains/runtimes/bridge-hubs/bridge-hub-rococo", default-features = false, version = "0.18.3" }
+=======
+bp-asset-hub-rococo = { path = "cumulus/parachains/runtimes/assets/asset-hub-rococo/bridge-primitives", default-features = false }
+bp-asset-hub-westend = { path = "cumulus/parachains/runtimes/assets/asset-hub-westend/bridge-primitives", default-features = false }
+bp-beefy = { path = "bridges/primitives/beefy", default-features = false }
+bp-bridge-hub-cumulus = { path = "bridges/chains/chain-cumulus", default-features = false }
+bp-bridge-hub-rococo = { path = "cumulus/parachains/runtimes/bridge-hubs/bridge-hub-rococo/bridge-primitives", default-features = false }
+bp-bridge-hub-westend = { path = "cumulus/parachains/runtimes/bridge-hubs/bridge-hub-westend/bridge-primitives", default-features = false }
+bp-header-chain = { path = "bridges/primitives/header-chain", default-features = false }
+bp-messages = { path = "bridges/primitives/messages", default-features = false }
+bp-parachains = { path = "bridges/primitives/parachains", default-features = false }
+bp-polkadot-bulletin = { path = "bridges/chains/chain-polkadot-bulletin", default-features = false }
+bp-polkadot-core = { path = "bridges/primitives/polkadot-core", default-features = false }
+bp-relayers = { path = "bridges/primitives/relayers", default-features = false }
+bp-rococo = { path = "polkadot/runtime/rococo/bridge-primitives", default-features = false }
+bp-runtime = { path = "bridges/primitives/runtime", default-features = false }
+bp-test-utils = { path = "bridges/primitives/test-utils", default-features = false }
+bp-westend = { path = "polkadot/runtime/westend/bridge-primitives", default-features = false }
+bp-xcm-bridge-hub = { path = "bridges/primitives/xcm-bridge-hub", default-features = false }
+bp-xcm-bridge-hub-router = { path = "bridges/primitives/xcm-bridge-hub-router", default-features = false }
+bridge-hub-common = { path = "cumulus/parachains/runtimes/bridge-hubs/common", default-features = false }
+bridge-hub-rococo-emulated-chain = { path = "cumulus/parachains/integration-tests/emulated/chains/parachains/bridges/bridge-hub-rococo" }
+bridge-hub-rococo-runtime = { path = "cumulus/parachains/runtimes/bridge-hubs/bridge-hub-rococo", default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 bridge-hub-test-utils = { path = "cumulus/parachains/runtimes/bridge-hubs/test-utils", default-features = false }
 bridge-hub-westend-emulated-chain = { path = "cumulus/parachains/integration-tests/emulated/chains/parachains/bridges/bridge-hub-westend", version = "0.1.0" }
 bridge-hub-westend-runtime = { path = "cumulus/parachains/runtimes/bridge-hubs/bridge-hub-westend", default-features = false, version = "0.15.3" }
@@ -679,7 +711,6 @@ chain-spec-guide-runtime = { path = "docs/sdk/src/reference_docs/chain_spec_runt
 chrono = { version = "0.4.31" }
 cid = { version = "0.9.0" }
 clap = { version = "4.5.13" }
-clap-num = { version = "1.0.2" }
 clap_complete = { version = "4.5.13" }
 cmd_lib = { version = "1.9.5" }
 coarsetime = { version = "0.1.22" }
@@ -774,6 +805,7 @@ frame = { path = "substrate/frame", default-features = false, package = "polkado
 frame-benchmarking = { path = "substrate/frame/benchmarking", default-features = false, version = "39.0.0" }
 frame-benchmarking-cli = { path = "substrate/utils/frame/benchmarking-cli", default-features = false, version = "46.1.0" }
 frame-benchmarking-pallet-pov = { default-features = false, path = "substrate/frame/benchmarking/pov" }
+<<<<<<< HEAD
 frame-election-provider-solution-type = { path = "substrate/frame/election-provider-support/solution-type", default-features = false, version = "14.0.1" }
 frame-election-provider-support = { path = "substrate/frame/election-provider-support", default-features = false, version = "39.0.0" }
 frame-executive = { path = "substrate/frame/executive", default-features = false, version = "39.1.0" }
@@ -783,6 +815,17 @@ frame-support = { path = "substrate/frame/support", default-features = false, ve
 frame-support-procedural = { path = "substrate/frame/support/procedural", default-features = false, version = "31.1.0" }
 frame-support-procedural-tools = { path = "substrate/frame/support/procedural/tools", default-features = false, version = "13.0.1" }
 frame-support-procedural-tools-derive = { path = "substrate/frame/support/procedural/tools/derive", default-features = false, version = "12.0.0" }
+=======
+frame-election-provider-solution-type = { path = "substrate/frame/election-provider-support/solution-type", default-features = false }
+frame-election-provider-support = { path = "substrate/frame/election-provider-support", default-features = false }
+frame-executive = { path = "substrate/frame/executive", default-features = false }
+frame-metadata = { version = "21.0.0", default-features = false }
+frame-metadata-hash-extension = { path = "substrate/frame/metadata-hash-extension", default-features = false }
+frame-support = { path = "substrate/frame/support", default-features = false }
+frame-support-procedural = { path = "substrate/frame/support/procedural", default-features = false }
+frame-support-procedural-tools = { path = "substrate/frame/support/procedural/tools", default-features = false }
+frame-support-procedural-tools-derive = { path = "substrate/frame/support/procedural/tools/derive", default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 frame-support-test = { path = "substrate/frame/support/test" }
 frame-system = { path = "substrate/frame/system", default-features = false, version = "39.1.0" }
 frame-system-benchmarking = { path = "substrate/frame/system/benchmarking", default-features = false, version = "39.0.0" }
@@ -791,11 +834,11 @@ frame-try-runtime = { path = "substrate/frame/try-runtime", default-features = f
 fs4 = { version = "0.7.0" }
 fs_extra = { version = "1.3.0" }
 futures = { version = "0.3.31" }
-futures-channel = { version = "0.3.23" }
 futures-timer = { version = "3.0.2" }
 futures-util = { version = "0.3.30", default-features = false }
 generate-bags = { path = "substrate/utils/frame/generate-bags", default-features = false, version = "39.0.0" }
 gethostname = { version = "0.2.3" }
+git2 = { version = "0.20.0", default-features = false }
 glob = { version = "0.3" }
 glutton-westend-runtime = { path = "cumulus/parachains/runtimes/glutton/glutton-westend", version = "15.0.0" }
 governor = { version = "0.6.0" }
@@ -825,7 +868,6 @@ is-terminal = { version = "0.4.9" }
 is_executable = { version = "1.0.1" }
 isahc = { version = "1.2" }
 itertools = { version = "0.11" }
-jemalloc_pprof = { version = "0.4" }
 jobserver = { version = "0.1.26" }
 jsonpath_lib = { version = "0.3" }
 jsonrpsee = { version = "0.24.3" }
@@ -841,6 +883,7 @@ libc = { version = "0.2.155" }
 libfuzzer-sys = { version = "0.4" }
 libp2p = { version = "0.52.4" }
 libp2p-identity = { version = "0.2.9" }
+libp2p-kad = { version = "0.46.2", default-features = false }
 libsecp256k1 = { version = "0.7.0", default-features = false }
 linked-hash-map = { version = "0.5.4" }
 linked_hash_set = { version = "0.1.4" }
@@ -852,7 +895,11 @@ macro_magic = { version = "0.5.1" }
 maplit = { version = "1.0.2" }
 memmap2 = { version = "0.9.3" }
 memory-db = { version = "0.32.0", default-features = false }
+<<<<<<< HEAD
 merkleized-metadata = { version = "0.2.0" }
+=======
+merkleized-metadata = { version = "0.5.0" }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 merlin = { version = "3.0", default-features = false }
 messages-relay = { path = "bridges/relays/messages", version = "0.1.0" }
 metered = { version = "0.6.1", default-features = false, package = "prioritized-metered-channel" }
@@ -860,13 +907,19 @@ milagro-bls = { version = "1.5.4", default-features = false, package = "snowbrid
 minimal-template-node = { path = "templates/minimal/node" }
 minimal-template-runtime = { path = "templates/minimal/runtime", version = "0.1.0" }
 mixnet = { version = "0.7.0" }
+<<<<<<< HEAD
 mmr-gadget = { path = "substrate/client/merkle-mountain-range", default-features = false, version = "43.0.0" }
 mmr-lib = { version = "0.5.2", package = "ckb-merkle-mountain-range" }
 mmr-rpc = { path = "substrate/client/merkle-mountain-range/rpc", default-features = false, version = "39.0.0" }
 mockall = { version = "0.11.3" }
+=======
+mmr-gadget = { path = "substrate/client/merkle-mountain-range", default-features = false }
+mmr-lib = { version = "0.8.1", package = "polkadot-ckb-merkle-mountain-range", default-features = false }
+mmr-rpc = { path = "substrate/client/merkle-mountain-range/rpc", default-features = false }
+mockall = { version = "0.13.1" }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 multiaddr = { version = "0.18.1" }
 multihash = { version = "0.19.1", default-features = false }
-multihash-codetable = { version = "0.1.1" }
 multistream-select = { version = "0.13.0" }
 names = { version = "0.14.0", default-features = false }
 nix = { version = "0.28.0" }
@@ -915,6 +968,7 @@ pallet-collective-content = { path = "cumulus/parachains/pallets/collective-cont
 pallet-contracts = { path = "substrate/frame/contracts", default-features = false, version = "39.1.0" }
 pallet-contracts-fixtures = { path = "substrate/frame/contracts/fixtures", default-features = false }
 pallet-contracts-mock-network = { default-features = false, path = "substrate/frame/contracts/mock-network" }
+<<<<<<< HEAD
 pallet-contracts-proc-macro = { path = "substrate/frame/contracts/proc-macro", default-features = false, version = "23.0.2" }
 pallet-contracts-uapi = { path = "substrate/frame/contracts/uapi", default-features = false, version = "12.0.1" }
 pallet-conviction-voting = { path = "substrate/frame/conviction-voting", default-features = false, version = "39.1.0" }
@@ -943,6 +997,38 @@ pallet-identity = { path = "substrate/frame/identity", default-features = false,
 pallet-im-online = { path = "substrate/frame/im-online", default-features = false, version = "38.1.0" }
 pallet-indices = { path = "substrate/frame/indices", default-features = false, version = "39.1.0" }
 pallet-insecure-randomness-collective-flip = { path = "substrate/frame/insecure-randomness-collective-flip", default-features = false, version = "27.0.0" }
+=======
+pallet-contracts-proc-macro = { path = "substrate/frame/contracts/proc-macro", default-features = false }
+pallet-contracts-uapi = { path = "substrate/frame/contracts/uapi", default-features = false }
+pallet-conviction-voting = { path = "substrate/frame/conviction-voting", default-features = false }
+pallet-core-fellowship = { path = "substrate/frame/core-fellowship", default-features = false }
+pallet-default-config-example = { path = "substrate/frame/examples/default-config", default-features = false }
+pallet-delegated-staking = { path = "substrate/frame/delegated-staking", default-features = false }
+pallet-democracy = { path = "substrate/frame/democracy", default-features = false }
+pallet-dev-mode = { path = "substrate/frame/examples/dev-mode", default-features = false }
+pallet-election-provider-multi-block = { path = "substrate/frame/election-provider-multi-block", default-features = false }
+pallet-election-provider-multi-phase = { path = "substrate/frame/election-provider-multi-phase", default-features = false }
+pallet-election-provider-support-benchmarking = { path = "substrate/frame/election-provider-support/benchmarking", default-features = false }
+pallet-elections-phragmen = { path = "substrate/frame/elections-phragmen", default-features = false }
+pallet-example-authorization-tx-extension = { path = "substrate/frame/examples/authorization-tx-extension", default-features = false }
+pallet-example-basic = { path = "substrate/frame/examples/basic", default-features = false }
+pallet-example-frame-crate = { path = "substrate/frame/examples/frame-crate", default-features = false }
+pallet-example-kitchensink = { path = "substrate/frame/examples/kitchensink", default-features = false }
+pallet-example-mbm = { path = "substrate/frame/examples/multi-block-migrations", default-features = false }
+pallet-example-offchain-worker = { path = "substrate/frame/examples/offchain-worker", default-features = false }
+pallet-example-single-block-migrations = { path = "substrate/frame/examples/single-block-migrations", default-features = false }
+pallet-example-split = { path = "substrate/frame/examples/split", default-features = false }
+pallet-example-tasks = { path = "substrate/frame/examples/tasks", default-features = false }
+pallet-example-view-functions = { path = "substrate/frame/examples/view-functions", default-features = false }
+pallet-examples = { path = "substrate/frame/examples" }
+pallet-fast-unstake = { path = "substrate/frame/fast-unstake", default-features = false }
+pallet-glutton = { path = "substrate/frame/glutton", default-features = false }
+pallet-grandpa = { path = "substrate/frame/grandpa", default-features = false }
+pallet-identity = { path = "substrate/frame/identity", default-features = false }
+pallet-im-online = { path = "substrate/frame/im-online", default-features = false }
+pallet-indices = { path = "substrate/frame/indices", default-features = false }
+pallet-insecure-randomness-collective-flip = { path = "substrate/frame/insecure-randomness-collective-flip", default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 pallet-lottery = { default-features = false, path = "substrate/frame/lottery" }
 pallet-membership = { path = "substrate/frame/membership", default-features = false, version = "39.0.0" }
 pallet-message-queue = { path = "substrate/frame/message-queue", default-features = false, version = "42.0.0" }
@@ -982,6 +1068,7 @@ pallet-safe-mode = { default-features = false, path = "substrate/frame/safe-mode
 pallet-salary = { path = "substrate/frame/salary", default-features = false, version = "24.0.0" }
 pallet-scheduler = { path = "substrate/frame/scheduler", default-features = false, version = "40.1.0" }
 pallet-scored-pool = { default-features = false, path = "substrate/frame/scored-pool" }
+<<<<<<< HEAD
 pallet-session = { path = "substrate/frame/session", default-features = false, version = "39.0.0" }
 pallet-session-benchmarking = { path = "substrate/frame/session/benchmarking", default-features = false, version = "39.1.0" }
 pallet-skip-feeless-payment = { path = "substrate/frame/transaction-payment/skip-feeless-payment", default-features = false, version = "14.1.0" }
@@ -991,6 +1078,27 @@ pallet-staking-reward-curve = { path = "substrate/frame/staking/reward-curve", d
 pallet-staking-reward-fn = { path = "substrate/frame/staking/reward-fn", default-features = false, version = "22.0.0" }
 pallet-staking-runtime-api = { path = "substrate/frame/staking/runtime-api", default-features = false, version = "25.0.0" }
 pallet-state-trie-migration = { path = "substrate/frame/state-trie-migration", default-features = false, version = "43.1.0" }
+=======
+pallet-session = { path = "substrate/frame/session", default-features = false }
+pallet-session-benchmarking = { path = "substrate/frame/session/benchmarking", default-features = false }
+pallet-skip-feeless-payment = { path = "substrate/frame/transaction-payment/skip-feeless-payment", default-features = false }
+pallet-society = { path = "substrate/frame/society", default-features = false }
+pallet-staking = { path = "substrate/frame/staking", default-features = false }
+pallet-staking-reward-curve = { path = "substrate/frame/staking/reward-curve", default-features = false }
+pallet-staking-reward-fn = { path = "substrate/frame/staking/reward-fn", default-features = false }
+pallet-staking-runtime-api = { path = "substrate/frame/staking/runtime-api", default-features = false }
+# TODO: remove the reward stuff as they are not needed here
+pallet-staking-async = { path = "substrate/frame/staking-async", default-features = false }
+pallet-staking-async-ah-client = { path = "substrate/frame/staking-async/ah-client", default-features = false }
+pallet-staking-async-parachain-runtime = { path = "substrate/frame/staking-async/runtimes/parachain" }
+pallet-staking-async-rc-client = { path = "substrate/frame/staking-async/rc-client", default-features = false }
+pallet-staking-async-rc-runtime = { path = "substrate/frame/staking-async/runtimes/rc" }
+pallet-staking-async-rc-runtime-constants = { path = "substrate/frame/staking-async/runtimes/rc/constants", default-features = false }
+pallet-staking-async-reward-curve = { path = "substrate/frame/staking-async/reward-curve", default-features = false }
+pallet-staking-async-reward-fn = { path = "substrate/frame/staking-async/reward-fn", default-features = false }
+pallet-staking-async-runtime-api = { path = "substrate/frame/staking-async/runtime-api", default-features = false }
+pallet-state-trie-migration = { path = "substrate/frame/state-trie-migration", default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 pallet-statement = { default-features = false, path = "substrate/frame/statement" }
 pallet-sudo = { path = "substrate/frame/sudo", default-features = false, version = "39.0.0" }
 pallet-template = { path = "templates/solochain/pallets/template", default-features = false, version = "0.1.0" }
@@ -1092,9 +1200,7 @@ polkavm-derive = "0.9.1"
 polkavm-linker = "0.9.2"
 portpicker = { version = "0.1.1" }
 pretty_assertions = { version = "1.3.0" }
-primitive-types = { version = "0.13.1", default-features = false, features = [
-	"num-traits",
-] }
+primitive-types = { version = "0.13.1", default-features = false, features = ["num-traits"] }
 proc-macro-crate = { version = "3.0.0" }
 proc-macro-warning = { version = "1.0.0", default-features = false }
 proc-macro2 = { version = "1.0.86" }
@@ -1114,14 +1220,20 @@ rand_chacha = { version = "0.3.1", default-features = false }
 rand_core = { version = "0.6.2" }
 rand_distr = { version = "0.4.3" }
 rand_pcg = { version = "0.3.1" }
-rayon = { version = "1.5.1" }
 rbtag = { version = "0.3" }
 ref-cast = { version = "1.0.23" }
 regex = { version = "1.10.2" }
+<<<<<<< HEAD
 relay-substrate-client = { path = "bridges/relays/client-substrate", version = "0.1.0" }
 relay-utils = { path = "bridges/relays/utils", version = "0.1.0" }
 remote-externalities = { path = "substrate/utils/frame/remote-externalities", default-features = false, package = "frame-remote-externalities", version = "0.49.0" }
 reqwest = { version = "0.11", default-features = false }
+=======
+relay-substrate-client = { path = "bridges/relays/client-substrate" }
+relay-utils = { path = "bridges/relays/utils" }
+remote-externalities = { path = "substrate/utils/frame/remote-externalities", default-features = false, package = "frame-remote-externalities" }
+ripemd = { version = "0.1.3", default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 rlp = { version = "0.6.1", default-features = false }
 rococo-emulated-chain = { path = "cumulus/parachains/integration-tests/emulated/chains/relays/rococo", version = "0.1.0" }
 rococo-parachain-runtime = { path = "cumulus/parachains/runtimes/testing/rococo-parachain", version = "0.18.0" }
@@ -1212,7 +1324,12 @@ sha1 = { version = "0.10.6" }
 sha2 = { version = "0.10.7", default-features = false }
 sha3 = { version = "0.10.0", default-features = false }
 shlex = { version = "1.3.0" }
+<<<<<<< HEAD
 slot-range-helper = { path = "polkadot/runtime/common/slot_range_helper", default-features = false, version = "16.0.0" }
+=======
+simple-mermaid = { version = "0.1.1" }
+slot-range-helper = { path = "polkadot/runtime/common/slot_range_helper", default-features = false }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 slotmap = { version = "1.0" }
 smallvec = { version = "1.11.0", default-features = false }
 smoldot = { version = "0.11.0", default-features = false }
@@ -1293,6 +1410,7 @@ sp-version-proc-macro = { path = "substrate/primitives/version/proc-macro", defa
 sp-wasm-interface = { path = "substrate/primitives/wasm-interface", default-features = false, version = "21.0.1" }
 sp-weights = { path = "substrate/primitives/weights", default-features = false, version = "31.0.0" }
 spinners = { version = "4.1.1" }
+sqlx = { version = "0.8.2" }
 ss58-registry = { version = "1.34.0", default-features = false }
 ssz_rs = { version = "0.9.0", default-features = false }
 ssz_rs_derive = { version = "0.9.0", default-features = false }
@@ -1334,7 +1452,7 @@ tikv-jemalloc-ctl = { version = "0.5.0" }
 tikv-jemallocator = { version = "0.5.0" }
 time = { version = "0.3" }
 tiny-keccak = { version = "2.0.2" }
-tokio = { version = "1.40.0", default-features = false }
+tokio = { version = "1.43.1", default-features = false }
 tokio-retry = { version = "0.3.0" }
 tokio-stream = { version = "0.1.14" }
 tokio-test = { version = "0.4.4" }
@@ -1358,6 +1476,7 @@ trybuild = { version = "1.0.89" }
 tt-call = { version = "1.0.8" }
 tuplex = { version = "0.1", default-features = false }
 twox-hash = { version = "1.6.3", default-features = false }
+txtesttool = { version = "0.4.0", package = "substrate-txtesttool" }
 unsigned-varint = { version = "0.7.2" }
 url = { version = "2.5.4" }
 void = { version = "1.0.2" }
@@ -1376,6 +1495,7 @@ westend-runtime = { path = "polkadot/runtime/westend", version = "21.1.0" }
 westend-runtime-constants = { path = "polkadot/runtime/westend/constants", default-features = false, version = "18.0.0" }
 westend-system-emulated-network = { path = "cumulus/parachains/integration-tests/emulated/networks/westend-system", version = "0.1.0" }
 x25519-dalek = { version = "2.0" }
+<<<<<<< HEAD
 xcm = { path = "polkadot/xcm", default-features = false, package = "staging-xcm", version = "15.0.2" }
 xcm-builder = { path = "polkadot/xcm/xcm-builder", default-features = false, package = "staging-xcm-builder", version = "18.1.0" }
 xcm-docs = { path = "polkadot/xcm/docs", version = "0.1.0" }
@@ -1386,6 +1506,19 @@ xcm-runtime-apis = { path = "polkadot/xcm/xcm-runtime-apis", default-features = 
 xcm-simulator = { path = "polkadot/xcm/xcm-simulator", default-features = false, version = "18.0.0" }
 zeroize = { version = "1.7.0", default-features = false }
 zombienet-sdk = { version = "0.2.13" }
+=======
+xcm = { path = "polkadot/xcm", default-features = false, package = "staging-xcm" }
+xcm-builder = { path = "polkadot/xcm/xcm-builder", default-features = false, package = "staging-xcm-builder" }
+xcm-docs = { path = "polkadot/xcm/docs" }
+xcm-emulator = { path = "cumulus/xcm/xcm-emulator", default-features = false }
+xcm-executor = { path = "polkadot/xcm/xcm-executor", default-features = false, package = "staging-xcm-executor" }
+xcm-procedural = { path = "polkadot/xcm/procedural", default-features = false }
+xcm-runtime-apis = { path = "polkadot/xcm/xcm-runtime-apis", default-features = false }
+xcm-simulator = { path = "polkadot/xcm/xcm-simulator", default-features = false }
+yet-another-parachain-runtime = { path = "cumulus/parachains/runtimes/testing/yet-another-parachain" }
+zeroize = { version = "1.7.0", default-features = false }
+zombienet-sdk = { version = "0.2.29" }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 zstd = { version = "0.12.4", default-features = false }
 
 [profile.release]
@@ -1419,6 +1552,7 @@ overflow-checks = true
 #
 # This list is ordered alphabetically.
 [profile.dev.package]
+ark-vrf = { opt-level = 3 }
 blake2 = { opt-level = 3 }
 blake2b_simd = { opt-level = 3 }
 chacha20poly1305 = { opt-level = 3 }

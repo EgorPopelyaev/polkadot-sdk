@@ -25,10 +25,15 @@ frame-system.workspace = true
 sp-runtime.workspace = true
 
 [dev-dependencies]
+<<<<<<< HEAD
 pallet-balances = { default-features = true, path = "../balances" }
 sp-core = { default-features = true, path = "../../primitives/core" }
 sp-io = { default-features = true, path = "../../primitives/io" }
 sp-std = { default-features = true, path = "../../primitives/std" }
+=======
+pallet-balances = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

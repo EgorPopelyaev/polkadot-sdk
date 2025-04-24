@@ -59,7 +59,13 @@ sp-transaction-pool.workspace = true
 sp-version.workspace = true
 # num-traits feature needed for dex integer sq root:
 primitive-types = { features = ["codec", "num-traits", "scale-info"], workspace = true }
+<<<<<<< HEAD
 pallet-xcm.workspace = true
+=======
+
+# Polkadot
+pallet-xcm = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 pallet-xcm-benchmarks = { optional = true, workspace = true }
 polkadot-parachain-primitives.workspace = true
 polkadot-runtime-common.workspace = true
@@ -82,6 +88,7 @@ pallet-collator-selection.workspace = true
 parachain-info.workspace = true
 parachains-common.workspace = true
 testnet-parachains-constants = { features = ["westend"], workspace = true }
+<<<<<<< HEAD
 assets-common.workspace = true
 pallet-xcm-bridge-hub-router.workspace = true
 bp-asset-hub-rococo.workspace = true
@@ -89,6 +96,18 @@ bp-asset-hub-westend.workspace = true
 bp-bridge-hub-rococo.workspace = true
 bp-bridge-hub-westend.workspace = true
 snowbridge-router-primitives.workspace = true
+=======
+
+# Bridges
+bp-asset-hub-rococo = { workspace = true }
+bp-asset-hub-westend = { workspace = true }
+bp-bridge-hub-rococo = { workspace = true }
+bp-bridge-hub-westend = { workspace = true }
+pallet-xcm-bridge-hub-router = { workspace = true }
+snowbridge-outbound-queue-primitives = { workspace = true }
+snowbridge-pallet-system-frontend = { workspace = true }
+snowbridge-runtime-common = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 asset-test-utils = { default-features = true, path = "../test-utils" }
@@ -133,7 +152,12 @@ runtime-benchmarks = [
 	"parachains-common/runtime-benchmarks",
 	"polkadot-parachain-primitives/runtime-benchmarks",
 	"polkadot-runtime-common/runtime-benchmarks",
+<<<<<<< HEAD
 	"snowbridge-router-primitives/runtime-benchmarks",
+=======
+	"snowbridge-pallet-system-frontend/runtime-benchmarks",
+	"snowbridge-runtime-common/runtime-benchmarks",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"sp-runtime/runtime-benchmarks",
 	"xcm-builder/runtime-benchmarks",
 	"xcm-executor/runtime-benchmarks",
@@ -231,7 +255,13 @@ std = [
 	"primitive-types/std",
 	"scale-info/std",
 	"serde_json/std",
+<<<<<<< HEAD
 	"snowbridge-router-primitives/std",
+=======
+	"snowbridge-outbound-queue-primitives/std",
+	"snowbridge-pallet-system-frontend/std",
+	"snowbridge-runtime-common/std",
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 	"sp-api/std",
 	"sp-block-builder/std",
 	"sp-consensus-aura/std",

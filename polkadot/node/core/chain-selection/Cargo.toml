@@ -12,6 +12,7 @@ workspace = true
 [dependencies]
 futures = { workspace = true }
 futures-timer = { workspace = true }
+<<<<<<< HEAD
 gum.workspace = true
 gum.default-features = true
 polkadot-primitives.workspace = true
@@ -23,6 +24,13 @@ polkadot-node-subsystem.default-features = true
 polkadot-node-subsystem-util.workspace = true
 polkadot-node-subsystem-util.default-features = true
 kvdb = { workspace = true }
+=======
+gum = { workspace = true, default-features = true }
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-node-subsystem-util = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 thiserror = { workspace = true }
 codec = { workspace = true, default-features = true }
 

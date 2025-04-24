@@ -11,13 +11,16 @@ workspace = true
 
 [dependencies]
 futures = { workspace = true }
+<<<<<<< HEAD
 hex = { workspace = true, default-features = true }
 gum.workspace = true
 gum.default-features = true
+=======
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 rand = { workspace = true, default-features = true }
 serde_json = { workspace = true, default-features = true }
-tempfile = { workspace = true }
 tokio = { workspace = true, default-features = true }
+<<<<<<< HEAD
 polkadot-overseer.workspace = true
 polkadot-overseer.default-features = true
 polkadot-primitives.workspace = true
@@ -91,6 +94,44 @@ sp-runtime.default-features = true
 sp-state-machine.workspace = true
 sp-state-machine.default-features = true
 substrate-test-client.workspace = true
+=======
+
+# Polkadot dependencies
+polkadot-node-primitives = { workspace = true, default-features = true }
+polkadot-node-subsystem = { workspace = true, default-features = true }
+polkadot-overseer = { workspace = true, default-features = true }
+polkadot-parachain-primitives = { workspace = true, default-features = true }
+polkadot-primitives = { workspace = true, default-features = true }
+polkadot-runtime-common = { workspace = true, default-features = true }
+polkadot-runtime-parachains = { workspace = true, default-features = true }
+polkadot-service = { workspace = true, default-features = true }
+polkadot-test-runtime = { workspace = true }
+test-runtime-constants = { workspace = true, default-features = true }
+
+# Substrate dependencies
+frame-system = { workspace = true, default-features = true }
+pallet-balances = { workspace = true, default-features = true }
+pallet-staking = { workspace = true, default-features = true }
+pallet-transaction-payment = { workspace = true, default-features = true }
+sc-chain-spec = { workspace = true, default-features = true }
+sc-cli = { workspace = true, default-features = true }
+sc-client-api = { workspace = true, default-features = true }
+sc-consensus = { workspace = true, default-features = true }
+sc-consensus-grandpa = { workspace = true, default-features = true }
+sc-network = { workspace = true, default-features = true }
+sc-service = { workspace = true }
+sc-tracing = { workspace = true, default-features = true }
+sp-arithmetic = { workspace = true, default-features = true }
+sp-authority-discovery = { workspace = true, default-features = true }
+sp-blockchain = { workspace = true, default-features = true }
+sp-consensus = { workspace = true, default-features = true }
+sp-consensus-babe = { workspace = true, default-features = true }
+sp-core = { workspace = true, default-features = true }
+sp-keyring = { workspace = true, default-features = true }
+sp-runtime = { workspace = true, default-features = true }
+sp-state-machine = { workspace = true, default-features = true }
+substrate-test-client = { workspace = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [dev-dependencies]
 pallet-balances = { path = "../../../../substrate/frame/balances", default-features = false }

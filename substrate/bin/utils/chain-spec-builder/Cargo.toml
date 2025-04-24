@@ -30,8 +30,13 @@ doctest = false
 [dependencies]
 clap = { features = ["derive"], workspace = true }
 docify = { workspace = true }
+<<<<<<< HEAD
 log = { workspace = true, default-features = true }
 sc-chain-spec = { features = ["clap"], workspace = true, default-features = true }
+=======
+sc-chain-spec = { features = ["clap"], workspace = true, default-features = true }
+serde = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 serde_json = { workspace = true, default-features = true }
 serde = { workspace = true, default-features = true }
 sp-tracing.workspace = true

@@ -16,10 +16,7 @@ workspace = true
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { features = [
-	"derive",
-	"max-encoded-len",
-], workspace = true }
+codec = { features = ["derive", "max-encoded-len"], workspace = true }
 docify = { workspace = true }
 impl-trait-for-tuples = { workspace = true }
 scale-info = { features = ["derive"], workspace = true }
@@ -33,9 +30,14 @@ sp-core = { optional = true, workspace = true }
 log = { workspace = true }
 
 [dev-dependencies]
+<<<<<<< HEAD
 sp-io = { default-features = true, path = "../../primitives/io" }
 pallet-utility = { default-features = true, path = "../utility" }
 sp-core = { path = "../../primitives/core", default-features = false }
+=======
+pallet-utility = { workspace = true, default-features = true }
+sp-io = { workspace = true, default-features = true }
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
 
 [features]
 default = ["std"]

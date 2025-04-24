@@ -1,7 +1,11 @@
 .zombienet-refs:
   extends: .build-refs
   variables:
+<<<<<<< HEAD
     ZOMBIENET_IMAGE: "docker.io/paritytech/zombienet:v1.3.116"
+=======
+    ZOMBIENET_IMAGE: "docker.io/paritytech/zombienet:v1.3.127"
+>>>>>>> 07827930 (Use original pr name in prdoc check (#60))
     PUSHGATEWAY_URL: "http://zombienet-prometheus-pushgateway.managed-monitoring:9091/metrics/job/zombie-metrics"
     DEBUG: "zombie,zombie::network-node,zombie::kube::client::logs"
     ZOMBIE_PROVIDER: "k8s"
