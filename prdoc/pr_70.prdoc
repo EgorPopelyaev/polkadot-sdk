@@ -6,6 +6,6 @@ title: Test pr
 doc:
   - audience: Node Dev
     description: |
-      ...
+      test
 
 crates: [ ]
