@@ -270,6 +270,7 @@ fetch_debian_package_from_s3() {
 }
 
 # Fetch the release artifacts like binary and signatures from S3. Assumes the ENV are set:
+#
 # inputs: binary (polkadot), target(aarch64-apple-darwin)
 fetch_release_artifacts_from_s3() {
   BINARY=$1
