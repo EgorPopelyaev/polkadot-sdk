@@ -61,6 +61,10 @@ jobs:
               "conflict_resolution": "draft_commit_conflicts"
             }
           copy_assignees: true
+<<<<<<< HEAD
+=======
+          label_pattern: ''
+>>>>>>> f7618a2 (Don't use labels for branch names creation (#86))
 
       - name: Label Backports
         if: ${{ steps.backport.outputs.created_pull_numbers != '' }}
