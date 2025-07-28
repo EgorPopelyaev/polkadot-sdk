@@ -1,9 +1,10 @@
 name: Release - Announce release to Matrix rooms
 on:
-  release:
-    types:
-      - published
-      - prereleased
+  workflow_dispatch:
+  #release:
+   # types:
+    #  - published
+     # - prereleased
 
 jobs:
   ping_matrix:
