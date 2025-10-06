@@ -79,9 +79,9 @@ jobs:
         id: generate_write_token
         uses: actions/create-github-app-token@v2
         with:
-            app-id: ${{ vars.POLKADOT_SDK_RELEASE_RW_APP_ID }}
-            private-key: ${{ secrets.POLKADOT_SDK_RELEASE_RW_APP_KEY }}
-            owner: paritytech
+            app-id: ${{ secrets.RELEASE_BACKPORT_AUTOMATION_APP_ID }}
+            private-key: ${{ secrets.RELEASE_BACKPORT_AUTOMATION_APP_PRIVATE_KEY }}
+            owner: EgorPopelyaev
             repositories: polkadot-sdk
       - name: Download artifacts
         env:
@@ -168,9 +168,9 @@ jobs:
         id: generate_write_token
         uses: actions/create-github-app-token@v2
         with:
-            app-id: ${{ vars.POLKADOT_SDK_RELEASE_RW_APP_ID }}
-            private-key: ${{ secrets.POLKADOT_SDK_RELEASE_RW_APP_KEY }}
-            owner: paritytech
+            app-id: ${{ secrets.RELEASE_BACKPORT_AUTOMATION_APP_ID }}
+            private-key: ${{ secrets.RELEASE_BACKPORT_AUTOMATION_APP_PRIVATE_KEY }}
+            owner: EgorPopelyaev
             repositories: polkadot-sdk
 
       - name: Download runtimes
@@ -237,9 +237,9 @@ jobs:
         id: generate_write_token
         uses: actions/create-github-app-token@v2
         with:
-            app-id: ${{ vars.POLKADOT_SDK_RELEASE_RW_APP_ID }}
-            private-key: ${{ secrets.POLKADOT_SDK_RELEASE_RW_APP_KEY }}
-            owner: paritytech
+            app-id: ${{ secrets.RELEASE_BACKPORT_AUTOMATION_APP_ID }}
+            private-key: ${{ secrets.RELEASE_BACKPORT_AUTOMATION_APP_PRIVATE_KEY }}
+            owner: EgorPopelyaev
             repositories: polkadot-sdk
 
       - name: Upload ${{ matrix.binary }} binary to release draft
