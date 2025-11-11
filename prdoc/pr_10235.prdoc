@@ -10,4 +10,3 @@ crates:
   bump: patch
 - name: frame-system
   bump: minor
-  validate: false
