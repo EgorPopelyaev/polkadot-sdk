@@ -137,15 +137,15 @@ jobs:
 
             # Only show error message and exit if validate: false is not found
             if [ "$has_validate_false" = false ]; then
-              cat <<EOF
+                cat <<EOF
               👋 Hello developer! The SemVer information that you declared in the prdoc file did not match what the CI detected.
 
               Please check the output above and see the following links for more help:
               - https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/prdoc.md#record-semver-changes
               - https://forum.polkadot.network/t/psa-polkadot-sdk-to-use-semver
 
-              Otherwise feel free to ask in the Merge Request or in Matrix chat.
-              EOF
+            Otherwise feel free to ask in the Merge Request or in Matrix chat.
+            EOF
 
               exit 1
             else
