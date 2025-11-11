@@ -44,7 +44,7 @@ jobs:
         run: |
           echo "This is a backport into stable."
 
-            cat > msg.txt <<EOF
+          cat > msg.txt <<-EOF
             This pull request is amending an existing release. Please proceed with extreme caution,
             as to not impact downstream teams that rely on the stability of it. Some things to consider:
             - Backports are only for 'patch' or 'minor' changes. No 'major' or other breaking change.
@@ -152,7 +152,7 @@ jobs:
               echo "✅ SemVer validation skipped due to validate: false in prdoc file"
             fi
           fi
-          
+
           # Only enforce SemVer restrictions for backports targeting stable branches
           if [[ "$BASE_BRANCH" != stable* && "$BASE_BRANCH" != unstable* ]]; then
               echo "ℹ️ Branch '$BASE_BRANCH' is not a (un)stable branch. Skipping SemVer backport-specific enforcements."
