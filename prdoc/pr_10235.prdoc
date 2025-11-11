@@ -9,5 +9,5 @@ crates:
 - name: frame-executive
   bump: patch
 - name: frame-system
-  bump: patch
+  bump: minor
   validate: false
