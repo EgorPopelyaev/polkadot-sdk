@@ -71,7 +71,7 @@ mod custom {
 
 		fn on_runtime_upgrade() -> Weight {
 			sp_io::storage::set(super::TEST_KEY, "module".as_bytes());
-			Weight::from_parts(200, 0)
+			Weight::from_parts(201, 0)
 		}
 
 		fn offchain_worker(n: BlockNumberFor<T>) {

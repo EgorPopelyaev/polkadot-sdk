@@ -948,7 +948,7 @@ pub mod pallet {
 		/// and the new runtime.
 		InvalidSpecName,
 		/// The specification version is not allowed to decrease between the current runtime
-		/// and the new runtime.
+		/// and the new runtime. Test
 		SpecVersionNeedsToIncrease,
 		/// Failed to extract the runtime version from the new runtime.
 		///
