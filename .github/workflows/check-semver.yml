@@ -118,9 +118,32 @@ jobs:
           prdoc_file="prdoc/pr_$PR.prdoc"
 
           # Always run parity-publish to check for all issues (mismatches and missing crates)
-          if ! parity-publish --color always prdoc --since old --validate prdoc/pr_$PR.prdoc $PRDOC_EXTRA_ARGS -v --toolchain $TOOLCHAIN; then
+          # Capture output to check for specific error types
+          parity_output=$(mktemp)
+          if ! parity-publish --color always prdoc --since old --validate prdoc/pr_$PR.prdoc $PRDOC_EXTRA_ARGS -v --toolchain $TOOLCHAIN 2>&1 | tee "$parity_output"; then
 
-            # Check if any crate has validate: false to override the failure
+            # Check if there are missing crates (files changed but not listed in prdoc)
+            if grep -q "Files changed but crate not listed in PR Doc" "$parity_output"; then
+              rm -f "$parity_output"
+              cat <<EOF
+
+          👋 Hello developer! The SemVer check found crates with changes that are not listed in the prdoc file.
+
+          It is recommended to add all changed crates to the prdoc.
+
+          Please check the output above and see the following links for more help:
+          - https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/prdoc.md#record-semver-changes
+          - https://forum.polkadot.network/t/psa-polkadot-sdk-to-use-semver
+
+          Otherwise feel free to ask in the Merge Request or in Matrix chat.
+          EOF
+
+              exit 1
+            fi
+
+            rm -f "$parity_output"
+
+            # Check if any crate has validate: false to override semver mismatch failures
             if grep -q "validate:[[:space:]]*false" "$prdoc_file"; then
               echo ""
               echo "ℹ️ Found crates with 'validate: false' in prdoc. Semver validation failure is overridden."
@@ -140,6 +163,8 @@ jobs:
 
               exit 1
             fi
+          else
+            rm -f "$parity_output"
           fi
 
           # Only enforce SemVer restrictions for backports targeting stable branches
