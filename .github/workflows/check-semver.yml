@@ -114,9 +114,20 @@ jobs:
           export RUSTFLAGS='-A warnings -A missing_docs'
           export SKIP_WASM_BUILD=1
 
+          prdoc_file="prdoc/pr_$PR.prdoc"
+
+          # Always run parity-publish to check for all issues (mismatches and missing crates)
           if ! parity-publish --color always prdoc --since old --validate prdoc/pr_$PR.prdoc $PRDOC_EXTRA_ARGS -v --toolchain $TOOLCHAIN; then
 
-            cat <<EOF
+            # Check if any crate has validate: false to override the failure
+            if grep -q "validate:[[:space:]]*false" "$prdoc_file"; then
+              echo ""
+              echo "ℹ️ Found crates with 'validate: false' in prdoc. Semver validation failure is overridden."
+              echo "⚠️ Please ensure the semver override is justified and documented in the PR description."
+            else
+              # No validate: false found, fail with error message
+              cat <<EOF
+
           👋 Hello developer! The SemVer information that you declared in the prdoc file did not match what the CI detected.
 
           Please check the output above and see the following links for more help:
@@ -126,7 +137,8 @@ jobs:
           Otherwise feel free to ask in the Merge Request or in Matrix chat.
           EOF
 
-            exit 1
+              exit 1
+            fi
           fi
 
           # Only enforce SemVer restrictions for backports targeting stable branches
@@ -136,8 +148,6 @@ jobs:
           fi
 
           echo "🔍 Backport branch detected, checking for disallowed semver changes..."
-
-          prdoc_file="prdoc/pr_$PR.prdoc"
 
           # Check for minor/patch bumps with validate: false
           if grep -qE "bump:[[:space:]]*(minor|patch)" "$prdoc_file"; then
