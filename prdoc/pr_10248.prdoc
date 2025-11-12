@@ -9,5 +9,6 @@ doc:
 crates:
 - name: asset-hub-westend-runtime
   bump: patch
+  validate: false
 - name: pallet-election-provider-multi-block
   bump: major
