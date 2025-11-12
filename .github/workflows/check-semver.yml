@@ -183,23 +183,33 @@ jobs:
           temp_file=$(mktemp)
           grep -A1 "bump:[[:space:]]*major" "$prdoc_file" > "$temp_file"
 
-          while read -r line; do
+          error_found=false
+          while IFS= read -r line; do
               if [[ "$line" =~ bump:[[:space:]]*major ]]; then
                   # This is the bump line, read the next line
-                  read -r next_line
-                  if [[ "$next_line" =~ validate:[[:space:]]*false ]]; then
-                      continue  # This major bump is properly validated
+                  if IFS= read -r next_line; then
+                      if [[ "$next_line" =~ validate:[[:space:]]*false ]]; then
+                          continue  # This major bump is properly validated
+                      else
+                          error_found=true
+                          break
+                      fi
                   else
-                      echo "❌ Error: Found major bump without 'validate: false'"
-                      echo "📘 See: https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/prdoc.md#backporting-prs"
-                      echo "🔧 Add 'validate: false' after the major bump in $prdoc_file with justification."
-                      rm -f "$temp_file"
-                      exit 1
+                      # No next line, means no validate: false
+                      error_found=true
+                      break
                   fi
               fi
           done < "$temp_file"
 
           rm -f "$temp_file"
+
+          if [ "$error_found" = true ]; then
+              echo "❌ Error: Found major bump without 'validate: false'"
+              echo "📘 See: https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/prdoc.md#backporting-prs"
+              echo "🔧 Add 'validate: false' after the major bump in $prdoc_file with justification."
+              exit 1
+          fi
 
           # If we reach here, all major bumps have validate: false
           echo "⚠️ Backport contains major bumps, but they are all marked with validate: false."
