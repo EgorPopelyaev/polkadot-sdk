@@ -933,7 +933,7 @@ pub mod pallet {
 		/// A [`Task`] has finished executing.
 		TaskCompleted { task: T::RuntimeTask },
 		#[cfg(feature = "experimental")]
-		/// A [`Task`] failed during execution.
+		/// A [`Task`] failed during execution. Test
 		TaskFailed { task: T::RuntimeTask, err: DispatchError },
 		/// An upgrade was authorized.
 		UpgradeAuthorized { code_hash: T::Hash, check_version: bool },
