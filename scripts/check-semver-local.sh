@@ -57,9 +57,29 @@ if [ "$SKIP_PARITY_PUBLISH" = false ]; then
   echo -e "${BLUE}Running parity-publish validation...${NC}"
   echo ""
   
-  if ! "../parity-publish/target/release/parity-publish" --color always prdoc --since HEAD~2 --validate "$prdoc_file" -v --toolchain "$TOOLCHAIN"; then
+  # Capture output to check for specific error types
+  parity_output=$(mktemp)
+  if ! "../parity-publish/target/release/parity-publish" --color always prdoc --since HEAD~2 --validate "$prdoc_file" -v --toolchain "$TOOLCHAIN" 2>&1 | tee "$parity_output"; then
     
-    # Check if any crate has validate: false to override the failure
+    # Check if there are missing crates (files changed but not listed in prdoc)
+    if grep -q "Files changed but crate not listed in PR Doc" "$parity_output"; then
+      rm -f "$parity_output"
+      echo ""
+      echo -e "${RED}👋 Hello developer! The SemVer check found crates with changes that are not listed in the prdoc file.${NC}"
+      echo ""
+      echo -e "${RED}❌ This type of error CANNOT be overridden with 'validate: false'. You must add all changed crates to the prdoc.${NC}"
+      echo ""
+      echo "Please check the output above and see the following links for more help:"
+      echo "- https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/prdoc.md#record-semver-changes"
+      echo "- https://forum.polkadot.network/t/psa-polkadot-sdk-to-use-semver"
+      echo ""
+      echo "Otherwise feel free to ask in the Merge Request or in Matrix chat."
+      exit 1
+    fi
+    
+    rm -f "$parity_output"
+    
+    # Check if any crate has validate: false to override semver mismatch failures
     if grep -q "validate:[[:space:]]*false" "$prdoc_file"; then
       echo ""
       echo -e "${BLUE}ℹ️  Found crates with 'validate: false' in prdoc. Semver validation failure is overridden.${NC}"
@@ -77,6 +97,7 @@ if [ "$SKIP_PARITY_PUBLISH" = false ]; then
       exit 1
     fi
   else
+    rm -f "$parity_output"
     echo -e "${GREEN}✅ Parity-publish validation passed!${NC}"
   fi
   echo ""
