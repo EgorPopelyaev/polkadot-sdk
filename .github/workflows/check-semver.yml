@@ -105,10 +105,19 @@ jobs:
           PRDOC_EXTRA_ARGS: ${{ env.PRDOC_EXTRA_ARGS }}
           PR: ${{ env.PR_NUMBER }}
           BASE_BRANCH: ${{ github.event.pull_request.base.ref }}
+          PR_LABELS: ${{ toJson(github.event.pull_request.labels.*.name) }}
         run: |
           if [ -z "$PR" ]; then
             echo "Skipping master/merge queue"
             exit 0
+          fi
+
+          # Skip semver check if PR targets stable branch and has R0-no-crate-publish-require label
+          if [[ "$BASE_BRANCH" =~ ^stable[0-9]{4}$ ]]; then
+            if echo "$PR_LABELS" | grep -q "R0-no-crate-publish-require"; then
+              echo "ℹ️ Skipping the SemVer check is not recommended and should only be done in rare cases: PR targets stable branch '$BASE_BRANCH' and has 'R0-no-crate-publish-require' label."
+              exit 0
+            fi
           fi
 
           export CARGO_TARGET_DIR=target
