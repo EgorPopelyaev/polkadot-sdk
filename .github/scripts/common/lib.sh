@@ -384,7 +384,7 @@ function import_gpg_keys() {
   PARITY_RELEASES_GCP_SIGN_COMMITS="267356033FE12634B5343FB572C93328E7E4731B"
 
   echo "Importing GPG keys from $GPG_KEYSERVER"
-  for key in $SEC $EGOR $MORGAN $PARITY_RELEASES $PARITY_RELEASES_SIGN_COMMITS; do
+  for key in $SEC $EGOR $MORGAN $PARITY_RELEASES $PARITY_RELEASES_SIGN_COMMITS $PARITY_RELEASES_GCP $PARITY_RELEASES_GCP_SIGN_COMMITS; do
     (
       echo "Importing GPG key $key"
       gpg --no-tty --quiet --keyserver $GPG_KEYSERVER --recv-keys $key
