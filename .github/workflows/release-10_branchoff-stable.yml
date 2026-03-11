@@ -68,7 +68,7 @@ jobs:
       - name: Install pgpkkms
         run: |
           # Install pgpkms that is used to sign commits
-          pip install git+https://github.com/paritytech-release/pgpkms.git@6cb1cecce1268412189b77e4b130f4fa248c4151
+          pip install git+https://github.com/paritytech-release/pgpkms.git@ac1ed7ce79f50fe0195a1b9f2083f67394d62ff5
 
       - name: Generate content write token for the release automation
         id: generate_write_token
